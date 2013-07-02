@@ -8,17 +8,35 @@
         android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
-
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" >
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/attack_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Attack"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <RatingBar
+            android:id="@+id/attack_rating_bar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:isIndicator="false"
+            android:numStars="10" />
+        <TextView
+            android:id="@+id/attack_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="Medium Text"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/attack_rating_bar"
+            android:text="0.0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
@@ -26,537 +44,434 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout1"
-        android:layout_marginTop="15dp" >
-
+        android:layout_alignLeft="@+id/relativeLayout1"
+        android:layout_below="@+id/relativeLayout1" >
         <TextView
+            android:id="@+id/defense_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Attack"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Defense"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_attack"
+            android:id="@+id/defense_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_attack"
+            android:id="@+id/defense_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/defense_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_below="@+id/relativeLayout2" >
+        <TextView
+            android:id="@+id/teamwork_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Defense"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Teamwork"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_defense"
+            android:id="@+id/teamwork_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_defense"
+            android:id="@+id/teamwork_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/teamwork_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
-
+    
     <RelativeLayout
         android:id="@+id/relativeLayout4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout3"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout3"
+        android:layout_below="@+id/relativeLayout3" >
+        <TextView
+            android:id="@+id/mental_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Teamwork"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Mental"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_teamwork"
+            android:id="@+id/mental_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_teamwork"
+            android:id="@+id/mental_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/mental_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
-
+    
     <RelativeLayout
         android:id="@+id/relativeLayout5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout4"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout4"
+        android:layout_below="@+id/relativeLayout4" >
+        <TextView
+            android:id="@+id/power_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Mental"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Power"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_mental"
+            android:id="@+id/power_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_mental"
+            android:id="@+id/power_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/power_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:id="@+id/relativeLayout6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout5"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout5"
+        android:layout_below="@+id/relativeLayout5" >
+        <TextView
+            android:id="@+id/speed_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Power"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Speed"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_power"
+            android:id="@+id/speed_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_power"
+            android:id="@+id/speed_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/speed_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
     
     <RelativeLayout
         android:id="@+id/relativeLayout7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout6"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout6"
+        android:layout_below="@+id/relativeLayout6" >
+        <TextView
+            android:id="@+id/stamina_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Speed"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Stamina"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_speed"
+            android:id="@+id/stamina_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_speed"
+            android:id="@+id/stamina_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-    </RelativeLayout>
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/stamina_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>    
     
     <RelativeLayout
         android:id="@+id/relativeLayout8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout7"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout7"
+        android:layout_below="@+id/relativeLayout7" >
+        <TextView
+            android:id="@+id/ball_control_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Stamina"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Ball Control"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_stamina"
+            android:id="@+id/ball_control_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_stamina"
+            android:id="@+id/ball_control_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-    </RelativeLayout>
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ball_control_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>    
 
     <RelativeLayout
         android:id="@+id/relativeLayout9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout8"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout8"
+        android:layout_below="@+id/relativeLayout8" >
+        <TextView
+            android:id="@+id/pass_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Ball Control"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Pass"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_ball_control"
+            android:id="@+id/pass_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_ball_control"
+            android:id="@+id/pass_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-    </RelativeLayout>
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/pass_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>     
 
     <RelativeLayout
         android:id="@+id/relativeLayout10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout9"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout9"
+        android:layout_below="@+id/relativeLayout9" >
+        <TextView
+            android:id="@+id/shot_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Pass"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Shot"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_pass"
+            android:id="@+id/shot_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_pass"
+            android:id="@+id/shot_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-    </RelativeLayout>
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/shot_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>     
 
     <RelativeLayout
         android:id="@+id/relativeLayout11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout10"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout10"
+        android:layout_below="@+id/relativeLayout10" >
+        <TextView
+            android:id="@+id/header_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Shot"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Header"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_shot"
+            android:id="@+id/header_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_shot"
+            android:id="@+id/header_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-    </RelativeLayout>
-    
-    
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/header_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>     
+
     <RelativeLayout
         android:id="@+id/relativeLayout12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout11"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout11"
+        android:layout_below="@+id/relativeLayout11" >
+        <TextView
+            android:id="@+id/cutting_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Header"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Cutting"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_header"
+            android:id="@+id/cutting_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_header"
+            android:id="@+id/cutting_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-    </RelativeLayout>
-
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/cutting_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>     
+    
     <RelativeLayout
         android:id="@+id/relativeLayout13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout12"
-        android:layout_marginTop="5dp" >
-
-         <TextView
+        android:layout_alignLeft="@+id/relativeLayout12"
+        android:layout_below="@+id/relativeLayout12" >
+        <TextView
+            android:id="@+id/temper_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Cutting"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="Temper"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <RatingBar
-            android:id="@+id/rb_cutting"
+            android:id="@+id/temper_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
             android:isIndicator="false"
             android:numStars="10" />
-
         <TextView
-            android:id="@+id/tv_cutting"
+            android:id="@+id/temper_rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-    </RelativeLayout>
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/temper_rating_bar"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>      
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout14"
+
+    <TextView
+        android:id="@+id/name_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout13"
-        android:layout_marginTop="5dp" >
-
-         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="18dp"
-            android:text="Manner"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <RatingBar
-            android:id="@+id/rb_manner"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="110dp"
-            android:isIndicator="false"
-            android:numStars="10" />
-
-        <TextView
-            android:id="@+id/tv_manner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="30dp"
-            android:text="8"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        
-    </RelativeLayout>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="NAME"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/btn_submit"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

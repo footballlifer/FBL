@@ -2,6 +2,7 @@ package nanofuntas.fbl;
 
 import org.json.simple.JSONObject;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -57,8 +58,8 @@ public class ProfileFragment extends Fragment {
     	
     	mRateMeButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				//Intent i = new Intent(getView().getContext(), PlayerRating.class);
-				//startActivity(i);
+				Intent i = new Intent(getView().getContext(), PlayerRatingActivity.class);
+				startActivity(i);
 			}
 		});
     }
