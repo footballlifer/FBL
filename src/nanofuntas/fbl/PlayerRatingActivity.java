@@ -1,16 +1,24 @@
 package nanofuntas.fbl;
 
+import org.json.simple.JSONObject;
+
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PlayerRatingActivity extends Activity {
 	private final String TAG = "PlayerRatingActivity";
 	private final boolean DEBUG = true;
+
+	private final int TEN = 10;
 
 	private Button submitButton = null;
 	private TextView nameRating = null;
@@ -28,7 +36,7 @@ public class PlayerRatingActivity extends Activity {
 	private RatingBar headerRatingBar = null;
 	private RatingBar cuttingRatingBar = null;
 	private RatingBar temperRatingBar = null;
- 
+
 	private TextView attackRatingValue = null;
 	private TextView defenseRatingValue = null;
 	private TextView teamworkRatingValue = null;
@@ -43,12 +51,79 @@ public class PlayerRatingActivity extends Activity {
 	private TextView cuttingRatingValue = null;
 	private TextView temperRatingValue = null;
 
+/*
+	private final RatingBar[] RATING_BAR_ARRAY = { 
+		attackRatingBar,
+		defenseRatingBar,
+		teamworkRatingBar,
+		mentalRatingBar,
+		powerRatingBar,
+		speedRatingBar,
+		staminaRatingBar,
+		ballControlRatingBar,
+		passRatingBar,
+		shotRatingBar,
+		headerRatingBar,
+		cuttingRatingBar,
+		temperRatingBar
+	};
+	
+	private final TextView[] TEXT_VIEW_ARRAY = { 
+		attackRatingValue,
+		defenseRatingValue,
+		teamworkRatingValue,
+		mentalRatingValue,
+		powerRatingValue,
+		speedRatingValue,
+		staminaRatingValue,
+		ballControlRatingValue,
+		passRatingValue,
+		shotRatingValue,
+		headerRatingValue,
+		cuttingRatingValue,
+		temperRatingValue
+	};
+*/
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_player_rating);
 		initViews();
+
+		submitButton.setOnClickListener(submitOnClickListener);
 	}
+
+	OnClickListener submitOnClickListener = new OnClickListener() {
+		@SuppressWarnings("unchecked")
+		@Override
+		public void onClick(View v) {
+			JSONObject jsonRating = new JSONObject();
+			
+			jsonRating.put(Config.KEY_ATTACK, Long.valueOf(attackRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_DEFENSE, Long.valueOf(defenseRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_TEAMWORK, Long.valueOf(teamworkRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_MENTAL, Long.valueOf(mentalRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_POWER, Long.valueOf(powerRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_SPEED, Long.valueOf(speedRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_STAMINA, Long.valueOf(staminaRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_BALL_CONTROL, Long.valueOf(ballControlRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_PASS, Long.valueOf(passRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_SHOT, Long.valueOf(shotRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_HEADER, Long.valueOf(headerRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_CUTTING, Long.valueOf(cuttingRatingValue.getText().toString()));
+			jsonRating.put(Config.KEY_TEMPER, Long.valueOf(temperRatingValue.getText().toString()));
+
+			SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
+			long uid = settings.getLong(Config.KEY_UID, 0);
+
+			String result = ServerIface.ratePlayer(uid, jsonRating);
+			if (result.equals(Config.KEY_OK)) {
+				Toast.makeText(getApplicationContext(), "Submit successful", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+	};
 
 	private void initViews() {
 		submitButton = (Button) findViewById(R.id.submit);
@@ -102,35 +177,36 @@ public class PlayerRatingActivity extends Activity {
 
 		public void onRatingChanged(RatingBar ratingBar, float rating,
 				boolean fromUser) {
-			if ( ratingBar.getId() == attackRatingBar.getId() ){
-				attackRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == defenseRatingBar.getId() ) {
-				defenseRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == teamworkRatingBar.getId() ) {
-				teamworkRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == mentalRatingBar.getId() ) {
-				mentalRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == powerRatingBar.getId() ) {
-				powerRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == speedRatingBar.getId() ) {
-				speedRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == staminaRatingBar.getId() ) {
-				staminaRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == ballControlRatingBar.getId() ) {
-				ballControlRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == passRatingBar.getId() ) {
-				passRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == shotRatingBar.getId() ) {
-				shotRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == headerRatingBar.getId() ) {
-				headerRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == cuttingRatingBar.getId() ) {
-				cuttingRatingValue.setText(String.valueOf(rating));
-			} else if (ratingBar.getId() == temperRatingBar.getId() ) {
-				temperRatingValue.setText(String.valueOf(rating));
+			
+			if (ratingBar.getId() == attackRatingBar.getId()) {
+				attackRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == defenseRatingBar.getId()) {
+				defenseRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == teamworkRatingBar.getId()) {
+				teamworkRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == mentalRatingBar.getId()) {
+				mentalRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == powerRatingBar.getId()) {
+				powerRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == speedRatingBar.getId()) {
+				speedRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == staminaRatingBar.getId()) {
+				staminaRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == ballControlRatingBar.getId()) {
+				ballControlRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == passRatingBar.getId()) {
+				passRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == shotRatingBar.getId()) {
+				shotRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == headerRatingBar.getId()) {
+				headerRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == cuttingRatingBar.getId()) {
+				cuttingRatingValue.setText(String.valueOf((int) (rating * TEN)));
+			} else if (ratingBar.getId() == temperRatingBar.getId()) {
+				temperRatingValue.setText(String.valueOf((int) (rating * TEN)));
 			} else {
 				if (DEBUG) Log.e(TAG, "no ratingBar ID matches");
-			}						
+			}
 		}
 	};
 

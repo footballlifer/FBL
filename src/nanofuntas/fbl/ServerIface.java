@@ -56,7 +56,7 @@ public class ServerIface {
 		if (DEBUG) Log.i(TAG, "login()");
 		
 		JSONObject jsonLogin = new JSONObject();
-		jsonLogin.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_LOGIN);
+		jsonLogin.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_LOGIN);
 		jsonLogin.put(Config.KEY_EMAIL, strEmailLogin);
 		jsonLogin.put(Config.KEY_PASSWORD, strPwLogin);
 		
@@ -70,7 +70,7 @@ public class ServerIface {
 		if (DEBUG) Log.i(TAG, "register()");
 		
 		JSONObject jsonRegister = new JSONObject();
-		jsonRegister.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_REGISTER);
+		jsonRegister.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_REGISTER);
 		jsonRegister.put(Config.KEY_EMAIL, strEmailReg);
 		jsonRegister.put(Config.KEY_PASSWORD, strPwReg);
 		
@@ -85,11 +85,26 @@ public class ServerIface {
 		if (DEBUG) Log.i(TAG, "getPlayerStatus()");
 
 		JSONObject jsonStatus = new JSONObject();
-		jsonStatus.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_STATUS);
+		jsonStatus.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_STATUS);
 		jsonStatus.put(Config.KEY_UID, uid);
 		
 		JSONObject jsonResult = postNgetJson(jsonStatus);		
 		return jsonResult;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String ratePlayer(long uid, JSONObject jsonRating) {
+		if (DEBUG) Log.i(TAG, "ratePlayer()");
+
+		JSONObject jsonPlayerRating = new JSONObject();
+		jsonPlayerRating.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_RATING);
+		jsonPlayerRating.put(Config.KEY_UID, uid);
+		jsonPlayerRating.put(Config.KEY_RATING, jsonRating);
+		
+		JSONObject jsonResult = postNgetJson(jsonPlayerRating);
+
+		String result = (String) jsonResult.get(Config.KEY_RESULT);		
+		return result;
 	}
 		
 }

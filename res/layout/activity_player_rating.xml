@@ -36,7 +36,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/attack_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
@@ -71,7 +71,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/defense_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
@@ -106,7 +106,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/teamwork_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
     
@@ -141,7 +141,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/mental_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
     
@@ -176,7 +176,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/power_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
@@ -211,7 +211,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/speed_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
     
@@ -246,7 +246,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/stamina_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>    
     
@@ -281,7 +281,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/ball_control_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>    
 
@@ -316,7 +316,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/pass_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>     
 
@@ -351,7 +351,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/shot_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>     
 
@@ -386,7 +386,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/header_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>     
 
@@ -421,7 +421,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/cutting_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>     
     
@@ -456,7 +456,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/temper_rating_bar"
-            android:text="0.0"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>      
 
