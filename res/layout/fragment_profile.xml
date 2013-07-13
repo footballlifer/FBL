@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp" >
+        android:layout_marginTop="25dp" >
 
         <RelativeLayout
             android:id="@+id/relativeLayout2"
@@ -263,28 +263,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/temper"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cutting"
-                android:text="Temper"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/temper_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/temper"
-                android:layout_alignBottom="@+id/temper"
-                android:layout_alignLeft="@+id/cutting_rating"
-                android:text="8"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
                 android:id="@+id/overall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/temper"
+                android:layout_below="@+id/cutting"
                 android:text="Overall"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -294,7 +276,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/overall"
                 android:layout_alignBottom="@+id/averall"
-                android:layout_alignLeft="@+id/temper_rating"
+                android:layout_alignLeft="@+id/cutting_rating"       
                 android:text="8"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </RelativeLayout>

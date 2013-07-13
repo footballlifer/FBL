@@ -35,7 +35,6 @@ public class PlayerRatingActivity extends Activity {
 	private RatingBar shotRatingBar = null;
 	private RatingBar headerRatingBar = null;
 	private RatingBar cuttingRatingBar = null;
-	private RatingBar temperRatingBar = null;
 
 	private TextView attackRatingValue = null;
 	private TextView defenseRatingValue = null;
@@ -49,41 +48,6 @@ public class PlayerRatingActivity extends Activity {
 	private TextView shotRatingValue = null;
 	private TextView headerRatingValue = null;
 	private TextView cuttingRatingValue = null;
-	private TextView temperRatingValue = null;
-
-/*
-	private final RatingBar[] RATING_BAR_ARRAY = { 
-		attackRatingBar,
-		defenseRatingBar,
-		teamworkRatingBar,
-		mentalRatingBar,
-		powerRatingBar,
-		speedRatingBar,
-		staminaRatingBar,
-		ballControlRatingBar,
-		passRatingBar,
-		shotRatingBar,
-		headerRatingBar,
-		cuttingRatingBar,
-		temperRatingBar
-	};
-	
-	private final TextView[] TEXT_VIEW_ARRAY = { 
-		attackRatingValue,
-		defenseRatingValue,
-		teamworkRatingValue,
-		mentalRatingValue,
-		powerRatingValue,
-		speedRatingValue,
-		staminaRatingValue,
-		ballControlRatingValue,
-		passRatingValue,
-		shotRatingValue,
-		headerRatingValue,
-		cuttingRatingValue,
-		temperRatingValue
-	};
-*/
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -112,7 +76,6 @@ public class PlayerRatingActivity extends Activity {
 			jsonRating.put(Config.KEY_SHOT, Long.valueOf(shotRatingValue.getText().toString()));
 			jsonRating.put(Config.KEY_HEADER, Long.valueOf(headerRatingValue.getText().toString()));
 			jsonRating.put(Config.KEY_CUTTING, Long.valueOf(cuttingRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_TEMPER, Long.valueOf(temperRatingValue.getText().toString()));
 
 			SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
 			long uid = settings.getLong(Config.KEY_UID, 0);
@@ -141,7 +104,6 @@ public class PlayerRatingActivity extends Activity {
 		shotRatingBar = (RatingBar) findViewById(R.id.shot_rating_bar);
 		headerRatingBar = (RatingBar) findViewById(R.id.header_rating_bar);
 		cuttingRatingBar = (RatingBar) findViewById(R.id.cutting_rating_bar);
-		temperRatingBar = (RatingBar) findViewById(R.id.temper_rating_bar);
 
 		attackRatingBar.setOnRatingBarChangeListener(mRatingBarListener);
 		defenseRatingBar.setOnRatingBarChangeListener(mRatingBarListener);
@@ -155,7 +117,6 @@ public class PlayerRatingActivity extends Activity {
 		shotRatingBar.setOnRatingBarChangeListener(mRatingBarListener);
 		headerRatingBar.setOnRatingBarChangeListener(mRatingBarListener);
 		cuttingRatingBar.setOnRatingBarChangeListener(mRatingBarListener);
-		temperRatingBar.setOnRatingBarChangeListener(mRatingBarListener);
 		
 		attackRatingValue = (TextView) findViewById(R.id.attack_rating_value);
 		defenseRatingValue = (TextView) findViewById(R.id.defense_rating_value);
@@ -169,7 +130,6 @@ public class PlayerRatingActivity extends Activity {
 		shotRatingValue = (TextView) findViewById(R.id.shot_rating_value);
 		headerRatingValue = (TextView) findViewById(R.id.header_rating_value);
 		cuttingRatingValue = (TextView) findViewById(R.id.cutting_rating_value);
-		temperRatingValue = (TextView) findViewById(R.id.temper_rating_value);
 
 	}
 
@@ -202,8 +162,6 @@ public class PlayerRatingActivity extends Activity {
 				headerRatingValue.setText(String.valueOf((int) (rating * TEN)));
 			} else if (ratingBar.getId() == cuttingRatingBar.getId()) {
 				cuttingRatingValue.setText(String.valueOf((int) (rating * TEN)));
-			} else if (ratingBar.getId() == temperRatingBar.getId()) {
-				temperRatingValue.setText(String.valueOf((int) (rating * TEN)));
 			} else {
 				if (DEBUG) Log.e(TAG, "no ratingBar ID matches");
 			}

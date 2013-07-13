@@ -34,7 +34,6 @@ public class ProfileFragment extends Fragment {
     private TextView mShotRating = null;
     private TextView mHeaderRating = null;
     private TextView mCuttingRating = null;
-    private TextView mTemperRating = null;
     private TextView mOverallRating = null;
     
 	@Override
@@ -81,7 +80,6 @@ public class ProfileFragment extends Fragment {
     	mPassRating = (TextView) getView().findViewById(R.id.pass_rating);
     	mHeaderRating = (TextView) getView().findViewById(R.id.header_rating);
     	mCuttingRating = (TextView) getView().findViewById(R.id.cutting_rating);
-    	mTemperRating = (TextView) getView().findViewById(R.id.temper_rating);
     	mOverallRating = (TextView) getView().findViewById(R.id.overall_rating);
     	
     }
@@ -108,7 +106,6 @@ public class ProfileFragment extends Fragment {
     	mPassRating.setText( ((Long)status.get(Config.KEY_SHOT)).toString());
     	mHeaderRating.setText( ((Long)status.get(Config.KEY_HEADER)).toString());
     	mCuttingRating.setText( ((Long)status.get(Config.KEY_CUTTING)).toString());
-    	mTemperRating.setText( ((Long)status.get(Config.KEY_TEMPER)).toString());
     	mOverallRating.setText( ((Long)status.get(Config.KEY_OVERALL)).toString());
     	
     }

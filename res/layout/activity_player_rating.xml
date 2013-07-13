@@ -423,41 +423,6 @@
             android:layout_toRightOf="@+id/cutting_rating_bar"
             android:text="0"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-    </RelativeLayout>     
-    
-    <RelativeLayout
-        android:id="@+id/relativeLayout13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/relativeLayout12"
-        android:layout_below="@+id/relativeLayout12" >
-        <TextView
-            android:id="@+id/temper_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Temper"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-        <RatingBar
-            android:id="@+id/temper_rating_bar"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="100dp"
-            android:isIndicator="false"
-            android:numStars="10" />
-        <TextView
-            android:id="@+id/temper_rating_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/temper_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>      
 
 
