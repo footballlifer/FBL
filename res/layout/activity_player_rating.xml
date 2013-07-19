@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@android:color/black">
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -18,7 +19,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Attack"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/attack_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -36,8 +38,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/attack_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -53,7 +56,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Defense"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/defense_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -71,8 +75,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/defense_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -88,7 +93,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Teamwork"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/teamwork_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -106,8 +112,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/teamwork_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
     
     <RelativeLayout
@@ -123,7 +130,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Mental"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/mental_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -141,8 +149,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/mental_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
     
     <RelativeLayout
@@ -158,7 +167,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Power"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/power_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -176,8 +186,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/power_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -193,7 +204,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Speed"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/speed_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -211,8 +223,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/speed_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>
     
     <RelativeLayout
@@ -228,7 +241,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Stamina"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/stamina_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -246,8 +260,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/stamina_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>    
     
     <RelativeLayout
@@ -263,7 +278,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Ball Control"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/ball_control_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -281,8 +297,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/ball_control_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>    
 
     <RelativeLayout
@@ -298,7 +315,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Pass"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/pass_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -316,8 +334,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/pass_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>     
 
     <RelativeLayout
@@ -333,7 +352,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Shot"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/shot_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -351,8 +371,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/shot_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>     
 
     <RelativeLayout
@@ -368,7 +389,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Header"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/header_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -386,8 +408,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/header_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>     
 
     <RelativeLayout
@@ -403,7 +426,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Cutting"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/cutting_rating_bar"
             style="?android:attr/ratingBarStyleSmall"
@@ -421,8 +445,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/cutting_rating_bar"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="00"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
     </RelativeLayout>      
 
 
@@ -433,7 +458,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="NAME"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/submit"
@@ -442,6 +468,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Submit" />
+        android:text="Submit" 
+        android:background="@android:color/darker_gray"
+    	android:textColor="@android:color/white"/>
     
 </RelativeLayout>

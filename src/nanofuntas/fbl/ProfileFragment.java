@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -106,22 +107,22 @@ public class ProfileFragment extends Fragment {
     	Long shtRating = (Long)status.get(Config.KEY_SHOT);
     	Long hdrRating = (Long)status.get(Config.KEY_HEADER);
     	Long cutRating = (Long)status.get(Config.KEY_CUTTING);
-    	Long ovrRating = (Long)status.get(Config.KEY_OVERALL);    	
+    	Long ovrRating = (Long)status.get(Config.KEY_OVERALL);    	    	
     	
-    	mAttackRating.setText( atkRating.toString());
-    	mDefenseRating.setText( dfsRating.toString());
-    	mTeamworkRating.setText( twkRating.toString());
-    	mMentalRating.setText( mtlRating.toString());
-    	mPowerRating.setText( powRating.toString());
-    	mSpeedRating.setText( spdRating.toString());
-    	mStaminaRating.setText( staRating.toString());
-    	mBallControlRating.setText( blcRating.toString());
-    	mShotRating.setText( pasRating.toString());
-    	mPassRating.setText( shtRating.toString());
-    	mHeaderRating.setText( hdrRating.toString());
-    	mCuttingRating.setText( cutRating.toString());
-    	mOverallRating.setText( ovrRating.toString());
-    	
+    	setTextAndColor(mAttackRating, atkRating);
+    	setTextAndColor(mDefenseRating, dfsRating);
+    	setTextAndColor(mTeamworkRating, twkRating);
+    	setTextAndColor(mMentalRating, mtlRating);
+    	setTextAndColor(mPowerRating, powRating);
+    	setTextAndColor(mSpeedRating, spdRating);
+    	setTextAndColor(mStaminaRating, staRating);
+    	setTextAndColor(mBallControlRating, blcRating);
+    	setTextAndColor(mShotRating, shtRating);
+    	setTextAndColor(mPassRating, pasRating);
+    	setTextAndColor(mHeaderRating, hdrRating);
+    	setTextAndColor(mCuttingRating, cutRating);
+    	setTextAndColor(mOverallRating, ovrRating);
+    	    	
     	float rATK = (float)atkRating / HUNDRED;
     	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
     	float rTWK = (float)twkRating / HUNDRED;
@@ -132,6 +133,19 @@ public class ProfileFragment extends Fragment {
     	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");
     	
     	mHexView.setRatingAndDraw(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);
-    	//mHexView.setRatingAndDraw(0.89f, 0.8f, 0.73f, 0.5f, 0.7f, 0.88f);
+
+    }
+    
+    private void setTextAndColor(TextView tv, Long rating) {
+    	if( 0<= rating && rating <= 79) {
+    		tv.setTextColor(Color.WHITE);
+    	} else if (80 <= rating && rating <= 89) {
+    		tv.setTextColor(Color.YELLOW);
+    	} else if (90 <= rating && rating <= 100) {
+    		tv.setTextColor(Color.RED);
+    	}
+
+    	tv.setText( rating.toString());
+
     }
 }

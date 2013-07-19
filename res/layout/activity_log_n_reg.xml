@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@android:color/black">
 
     <EditText
         android:id="@+id/email_login"
@@ -12,7 +13,8 @@
         android:layout_marginTop="18dp"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textEmailAddress" >
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/white" >
         <requestFocus />
     </EditText>
     
@@ -25,7 +27,8 @@
         android:layout_below="@+id/email_login"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword" 
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/login"
@@ -34,7 +37,9 @@
         android:layout_alignLeft="@+id/pw_login"
         android:layout_alignRight="@+id/pw_login"
         android:layout_below="@+id/pw_login"
-        android:text="Login" />
+        android:text="Login" 
+        android:background="@android:color/darker_gray"
+    	android:textColor="@android:color/white"/>
 
     <TextView
         android:id="@+id/test_text"
@@ -43,7 +48,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
-        android:text="Test Result" />
+        android:text="Test Result" 
+        android:textColor="@android:color/white"/>
 
     <EditText
         android:id="@+id/email_reg"
@@ -54,7 +60,8 @@
         android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress" 
+        android:textColor="@android:color/white"/>
 
     <EditText
         android:id="@+id/pw_reg"
@@ -65,7 +72,8 @@
         android:layout_below="@+id/email_reg"
         android:ems="10"
         android:hint="Enter Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword" 
+        android:textColor="@android:color/white"/>
 
     <EditText
         android:id="@+id/pw_reg_retype"
@@ -76,7 +84,8 @@
         android:layout_below="@+id/pw_reg"
         android:ems="10"
         android:hint="Retype Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword" 
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/regiter"
@@ -85,6 +94,8 @@
         android:layout_alignLeft="@+id/pw_reg_retype"
         android:layout_alignRight="@+id/pw_reg_retype"
         android:layout_below="@+id/pw_reg_retype"
-        android:text="Regiter" />
+        android:text="Regiter" 
+        android:background="@android:color/darker_gray"
+    	android:textColor="@android:color/white"/>
 
 </RelativeLayout>
