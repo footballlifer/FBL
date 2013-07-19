@@ -17,7 +17,8 @@ public class ProfileFragment extends Fragment {
 	private final boolean DEBUG = true;
 	private final String TAG = "PlayerProfile";
 	
-	//private FrameLayout mFrameLayout = null;
+	private final float HUNDRED = 100.0f;
+	
     private TextView mPlayerName = null;
     private TextView mPosition = null;
     private Button mRateMeButton = null;
@@ -35,6 +36,7 @@ public class ProfileFragment extends Fragment {
     private TextView mHeaderRating = null;
     private TextView mCuttingRating = null;
     private TextView mOverallRating = null;
+    private HexView mHexView = null;
     
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,11 +51,8 @@ public class ProfileFragment extends Fragment {
     	
     	super.onActivityCreated(savedInstanceState);
     	
-//      mFrameLayout = (FrameLayout)findViewById(R.id.frameLayout);              
-//      HexStatus mHexStatus = new HexStatus(this);
-//      mFrameLayout.addView(mHexStatus);
     	initView();
-    	getPlayerStatus();
+    	getAndSetPlayerStatus();    	
     	
     	mRateMeButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -82,9 +81,10 @@ public class ProfileFragment extends Fragment {
     	mCuttingRating = (TextView) getView().findViewById(R.id.cutting_rating);
     	mOverallRating = (TextView) getView().findViewById(R.id.overall_rating);
     	
+    	mHexView = (HexView) getActivity().findViewById(R.id.hexView);
     }
     
-    private void getPlayerStatus() {
+    private void getAndSetPlayerStatus() {
     	JSONObject status = null;
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
     	long uid = settings.getLong(Config.KEY_UID, 0);
@@ -94,19 +94,44 @@ public class ProfileFragment extends Fragment {
     	mPlayerName.setText( (String)status.get(Config.KEY_NAME));
     	mPosition.setText( (String)status.get(Config.KEY_POSITION));
     	
-    	mAttackRating.setText( ((Long)status.get(Config.KEY_ATTACK)).toString());
-    	mDefenseRating.setText( ((Long)status.get(Config.KEY_DEFENSE)).toString());
-    	mTeamworkRating.setText( ((Long)status.get(Config.KEY_TEAMWORK)).toString());
-    	mMentalRating.setText( ((Long)status.get(Config.KEY_MENTAL)).toString());
-    	mPowerRating.setText( ((Long)status.get(Config.KEY_POWER)).toString());
-    	mSpeedRating.setText( ((Long)status.get(Config.KEY_SPEED)).toString());
-    	mStaminaRating.setText( ((Long)status.get(Config.KEY_STAMINA)).toString());
-    	mBallControlRating.setText( ((Long)status.get(Config.KEY_BALL_CONTROL)).toString());
-    	mShotRating.setText( ((Long)status.get(Config.KEY_PASS)).toString());
-    	mPassRating.setText( ((Long)status.get(Config.KEY_SHOT)).toString());
-    	mHeaderRating.setText( ((Long)status.get(Config.KEY_HEADER)).toString());
-    	mCuttingRating.setText( ((Long)status.get(Config.KEY_CUTTING)).toString());
-    	mOverallRating.setText( ((Long)status.get(Config.KEY_OVERALL)).toString());
+    	Long atkRating = (Long)status.get(Config.KEY_ATTACK);
+    	Long dfsRating = (Long)status.get(Config.KEY_DEFENSE);
+    	Long twkRating = (Long)status.get(Config.KEY_TEAMWORK);
+    	Long mtlRating = (Long)status.get(Config.KEY_MENTAL);
+    	Long powRating = (Long)status.get(Config.KEY_POWER);
+    	Long spdRating = (Long)status.get(Config.KEY_SPEED);
+    	Long staRating = (Long)status.get(Config.KEY_STAMINA);
+    	Long blcRating = (Long)status.get(Config.KEY_BALL_CONTROL);
+    	Long pasRating = (Long)status.get(Config.KEY_PASS);
+    	Long shtRating = (Long)status.get(Config.KEY_SHOT);
+    	Long hdrRating = (Long)status.get(Config.KEY_HEADER);
+    	Long cutRating = (Long)status.get(Config.KEY_CUTTING);
+    	Long ovrRating = (Long)status.get(Config.KEY_OVERALL);    	
     	
+    	mAttackRating.setText( atkRating.toString());
+    	mDefenseRating.setText( dfsRating.toString());
+    	mTeamworkRating.setText( twkRating.toString());
+    	mMentalRating.setText( mtlRating.toString());
+    	mPowerRating.setText( powRating.toString());
+    	mSpeedRating.setText( spdRating.toString());
+    	mStaminaRating.setText( staRating.toString());
+    	mBallControlRating.setText( blcRating.toString());
+    	mShotRating.setText( pasRating.toString());
+    	mPassRating.setText( shtRating.toString());
+    	mHeaderRating.setText( hdrRating.toString());
+    	mCuttingRating.setText( cutRating.toString());
+    	mOverallRating.setText( ovrRating.toString());
+    	
+    	float rATK = (float)atkRating / HUNDRED;
+    	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
+    	float rTWK = (float)twkRating / HUNDRED;
+    	float rMTL = (float)mtlRating / HUNDRED;
+    	float rPHY = (float)(powRating + spdRating + staRating) / (3*HUNDRED);
+    	float rTEC = (float)(blcRating + pasRating + shtRating + hdrRating) / (4*HUNDRED);
+    	
+    	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");
+    	
+    	mHexView.setRatingAndDraw(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);
+    	//mHexView.setRatingAndDraw(0.89f, 0.8f, 0.73f, 0.5f, 0.7f, 0.88f);
     }
 }
