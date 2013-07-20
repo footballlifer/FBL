@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.Window;
 
 public class TabViewActivity extends FragmentActivity {
 	private final boolean DEBUG = true;
@@ -19,13 +20,16 @@ public class TabViewActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (DEBUG) Log.d(TAG, "onCreate()");
-    	
-    	super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tabview);
+    	    	
+        super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_tabview);
+        
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+
         // For each of the sections in the app, add a tab to the action bar.
         actionBar.addTab(actionBar.newTab().setText(R.string.title_section1)
         		.setTabListener(new TabListener<ProfileFragment>(this, "PlayerProfile", ProfileFragment.class) ));
@@ -81,7 +85,8 @@ public class TabViewActivity extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_tabview, menu);
+        // remove the option menu in action bar
+    	//getMenuInflater().inflate(R.menu.activity_tabview, menu);
         return true;
     }
 

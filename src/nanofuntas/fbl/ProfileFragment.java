@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -42,14 +43,14 @@ public class ProfileFragment extends Fragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {   	         	
-    	View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        return view;
+		View view = inflater.inflate(R.layout.fragment_profile, container, false);
+		return view;
     }
     
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
     	if (DEBUG) Log.d(TAG, "onActivityCreated()");
-    	
+
     	super.onActivityCreated(savedInstanceState);
     	
     	initView();
@@ -130,7 +131,7 @@ public class ProfileFragment extends Fragment {
     	float rPHY = (float)(powRating + spdRating + staRating) / (3*HUNDRED);
     	float rTEC = (float)(blcRating + pasRating + shtRating + hdrRating) / (4*HUNDRED);
     	
-    	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");
+    	//Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");
     	
     	mHexView.setRatingAndDraw(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);
 

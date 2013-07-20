@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -53,6 +54,7 @@ public class PlayerRatingActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_player_rating);
 		initViews();
 
@@ -144,34 +146,24 @@ public class PlayerRatingActivity extends Activity {
 			} else if (ratingBar.getId() == defenseRatingBar.getId()) {
 				setTextAndColor(defenseRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == teamworkRatingBar.getId()) {
-				//teamworkRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(teamworkRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == mentalRatingBar.getId()) {
-				//mentalRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(mentalRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == powerRatingBar.getId()) {
-				//powerRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(powerRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == speedRatingBar.getId()) {
-				//speedRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(speedRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == staminaRatingBar.getId()) {
-				//staminaRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(staminaRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == ballControlRatingBar.getId()) {
-				//ballControlRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(ballControlRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == passRatingBar.getId()) {
-				//passRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(passRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == shotRatingBar.getId()) {
-				//shotRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(shotRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == headerRatingBar.getId()) {
-				//headerRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(headerRatingValue, (int)rating*TEN);
 			} else if (ratingBar.getId() == cuttingRatingBar.getId()) {
-				//cuttingRatingValue.setText(String.valueOf((int) (rating * TEN)));
 				setTextAndColor(cuttingRatingValue, (int)rating*TEN);
 			} else {
 				if (DEBUG) Log.e(TAG, "no ratingBar ID matches");
@@ -191,7 +183,6 @@ public class PlayerRatingActivity extends Activity {
     	tv.setText( Integer.toString(rating));
 
     }
-
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
