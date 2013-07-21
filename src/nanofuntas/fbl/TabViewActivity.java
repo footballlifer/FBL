@@ -31,10 +31,10 @@ public class TabViewActivity extends FragmentActivity {
         actionBar.setDisplayShowHomeEnabled(false);
 
         // For each of the sections in the app, add a tab to the action bar.
-        actionBar.addTab(actionBar.newTab().setText(R.string.title_section1)
+        actionBar.addTab(actionBar.newTab().setText("Me")
         		.setTabListener(new TabListener<ProfileFragment>(this, "PlayerProfile", ProfileFragment.class) ));
-        actionBar.addTab(actionBar.newTab().setText(R.string.title_section2)
-        		.setTabListener(new TabListener<ProfileFragment>(this, "PlayerProfile", ProfileFragment.class) ));
+        actionBar.addTab(actionBar.newTab().setText("Member")
+        		.setTabListener(new TabListener<MemberFragment>(this, "MemberProfile", MemberFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText(R.string.title_section3)
         		.setTabListener(new TabListener<ProfileFragment>(this, "PlayerProfile", ProfileFragment.class) ));
     }

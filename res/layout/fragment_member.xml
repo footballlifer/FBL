@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp" >
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" >
+        </ListView>
+       
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_toRightOf="@+id/listView1"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/relativeLayout1"
+            android:layout_marginTop="30dp">
+           
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+				android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/cr" />
+            
+            <TextView
+                android:id="@+id/name_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:layout_marginTop="5dp"
+                android:text="WU YONGSHOU"
+                android:layout_centerHorizontal="true"                
+                android:textAppearance="?android:attr/textAppearanceMedium" 
+                android:textColor="@android:color/white"/>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_member"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Position "
+                    android:textAppearance="?android:attr/textAppearanceMedium" 
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:text="CF"
+                    android:textAppearance="?android:attr/textAppearanceMedium" 
+                    android:textColor="@android:color/white"/>
+
+            </RelativeLayout>
+                        
+            <nanofuntas.fbl.HexView
+                android:id="@+id/hexView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeLayout2"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="115dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/hexView"
+                android:layout_marginTop="25dp"
+                android:layout_centerHorizontal="true"
+                android:text="Details" 
+                android:background="@android:color/darker_gray"
+    			android:textColor="@android:color/white"/>
+            
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
