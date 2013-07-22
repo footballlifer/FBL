@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:background="@android:color/black">
+
+    <TextView
+	    android:id="@+id/ranking"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_vertical"
+	    android:textAppearance="?android:attr/textAppearanceMedium" 
+	    android:text="111"
+	    android:padding="5dp"
+        android:textColor="@android:color/white"/>		    
+    
+	<ImageView
+	    android:id="@+id/photo_ranking"
+	    android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:padding="5dp"
+		android:src="@drawable/cr2" />
+
+	<TextView
+	    android:id="@+id/name_ranking"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_vertical"
+	    android:textAppearance="?android:attr/textAppearanceMedium" 
+	    android:text="WU YONGSHOU"
+	    android:padding="5dp"
+        android:textColor="@android:color/white"/>		
+
+	<TextView
+	    android:id="@+id/goals_ranking"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_vertical"
+	    android:textAppearance="?android:attr/textAppearanceMedium" 
+	    android:text="24 goals"
+	    android:padding="5dp"
+        android:textColor="@android:color/white"/>					
+			
+</LinearLayout>
