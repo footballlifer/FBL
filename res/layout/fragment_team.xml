@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/team_twk"
                 android:layout_alignLeft="@+id/team_dfs"
-                android:text="DFS"
+                android:text="MTL"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
 
