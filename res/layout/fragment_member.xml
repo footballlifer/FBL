@@ -14,7 +14,7 @@
 
         <ListView
             android:id="@+id/listView1"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true" >
         </ListView>
@@ -24,7 +24,6 @@
             android:layout_height="wrap_content" 
             android:layout_toRightOf="@+id/listView1"
             android:layout_marginLeft="10dp"
-            android:layout_below="@+id/relativeLayout1"
             android:layout_marginTop="30dp">
            
             <ImageView
