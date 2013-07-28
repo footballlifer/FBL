@@ -65,6 +65,8 @@ public class ProfileFragment extends Fragment {
     }
     
     private void initView() {
+    	if (DEBUG) Log.d(TAG, "initView()");
+    	
     	mPlayerName = (TextView) getView().findViewById(R.id.player_name);
     	mPosition = (TextView) getView().findViewById(R.id.position_value);
     	mRateMeButton = (Button) getView().findViewById(R.id.rate_me);
@@ -83,10 +85,12 @@ public class ProfileFragment extends Fragment {
     	mCuttingRating = (TextView) getView().findViewById(R.id.cutting_rating);
     	mOverallRating = (TextView) getView().findViewById(R.id.overall_rating);
     	
-    	mHexView = (HexView) getActivity().findViewById(R.id.hexView);
+    	mHexView = (HexView) getActivity().findViewById(R.id.hex_view);
     }
     
     private void getAndSetPlayerStatus() {
+    	if (DEBUG) Log.d(TAG, "getAndSetPlayerStatus()");
+    	
     	JSONObject status = null;
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
     	long uid = settings.getLong(Config.KEY_UID, 0);
@@ -147,6 +151,5 @@ public class ProfileFragment extends Fragment {
     	}
 
     	tv.setText( rating.toString());
-
     }
 }

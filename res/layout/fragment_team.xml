@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@android:color/black">
+    android:layout_height="match_parent"
+    android:background="@android:color/black" >
 
     <TextView
         android:id="@+id/team_name"
@@ -11,8 +11,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="FC5678"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textColor="@android:color/white"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -23,7 +23,7 @@
         android:layout_marginTop="50dp" >
 
         <nanofuntas.fbl.HexView
-            android:id="@+id/hexView"
+            android:id="@+id/team_hex_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="30dp"
-            android:layout_toRightOf="@+id/hexView" >
+            android:layout_toRightOf="@+id/team_hex_view" >
 
             <TextView
                 android:id="@+id/team_overall"
@@ -43,8 +43,8 @@
                 android:layout_height="wrap_content"
                 android:text="OVERALL"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20dp" 
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/team_overall_rating"
@@ -55,8 +55,8 @@
                 android:layout_toRightOf="@+id/team_overall"
                 android:text="B"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20dp" 
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/team_atk"
@@ -65,8 +65,8 @@
                 android:layout_below="@+id/team_overall_rating"
                 android:layout_marginTop="10dp"
                 android:text="ATK"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_atk_rating"
@@ -76,8 +76,8 @@
                 android:layout_marginLeft="6dp"
                 android:layout_toRightOf="@+id/team_atk"
                 android:text="B"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_dfs"
@@ -87,8 +87,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/team_atk_rating"
                 android:text="DFS"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_dfs_rating"
@@ -98,8 +98,8 @@
                 android:layout_marginLeft="6dp"
                 android:layout_toRightOf="@+id/team_dfs"
                 android:text="B"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_tec"
@@ -107,8 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/team_atk"
                 android:text="TEC"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_tec_rating"
@@ -117,8 +117,8 @@
                 android:layout_alignBaseline="@+id/team_tec"
                 android:layout_alignLeft="@+id/team_atk_rating"
                 android:text="B"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_phy"
@@ -127,8 +127,8 @@
                 android:layout_alignBaseline="@+id/team_tec"
                 android:layout_alignLeft="@+id/team_dfs"
                 android:text="PHY"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_phy_rating"
@@ -137,8 +137,8 @@
                 android:layout_alignBaseline="@+id/team_phy"
                 android:layout_alignLeft="@+id/team_dfs_rating"
                 android:text="B"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_twk"
@@ -146,8 +146,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/team_tec"
                 android:text="TWK"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_twk_rating"
@@ -156,8 +156,8 @@
                 android:layout_alignBaseline="@+id/team_twk"
                 android:layout_alignLeft="@+id/team_atk_rating"
                 android:text="B"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_mtl"
@@ -166,8 +166,8 @@
                 android:layout_alignBaseline="@+id/team_twk"
                 android:layout_alignLeft="@+id/team_dfs"
                 android:text="MTL"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/team_mtl_rating"
@@ -176,8 +176,8 @@
                 android:layout_alignBaseline="@+id/team_mtl"
                 android:layout_alignLeft="@+id/team_dfs_rating"
                 android:text="B"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                android:textColor="@android:color/white"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -185,12 +185,12 @@
         android:id="@+id/killer_ranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeLayout1"
         android:layout_below="@+id/relativeLayout1"
         android:layout_marginTop="20dp"
-        android:layout_alignLeft="@+id/relativeLayout1"
         android:text="Killer Ranking"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textColor="@android:color/white"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
 
     <ListView
         android:id="@+id/killer_list_view"
@@ -205,12 +205,12 @@
         android:id="@+id/assister_ranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeLayout1"
         android:layout_below="@+id/killer_list_view"
         android:layout_marginTop="30dp"
-        android:layout_alignLeft="@+id/relativeLayout1"
         android:text="Assister Ranking"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textColor="@android:color/white"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
 
     <ListView
         android:id="@+id/assister_list_view"

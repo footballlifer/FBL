@@ -7,10 +7,15 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class HexView extends View {
+	private final boolean DEBUG = true;
+	private final String TAG = "HexView";
+	
 	private final float SIZE = 115; // View will be shown in Rectangle of (0,0,2SIZE,2SIZE)
+
 	// tuning ratio to size
 	private final float R_RATIO_TO_SIZE = 0.7f; //Radius of HEX
 	private final float DELTA_X_RATIO_TO_SIZE = 0.12f;
@@ -82,6 +87,8 @@ public class HexView extends View {
 	}
 
 	public void setRatingAndDraw(float rATK, float rTEC, float rTWK, float rDFS, float rMTL, float rPHY) {
+		if (DEBUG) Log.d(TAG, "setRatingAndDraw()");
+		
 		this.ratioATK = rATK;
 		this.ratioTEC = rTEC;
 		this.ratioTWK = rTWK;
@@ -95,15 +102,15 @@ public class HexView extends View {
 		widthMeasureSpec = (int) (2*SIZE);
 		heightMeasureSpec = (int) (2*SIZE);
 		setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
-		//setMeasuredDimension(200, 200);
-
 	}
 	
 	protected void onDraw(Canvas canvas) {		
+		if (DEBUG) Log.d(TAG, "onDraw()");
+		
 		// draw HEX on rectangle of (0,0,2X,2Y)
 		p.setColor(Color.GRAY);
 		canvas.drawRect(0, 0, 2*X, 2*Y, p);
-
+		
 		// points of HEX frame
 		POINT_ATK.set( X, Y-R );
 		POINT_TEC.set( X-R*F, Y-R/2 );
@@ -111,7 +118,7 @@ public class HexView extends View {
 		POINT_DFS.set( X, Y+R );
 		POINT_MTL.set( X+R*F, Y+R/2 );
 		POINT_PHY.set( X+R*F, Y-R/2 );
-		
+				
 		// draw HEX frame
 		p.setColor(Color.RED);
 		hexFrame.moveTo(POINT_ATK.x, POINT_ATK.y);
@@ -130,9 +137,8 @@ public class HexView extends View {
 		POINT_DFS_RATING.set( X, Y+ratioDFS*R );
 		POINT_MTL_RATING.set( X+ratioMTL*R*F, Y+ratioMTL*R/2 );
 		POINT_PHY_RATING.set( X+ratioPHY*R*F, Y-ratioPHY*R/2 );	
-		
+								
 		// draw rating HEXx
-		//path = new Path();
 		p.setColor(Color.GREEN);
 		hexValue.moveTo(POINT_ATK_RATING.x, POINT_ATK_RATING.y);
 		hexValue.lineTo(POINT_TEC_RATING.x, POINT_TEC_RATING.y);
@@ -141,7 +147,7 @@ public class HexView extends View {
 		hexValue.lineTo(POINT_MTL_RATING.x, POINT_MTL_RATING.y);
 		hexValue.lineTo(POINT_PHY_RATING.x, POINT_PHY_RATING.y);
 		hexValue.lineTo(POINT_ATK_RATING.x, POINT_ATK_RATING.y);
-		canvas.drawPath(hexValue, p);
+		canvas.drawPath(hexValue, p);	
 		
 		// draw lines
 		p.setColor(Color.BLACK);
@@ -167,7 +173,6 @@ public class HexView extends View {
 		canvas.drawText("DFS", POINT_DFS_TEXT.x, POINT_DFS_TEXT.y, p);
 		canvas.drawText("MTL", POINT_MTL_TEXT.x, POINT_MTL_TEXT.y, p);
 		canvas.drawText("PHY", POINT_PHY_TEXT.x, POINT_PHY_TEXT.y, p);
-
 	}
 
 }

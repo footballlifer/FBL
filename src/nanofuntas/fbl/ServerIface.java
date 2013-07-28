@@ -52,7 +52,7 @@ public class ServerIface {
 	}
     
 	@SuppressWarnings("unchecked")
-	public static long login(String strEmailLogin, String strPwLogin) {
+	public static JSONObject login(String strEmailLogin, String strPwLogin) {
 		if (DEBUG) Log.i(TAG, "login()");
 		
 		JSONObject jsonLogin = new JSONObject();
@@ -61,12 +61,12 @@ public class ServerIface {
 		jsonLogin.put(Config.KEY_PASSWORD, strPwLogin);
 		
 		JSONObject jsonResult = postNgetJson(jsonLogin);
-		Long uid = (Long) jsonResult.get(Config.KEY_RESULT);
-		return uid;
+		JSONObject result = (JSONObject) jsonResult.get(Config.KEY_RESULT);
+		return result;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static long register(String strEmailReg, String strPwReg) {
+	public static JSONObject register(String strEmailReg, String strPwReg) {
 		if (DEBUG) Log.i(TAG, "register()");
 		
 		JSONObject jsonRegister = new JSONObject();
@@ -75,8 +75,8 @@ public class ServerIface {
 		jsonRegister.put(Config.KEY_PASSWORD, strPwReg);
 		
 		JSONObject jsonResult = postNgetJson(jsonRegister);
-		long uid = (Long) jsonResult.get(Config.KEY_RESULT);
-		return uid;
+		JSONObject result = (JSONObject) jsonResult.get(Config.KEY_RESULT);
+		return result;
 		
 	}
 	
@@ -85,8 +85,20 @@ public class ServerIface {
 		if (DEBUG) Log.i(TAG, "getPlayerStatus()");
 
 		JSONObject jsonStatus = new JSONObject();
-		jsonStatus.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_STATUS);
+		jsonStatus.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_PLAYER_STATUS);
 		jsonStatus.put(Config.KEY_UID, uid);
+		
+		JSONObject jsonResult = postNgetJson(jsonStatus);		
+		return jsonResult;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONObject getTeamStatus(long tid) {
+		if (DEBUG) Log.i(TAG, "getTeamStatus()");
+
+		JSONObject jsonStatus = new JSONObject();
+		jsonStatus.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_TEAM_STATUS);
+		jsonStatus.put(Config.KEY_TID, tid);
 		
 		JSONObject jsonResult = postNgetJson(jsonStatus);		
 		return jsonResult;
@@ -97,7 +109,7 @@ public class ServerIface {
 		if (DEBUG) Log.i(TAG, "ratePlayer()");
 
 		JSONObject jsonPlayerRating = new JSONObject();
-		jsonPlayerRating.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_RATING);
+		jsonPlayerRating.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_PLAYER_RATING);
 		jsonPlayerRating.put(Config.KEY_UID, uid);
 		jsonPlayerRating.put(Config.KEY_RATING, jsonRating);
 		

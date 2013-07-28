@@ -1,5 +1,7 @@
 package nanofuntas.fbl;
 
+import org.json.simple.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,13 +48,18 @@ public class LogNRegActivity extends Activity {
 				String strEmailLogin = emailLogin.getText().toString();
 				String strPwLogin = pwLogin.getText().toString();
 				
-				long uid = ServerIface.login(strEmailLogin, strPwLogin);				
-				testText.setText(Long.toString(uid));
+				JSONObject result = ServerIface.login(strEmailLogin, strPwLogin);	
+				long uid = (Long) result.get(Config.KEY_UID);
+				long tid = (Long) result.get(Config.KEY_TID);
+				
+				testText.setText(Long.toString(uid) + " " + Long.toString(tid));
+				
 				if ( uid != -1 ) {
 					// save uid 
 					SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
 					SharedPreferences.Editor editor = settings.edit();
 					editor.putLong(Config.KEY_UID, uid);
+					editor.putLong(Config.KEY_TID, tid);
 					editor.commit();
 					
 					Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);
@@ -76,9 +83,11 @@ public class LogNRegActivity extends Activity {
 					return;
 				}
 				
-				long uid = ServerIface.register(strEmailReg, strPwReg);
-				testText.setText(Long.toString(uid));
-
+				JSONObject result = ServerIface.register(strEmailReg, strPwReg);	
+				long uid = (Long) result.get(Config.KEY_UID);
+				long tid = (Long) result.get(Config.KEY_TID);
+				
+				testText.setText(Long.toString(uid) + " " + Long.toString(tid));			
 			}       	
         });
     }

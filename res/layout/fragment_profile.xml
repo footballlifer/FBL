@@ -19,7 +19,7 @@
             android:src="@drawable/cr" />
         
         <nanofuntas.fbl.HexView
-            android:id="@+id/hexView"
+            android:id="@+id/hex_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
