@@ -140,7 +140,7 @@ public final class R {
         public static final int textView3=0x7f07003f;
         public static final int tname_create=0x7f070056;
         public static final int tname_join=0x7f070058;
-        public static final int update_ur_info=0x7f07005e;
+        public static final int update_my_info=0x7f07005e;
         public static final int ur_name_update=0x7f07005c;
         public static final int ur_position_update=0x7f07005d;
     }

@@ -118,5 +118,66 @@ public class ServerIface {
 		String result = (String) jsonResult.get(Config.KEY_RESULT);		
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static long createTeam(long uid, String teamName) {
+		if (DEBUG) Log.i(TAG, "createTeam()");
+
+		JSONObject jsonCreateTeam = new JSONObject();
+		jsonCreateTeam.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_CREATE_TEAM);
+		jsonCreateTeam.put(Config.KEY_UID, uid);
+		jsonCreateTeam.put(Config.KEY_TEAM_NAME, teamName);
 		
+		JSONObject jsonResult = postNgetJson(jsonCreateTeam);
+
+		long result = (Long) jsonResult.get(Config.KEY_RESULT);		
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static long joinTeam(long uid, String teamName) {
+		if (DEBUG) Log.i(TAG, "joinTeam()");
+		
+		JSONObject jsonJoinTeam = new JSONObject();
+		jsonJoinTeam.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_JOIN_TEAM);
+		jsonJoinTeam.put(Config.KEY_UID, uid);
+		jsonJoinTeam.put(Config.KEY_TEAM_NAME, teamName);
+		
+		JSONObject jsonResult = postNgetJson(jsonJoinTeam);
+
+		long result = (Long) jsonResult.get(Config.KEY_RESULT);		
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static long incruitPlayer(long tid, String playerName) {
+		if (DEBUG) Log.i(TAG, "incruitPlayer()");
+		
+		JSONObject jsonIncruitPlayer = new JSONObject();
+		jsonIncruitPlayer.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_INCRUIT_PLAYER);
+		jsonIncruitPlayer.put(Config.KEY_TID, tid);
+		jsonIncruitPlayer.put(Config.KEY_NAME, playerName);
+		
+		JSONObject jsonResult = postNgetJson(jsonIncruitPlayer);
+
+		long result = (Long) jsonResult.get(Config.KEY_RESULT);		
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void updateMyInfo(long uid, String myName, String myPosition) {
+		if (DEBUG) Log.i(TAG, "updateMyInfo()");
+		/*
+		JSONObject jsonUpdateMyInfo = new JSONObject();
+		jsonUpdateMyInfo.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_UPDATA_MY_INFO);
+		jsonUpdateMyInfo.put(Config.KEY_UID, uid);
+		jsonUpdateMyInfo.put(Config.KEY_NAME, myName);
+		jsonUpdateMyInfo.put(Config.KEY_POSITION, myPosition);
+		
+		JSONObject jsonResult = postNgetJson(jsonUpdateMyInfo);
+
+		long result = (Long) jsonResult.get(Config.KEY_RESULT);
+		*/		
+	}
+
 }
