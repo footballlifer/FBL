@@ -19,8 +19,8 @@ public final class R {
         public static final int ic_launcher=0x7f020005;
     }
     public static final class id {
-        public static final int assister_list_view=0x7f070069;
-        public static final int assister_ranking=0x7f070068;
+        public static final int assister_list_view=0x7f070073;
+        public static final int assister_ranking=0x7f070072;
         public static final int attack=0x7f070043;
         public static final int attack_rating=0x7f070009;
         public static final int attack_rating_bar=0x7f07000a;
@@ -31,8 +31,9 @@ public final class R {
         public static final int ball_control_rating_bar=0x7f070026;
         public static final int ball_control_rating_value=0x7f070027;
         public static final int button1=0x7f070041;
-        public static final int condition=0x7f07006b;
+        public static final int condition=0x7f070075;
         public static final int container=0x7f07003a;
+        public static final int create_team=0x7f070057;
         public static final int cutting=0x7f07004e;
         public static final int cutting_rating=0x7f070035;
         public static final int cutting_rating_bar=0x7f070036;
@@ -43,7 +44,7 @@ public final class R {
         public static final int defense_rating_value=0x7f07000f;
         public static final int email_login=0x7f070000;
         public static final int email_reg=0x7f070004;
-        public static final int goals_ranking=0x7f070070;
+        public static final int goals_ranking=0x7f07007a;
         public static final int header=0x7f07004d;
         public static final int header_rating=0x7f070031;
         public static final int header_rating_bar=0x7f070032;
@@ -51,18 +52,20 @@ public final class R {
         public static final int hexView=0x7f070040;
         public static final int hex_view=0x7f070042;
         public static final int imageView1=0x7f07003c;
-        public static final int killer_list_view=0x7f070067;
-        public static final int killer_ranking=0x7f070066;
+        public static final int incruit_player=0x7f07005b;
+        public static final int join_team=0x7f070059;
+        public static final int killer_list_view=0x7f070071;
+        public static final int killer_ranking=0x7f070070;
         public static final int listView1=0x7f07003b;
         public static final int login=0x7f070002;
         public static final int mental=0x7f070046;
         public static final int mental_rating=0x7f070015;
         public static final int mental_rating_bar=0x7f070016;
         public static final int mental_rating_value=0x7f070017;
-        public static final int menu_settings=0x7f070071;
-        public static final int name=0x7f07006c;
+        public static final int menu_settings=0x7f07007b;
+        public static final int name=0x7f070076;
         public static final int name_member=0x7f07003d;
-        public static final int name_ranking=0x7f07006f;
+        public static final int name_ranking=0x7f070079;
         public static final int name_rating=0x7f070038;
         public static final int overall=0x7f07004f;
         public static final int overall_rating=0x7f070050;
@@ -70,9 +73,10 @@ public final class R {
         public static final int pass_rating=0x7f070029;
         public static final int pass_rating_bar=0x7f07002a;
         public static final int pass_rating_value=0x7f07002b;
-        public static final int photo=0x7f07006a;
-        public static final int photo_ranking=0x7f07006e;
+        public static final int photo=0x7f070074;
+        public static final int photo_ranking=0x7f070078;
         public static final int player_name=0x7f070053;
+        public static final int pname_incruit=0x7f07005a;
         public static final int position=0x7f070054;
         public static final int position_value=0x7f070055;
         public static final int power=0x7f070047;
@@ -82,7 +86,7 @@ public final class R {
         public static final int pw_login=0x7f070001;
         public static final int pw_reg=0x7f070005;
         public static final int pw_reg_retype=0x7f070006;
-        public static final int ranking=0x7f07006d;
+        public static final int ranking=0x7f070077;
         public static final int rate_me=0x7f070052;
         public static final int regiter=0x7f070007;
         public static final int relativeLayout1=0x7f070008;
@@ -110,29 +114,35 @@ public final class R {
         public static final int stamina_rating_bar=0x7f070022;
         public static final int stamina_rating_value=0x7f070023;
         public static final int submit=0x7f070039;
-        public static final int team_atk=0x7f07005a;
-        public static final int team_atk_rating=0x7f07005b;
-        public static final int team_dfs=0x7f07005c;
-        public static final int team_dfs_rating=0x7f07005d;
-        public static final int team_hex_view=0x7f070057;
-        public static final int team_mtl=0x7f070064;
-        public static final int team_mtl_rating=0x7f070065;
-        public static final int team_name=0x7f070056;
-        public static final int team_overall=0x7f070058;
-        public static final int team_overall_rating=0x7f070059;
-        public static final int team_phy=0x7f070060;
-        public static final int team_phy_rating=0x7f070061;
-        public static final int team_tec=0x7f07005e;
-        public static final int team_tec_rating=0x7f07005f;
-        public static final int team_twk=0x7f070062;
-        public static final int team_twk_rating=0x7f070063;
+        public static final int team_atk=0x7f070064;
+        public static final int team_atk_rating=0x7f070065;
+        public static final int team_dfs=0x7f070066;
+        public static final int team_dfs_rating=0x7f070067;
+        public static final int team_hex_view=0x7f070061;
+        public static final int team_mtl=0x7f07006e;
+        public static final int team_mtl_rating=0x7f07006f;
+        public static final int team_name=0x7f070060;
+        public static final int team_overall=0x7f070062;
+        public static final int team_overall_rating=0x7f070063;
+        public static final int team_phy=0x7f07006a;
+        public static final int team_phy_rating=0x7f07006b;
+        public static final int team_tec=0x7f070068;
+        public static final int team_tec_rating=0x7f070069;
+        public static final int team_twk=0x7f07006c;
+        public static final int team_twk_rating=0x7f07006d;
         public static final int teamwork=0x7f070045;
         public static final int teamwork_rating=0x7f070011;
         public static final int teamwork_rating_bar=0x7f070012;
         public static final int teamwork_rating_value=0x7f070013;
+        public static final int test_setting=0x7f07005f;
         public static final int test_text=0x7f070003;
         public static final int textView2=0x7f07003e;
         public static final int textView3=0x7f07003f;
+        public static final int tname_create=0x7f070056;
+        public static final int tname_join=0x7f070058;
+        public static final int update_ur_info=0x7f07005e;
+        public static final int ur_name_update=0x7f07005c;
+        public static final int ur_position_update=0x7f07005d;
     }
     public static final class layout {
         public static final int activity_log_n_reg=0x7f030000;
@@ -140,9 +150,10 @@ public final class R {
         public static final int activity_tabview=0x7f030002;
         public static final int fragment_member=0x7f030003;
         public static final int fragment_profile=0x7f030004;
-        public static final int fragment_team=0x7f030005;
-        public static final int item_view=0x7f030006;
-        public static final int ranking_item_view=0x7f030007;
+        public static final int fragment_settings=0x7f030005;
+        public static final int fragment_team=0x7f030006;
+        public static final int item_view=0x7f030007;
+        public static final int ranking_item_view=0x7f030008;
     }
     public static final class menu {
         public static final int activity_log_n_reg=0x7f060000;

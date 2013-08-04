@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@android:color/black">
+
+    <EditText
+        android:id="@+id/tname_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Team Name" >
+
+        <requestFocus />
+    </EditText>
+    <Button
+        android:id="@+id/create_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tname_create"
+        android:layout_alignRight="@+id/tname_create"
+        android:layout_below="@+id/tname_create"
+        android:background="@android:color/darker_gray"
+        android:text="Create Team"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/tname_join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/create_team"
+        android:layout_below="@+id/create_team"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Team Name" />
+  	<Button
+     	android:id="@+id/join_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tname_join"
+        android:layout_alignRight="@+id/tname_join"
+        android:layout_below="@+id/tname_join"
+        android:text="Join Team" 
+        android:background="@android:color/darker_gray"
+    	android:textColor="@android:color/white"        />
+    
+    <EditText
+        android:id="@+id/pname_incruit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/join_team"
+        android:layout_below="@+id/join_team"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Player Name" />
+    <Button
+        android:id="@+id/incruit_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pname_incruit"
+        android:layout_alignRight="@+id/pname_incruit"
+        android:layout_below="@+id/pname_incruit"
+        android:text="Incruit Player" 
+        android:background="@android:color/darker_gray"
+    	android:textColor="@android:color/white" />  
+    
+    <EditText
+        android:id="@+id/ur_name_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/incruit_player"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="Your Name"
+        android:ems="10" />
+    <EditText
+        android:id="@+id/ur_position_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ur_name_update"
+        android:layout_centerHorizontal="true"
+        android:hint="Your Position"
+        android:ems="10" />
+    <Button
+        android:id="@+id/update_ur_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ur_position_update"
+        android:layout_alignRight="@+id/ur_position_update"
+        android:layout_below="@+id/ur_position_update"
+        android:text="Update Your Info" 
+        android:background="@android:color/darker_gray"
+    	android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/test_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="info"
+        android:textAppearance="?android:attr/textAppearanceMedium"         
+    	android:textColor="@android:color/white" />
+
+</RelativeLayout>
