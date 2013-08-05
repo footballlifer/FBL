@@ -1,5 +1,7 @@
 package nanofuntas.fbl;
 
+import org.json.simple.JSONObject;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,7 +26,7 @@ public class SettingsFragment extends Fragment {
 	private Button mIncruitPlayer = null;	
 	private EditText mYourName = null;
 	private EditText mYourPosition = null;
-	private Button mUpdateMyInfo = null;
+	private Button mUpdateMyProfile = null;
 	
 	private TextView mTestSettings = null;
 	
@@ -98,16 +100,22 @@ public class SettingsFragment extends Fragment {
 			}    		
     	});
     	
-    	mUpdateMyInfo.setOnClickListener(new OnClickListener(){
+    	mUpdateMyProfile.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				if (DEBUG) Log.d(TAG, "Update Your info clicked!");
+				if (DEBUG) Log.d(TAG, "Update Your Profile clicked!");
 				
 				String myName = mYourName.getText().toString();
 				String myPosition = mYourPosition.getText().toString();
 				
-				//ServerIface.updateMyInfo(UID, myName, myPosition);
+				JSONObject myProfile = new JSONObject();
+				myProfile.put(Config.KEY_NAME, myName);
+				myProfile.put(Config.KEY_POSITION, myPosition);
 				
+				String result = ServerIface.updateMyProfile(UID, myProfile);
+				if (result.equals(Config.KEY_OK)) {
+					mTestSettings.setText("My Profile updated OK");
+				}
 			}    		
     	});
     }
@@ -130,7 +138,7 @@ public class SettingsFragment extends Fragment {
     	mIncruitPlayer = (Button) getView().findViewById(R.id.incruit_player);	
     	mYourName = (EditText) getView().findViewById(R.id.ur_name_update);
     	mYourPosition = (EditText) getView().findViewById(R.id.ur_position_update);
-    	mUpdateMyInfo = (Button) getView().findViewById(R.id.update_my_info);
+    	mUpdateMyProfile = (Button) getView().findViewById(R.id.update_my_profile);
     	
     	mTestSettings = (TextView) getView().findViewById(R.id.test_setting);
     }

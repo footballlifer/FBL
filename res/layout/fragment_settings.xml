@@ -88,13 +88,13 @@
         android:ems="10" 
         android:textColor="@android:color/white" />
     <Button
-        android:id="@+id/update_my_info"
+        android:id="@+id/update_my_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ur_position_update"
         android:layout_alignRight="@+id/ur_position_update"
         android:layout_below="@+id/ur_position_update"
-        android:text="Update My Info"
+        android:text="Update My Profile"
         android:background="@android:color/darker_gray"
     	android:textColor="@android:color/white" />
 
@@ -102,7 +102,7 @@
         android:id="@+id/test_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/update_my_info"
+        android:layout_below="@+id/update_my_profile"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:text="info"

@@ -165,19 +165,18 @@ public class ServerIface {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void updateMyInfo(long uid, String myName, String myPosition) {
-		if (DEBUG) Log.i(TAG, "updateMyInfo()");
-		/*
-		JSONObject jsonUpdateMyInfo = new JSONObject();
-		jsonUpdateMyInfo.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_UPDATA_MY_INFO);
-		jsonUpdateMyInfo.put(Config.KEY_UID, uid);
-		jsonUpdateMyInfo.put(Config.KEY_NAME, myName);
-		jsonUpdateMyInfo.put(Config.KEY_POSITION, myPosition);
-		
-		JSONObject jsonResult = postNgetJson(jsonUpdateMyInfo);
+	public static String updateMyProfile(long uid, JSONObject myProfile) {
+		if (DEBUG) Log.i(TAG, "updateMyProfile()");
 
-		long result = (Long) jsonResult.get(Config.KEY_RESULT);
-		*/		
+		JSONObject jsonUpdateMyProfile = new JSONObject();
+		jsonUpdateMyProfile.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_UPDATA_PLAYER_PROFILE);
+		jsonUpdateMyProfile.put(Config.KEY_UID, uid);
+		jsonUpdateMyProfile.put(Config.KEY_PLAYER_PROFILE, myProfile);
+		
+		JSONObject jsonResult = postNgetJson(jsonUpdateMyProfile);
+
+		String result = (String) jsonResult.get(Config.KEY_RESULT);		
+		return result;
 	}
 
 }
