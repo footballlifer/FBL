@@ -14,22 +14,23 @@ public class HexView extends View {
 	private final boolean DEBUG = true;
 	private final String TAG = "HexView";
 	
-	private final float SIZE = 115; // View will be shown in Rectangle of (0,0,2SIZE,2SIZE)
-
 	// tuning ratio to size
 	private final float R_RATIO_TO_SIZE = 0.7f; //Radius of HEX
 	private final float DELTA_X_RATIO_TO_SIZE = 0.12f;
 	private final float DELTA_Y_RATIO_TO_SIZE = 0.06f;
 	private final float RATIO_TEXT = 1.25f; // (RATIO_TEXT*R) is the center point where text shows
 	private final float POINT_SIZE_RATIO_TO_SIZE = 0.14f;
-
-	private final float X = SIZE;
-	private final float Y = SIZE;
-	private final float R = R_RATIO_TO_SIZE * SIZE;
 	private final float F = (float) (Math.sqrt(3) / 2);
-	private final float TEXT_DELTA_X = DELTA_X_RATIO_TO_SIZE * SIZE;
-	private final float TEXT_DELTA_Y = DELTA_Y_RATIO_TO_SIZE * SIZE;
-	private final float PONT_SIZE = POINT_SIZE_RATIO_TO_SIZE * SIZE;
+	
+	// Default size
+	private float PIXEL = 50;
+	private float SIZE = 115; // View will be shown in Rectangle of (0,0,2SIZE,2SIZE), resized to SIZE = density * PIXEL
+	private float X = SIZE;
+	private float Y = SIZE;
+	private float R = R_RATIO_TO_SIZE * SIZE;
+	private float TEXT_DELTA_X = DELTA_X_RATIO_TO_SIZE * SIZE;
+	private float TEXT_DELTA_Y = DELTA_Y_RATIO_TO_SIZE * SIZE;
+	private float PONT_SIZE = POINT_SIZE_RATIO_TO_SIZE * SIZE;
 	
 	// ratio of HEX value
 	private float ratioATK = 0.0f;
@@ -66,13 +67,16 @@ public class HexView extends View {
 	
 	public HexView(Context context) {
 		super(context);
+		setSize();
 	}
 	public HexView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		setSize();
 	}
 	
 	public HexView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		setSize();
 	}
 	
 	public HexView(Context context, 
@@ -84,8 +88,19 @@ public class HexView extends View {
 		this.ratioDFS = rDFS;
 		this.ratioMTL = rMTL;
 		this.ratioPHY = rPHY;
+		setSize();
 	}
 
+	private void setSize() {
+		SIZE = getResources().getDisplayMetrics().density * PIXEL;
+		X = SIZE;
+		Y = SIZE;
+		R = R_RATIO_TO_SIZE * SIZE;
+		TEXT_DELTA_X = DELTA_X_RATIO_TO_SIZE * SIZE;
+		TEXT_DELTA_Y = DELTA_Y_RATIO_TO_SIZE * SIZE;
+		PONT_SIZE = POINT_SIZE_RATIO_TO_SIZE * SIZE;
+	}
+	
 	public void setRatingAndDraw(float rATK, float rTEC, float rTWK, float rDFS, float rMTL, float rPHY) {
 		if (DEBUG) Log.d(TAG, "setRatingAndDraw()");
 		
