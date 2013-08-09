@@ -36,7 +36,7 @@ public class TabViewActivity extends FragmentActivity {
         actionBar.addTab(actionBar.newTab().setText("Member")
         		.setTabListener(new TabListener<MemberFragment>(this, "MemberFragment", MemberFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText("Settings")
-        		.setTabListener(new TabListener<SettingsFragment>(this, "SettingsProfile", SettingsFragment.class) ));
+        		.setTabListener(new TabListener<SettingsFragment>(this, "SettingsFragment", SettingsFragment.class) ));
     }
 
     public class TabListener<T extends Fragment> implements ActionBar.TabListener {
