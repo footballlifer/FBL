@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nanofuntas.fbl"
     android:versionCode="1"
@@ -14,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".LogNRegActivity"
+            android:name="nanofuntas.fbl.LogNRegActivity"
             android:label="@string/title_activity_log_n_reg" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TabViewActivity"
+            android:name="nanofuntas.fbl.TabViewActivity"
             android:label="@string/title_activity_tabview" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,13 +33,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlayerRatingActivity"
+            android:name="nanofuntas.fbl.PlayerRatingActivity"
             android:label="@string/title_activity_player_rating" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="nanofuntas.fbl.ProfileActivity"
+            android:label="@string/title_activity_profile" >
         </activity>
     </application>
 

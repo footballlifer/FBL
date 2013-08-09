@@ -2,16 +2,25 @@ package nanofuntas.fbl;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class MemberFragment extends Fragment {
-
+	private boolean DEBUG = true;
+	private String TAG = "MemberFragment";
+	
+	private ListView mListView = null;
+	private Button mDetails = null;
+	
 	public MemberFragment() {
     }
 
@@ -19,13 +28,30 @@ public class MemberFragment extends Fragment {
 
     @Override
     public void onStart(){
-    	super.onStart();
+    	super.onStart();    	
     	
-    	ListView mListView = (ListView) getView().findViewById(R.id.listView1);
-
+    	initViews();
+    	
+    	mDetails.setOnClickListener(new OnClickListener(){			
+    		@Override
+			public void onClick(View arg0) {
+    			if (DEBUG) Log.d(TAG, "details Clicked!");
+    			
+				Intent i = new Intent(getActivity(), ProfileActivity.class);
+				startActivity(i);
+			}    	
+    	});
+    	
     	ArrayList<PhotoTextItem> mItemList = getListView();
     	PhotoTextListAdapter mPhotoTextListAdapter = new PhotoTextListAdapter(getActivity(), mItemList);
         mListView.setAdapter(mPhotoTextListAdapter);
+    }
+    
+    private void initViews() {
+    	if (DEBUG) Log.d(TAG, "initViews()");
+    	
+    	mListView = (ListView) getView().findViewById(R.id.listView1);
+    	mDetails = (Button) getView().findViewById(R.id.details);
     }
     
     @Override

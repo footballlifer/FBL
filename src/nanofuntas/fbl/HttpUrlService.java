@@ -27,7 +27,7 @@ public class HttpUrlService {
 	private final static int HTTP_CONNECT_TIMEOUT = 30 * 1000; //30 seconds
 	private final static int HTTP_READ_TIMEOUT = 30 * 1000; //30 seconds
 
-	private final static String strURL = "http://192.168.0.10:8080/FBLS/FBLServlet";
+	private final static String strURL = "http://192.168.219.122:8080/FBLS/FBLServlet";
 	
 	/**
 	 * Function execStrPost sends String data received from client to server,

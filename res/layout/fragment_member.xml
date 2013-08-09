@@ -81,7 +81,7 @@
                 android:layout_centerHorizontal="true"/>
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/details"
                 android:layout_width="115dp"
                 android:layout_height="40dp"
                 android:layout_below="@+id/hexView"

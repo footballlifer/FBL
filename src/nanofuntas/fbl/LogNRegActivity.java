@@ -55,7 +55,7 @@ public class LogNRegActivity extends Activity {
 				testText.setText(Long.toString(uid) + " " + Long.toString(tid));
 				
 				if ( uid != -1 ) {
-					// save uid 
+					// save uid, tid
 					SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
 					SharedPreferences.Editor editor = settings.edit();
 					editor.putLong(Config.KEY_UID, uid);
