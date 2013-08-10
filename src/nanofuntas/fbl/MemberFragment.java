@@ -1,8 +1,13 @@
 package nanofuntas.fbl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.simple.JSONObject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MemberFragment extends Fragment {
 	private boolean DEBUG = true;
@@ -20,6 +28,8 @@ public class MemberFragment extends Fragment {
 	
 	private ListView mListView = null;
 	private Button mDetails = null;
+		
+	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
 	
 	public MemberFragment() {
     }
@@ -29,7 +39,7 @@ public class MemberFragment extends Fragment {
     @Override
     public void onStart(){
     	super.onStart();    	
-    	
+
     	initViews();
     	
     	mDetails.setOnClickListener(new OnClickListener(){			
@@ -45,6 +55,16 @@ public class MemberFragment extends Fragment {
     	ArrayList<PhotoTextItem> mItemList = getListView();
     	PhotoTextListAdapter mPhotoTextListAdapter = new PhotoTextListAdapter(getActivity(), mItemList);
         mListView.setAdapter(mPhotoTextListAdapter);
+        
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), "Position:" + position, Toast.LENGTH_SHORT).show();
+			}
+        });
+        
     }
     
     private void initViews() {
@@ -62,91 +82,54 @@ public class MemberFragment extends Fragment {
     }   
     
     private ArrayList<PhotoTextItem> getListView(){
-    	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
-    	PhotoTextItem item = null;
+    	if (DEBUG) Log.d(TAG, "getListView()");
+    	
     	Drawable photo = getResources().getDrawable(R.drawable.cr2);
     	Drawable condition = getResources().getDrawable(R.drawable.condition);
     	
-    	item = new PhotoTextItem();
+    	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
+    	PhotoTextItem item = new PhotoTextItem();
+    	JSONObject profile = null;
+    	PlayerProfile pp = null;
+    	
+    	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
+    	long uid = settings.getLong(Config.KEY_UID, 0);
+    	long tid = settings.getLong(Config.KEY_TID, 0);
+    	
     	item.setPhoto(photo);
     	item.setCondition(condition);
-    	item.setName("name1");
+    	item.setName("Me");
     	itemList.add(item);
     	
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
+    	pp = new PlayerProfile(uid, "Me", "FW");
+    	map.put( (long)0, pp);
     	
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);    	
+    	if (tid == -1) {
+    		Log.d(TAG, "tid == -1, return");
+    		return itemList;
+    	}
+    	
+    	JSONObject jsonMembersProfile = ServerIface.getMembersProfile(tid);
+    	long count = (Long) jsonMembersProfile.get(Config.KEY_MEMBERS_COUNT);    	
+    	
+    	for (long i = 1; i <= count; i++) {
+    		profile = (JSONObject) jsonMembersProfile.get(Long.toString(i));
+    		
+    		pp = new PlayerProfile();
+    		pp.setUid( (Long)profile.get(Config.KEY_UID) );
+    		pp.setName( (String)profile.get(Config.KEY_NAME) );
+    		pp.setName( (String)profile.get(Config.KEY_POSITION) );
 
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);
-
-    	item = new PhotoTextItem();
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("name1");
-    	itemList.add(item);     
+    		map.put(i, pp);
+    		
+    		item = new PhotoTextItem();
+        	item.setPhoto(photo);
+        	item.setCondition(condition);
+        	item.setName( (String)profile.get(Config.KEY_NAME) );
+        	itemList.add(item);
+    	}
     	
     	return itemList;
-    	
     }
 
 }

@@ -179,4 +179,19 @@ public class ServerIface {
 		return result;
 	}
 
+	public static JSONObject getMembersProfile(long tid) {
+		if (DEBUG) Log.i(TAG, "getMembersProfile()");
+
+		JSONObject jsonGetMembersProfile = new JSONObject();
+		jsonGetMembersProfile.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_GET_MEMBERS_PROFILE);
+		jsonGetMembersProfile.put(Config.KEY_TID, tid);
+		
+		JSONObject jsonResult = postNgetJson(jsonGetMembersProfile);
+		// kakpple test log
+		Log.d(TAG, "JSON result:" + jsonResult);
+		
+		JSONObject result = (JSONObject) jsonResult.get(Config.KEY_RESULT);
+		return result;
+	}
+
 }
