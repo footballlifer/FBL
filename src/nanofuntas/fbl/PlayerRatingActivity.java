@@ -51,6 +51,9 @@ public class PlayerRatingActivity extends Activity {
 	private TextView headerRatingValue = null;
 	private TextView cuttingRatingValue = null;
 
+	private long uid = -1;
+	private String name = null;	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,6 +61,10 @@ public class PlayerRatingActivity extends Activity {
 		setContentView(R.layout.activity_player_rating);
 		initViews();
 
+		uid = getIntent().getExtras().getLong(Config.KEY_UID);
+		name = getIntent().getExtras().getString(Config.KEY_NAME);
+		nameRating.setText(name);
+		
 		submitButton.setOnClickListener(submitOnClickListener);
 	}
 
@@ -80,9 +87,11 @@ public class PlayerRatingActivity extends Activity {
 			jsonRating.put(Config.KEY_HEADER, Long.valueOf(headerRatingValue.getText().toString()));
 			jsonRating.put(Config.KEY_CUTTING, Long.valueOf(cuttingRatingValue.getText().toString()));
 
+			/*
 			SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
 			long uid = settings.getLong(Config.KEY_UID, 0);
-
+			*/
+			
 			String result = ServerIface.ratePlayer(uid, jsonRating);
 			if (result.equals(Config.KEY_OK)) {
 				Toast.makeText(getApplicationContext(), "Submit successful", Toast.LENGTH_SHORT).show();

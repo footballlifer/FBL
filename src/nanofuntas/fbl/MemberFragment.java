@@ -48,6 +48,14 @@ public class MemberFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				// TODO Auto-generated method stub
+				PlayerProfile pp = map.get((long)position);
+				
+				Intent i = new Intent(getActivity(), ProfileActivity.class);
+				i.putExtra(Config.KEY_UID, pp.getUid());
+				i.putExtra(Config.KEY_NAME, pp.getName());
+				i.putExtra(Config.KEY_POSITION, pp.getPosition());
+				startActivity(i);
+				
 				Toast.makeText(getActivity(), "Position:" + position, Toast.LENGTH_SHORT).show();
 			}
         });

@@ -37,18 +37,30 @@ public class ProfileActivity extends Activity {
     private TextView mCuttingRating = null;
     private TextView mOverallRating = null;
     private HexView mHexView = null;
-	
+	 
+    private long uid = -1;
+    private String name = null;
+    private String position = null;
+    
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+		initView();
 		
-    	initView();
-    	getAndSetPlayerStatus();    	
+		uid = getIntent().getExtras().getLong(Config.KEY_UID);		
+    	name = getIntent().getExtras().getString(Config.KEY_NAME);
+    	position = getIntent().getExtras().getString(Config.KEY_POSITION);
+    	mPlayerName.setText(name);
+    	mPosition.setText(position);
+    	
+    	getAndSetPlayerStatus(uid);    	
     	
     	mRateMeButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(ProfileActivity.this, PlayerRatingActivity.class);
+				i.putExtra(Config.KEY_UID, uid);
+				i.putExtra(Config.KEY_NAME, name);
 				startActivity(i);
 			}
 		});
@@ -78,13 +90,14 @@ public class ProfileActivity extends Activity {
     	mHexView = (HexView) findViewById(R.id.hex_view);
     }
     
-    private void getAndSetPlayerStatus() {
+    private void getAndSetPlayerStatus(long uid) {
     	if (DEBUG) Log.d(TAG, "getAndSetPlayerStatus()");
     	
     	JSONObject status = null;
+    	/*    	
     	SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
     	long uid = settings.getLong(Config.KEY_UID, 0);
-    	
+    	*/
     	status = ServerIface.getPlayerStatus(uid);
     	   	
     	mPlayerName.setText( (String)status.get(Config.KEY_NAME));
