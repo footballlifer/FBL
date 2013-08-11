@@ -9,6 +9,7 @@ import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 
 public class HexView extends View {
 	private final boolean DEBUG = true;
@@ -23,8 +24,8 @@ public class HexView extends View {
 	private final float F = (float) (Math.sqrt(3) / 2);
 	
 	// Default size
-	private float PIXEL = 50;
-	private float SIZE = 115; // View will be shown in Rectangle of (0,0,2SIZE,2SIZE), resized to SIZE = density * PIXEL
+	private float DEFAULT_SIZE = 120;
+	private float SIZE = DEFAULT_SIZE; // View will be shown in Rectangle of (0,0,2SIZE,2SIZE), resized to SIZE = density * PIXEL
 	private float X = SIZE;
 	private float Y = SIZE;
 	private float R = R_RATIO_TO_SIZE * SIZE;
@@ -67,18 +68,16 @@ public class HexView extends View {
 	
 	public HexView(Context context) {
 		super(context);
-		setSize();
 	}
 	public HexView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setSize();
 	}
 	
 	public HexView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		setSize();
 	}
 	
+	//rATK, rTEC, rTWK, rDFS, rMTL, rPHY is ratio smaller than 1
 	public HexView(Context context, 
 			float rATK, float rTEC, float rTWK, float rDFS, float rMTL, float rPHY) {
 		super(context);
@@ -88,11 +87,10 @@ public class HexView extends View {
 		this.ratioDFS = rDFS;
 		this.ratioMTL = rMTL;
 		this.ratioPHY = rPHY;
-		setSize();
 	}
-
-	private void setSize() {
-		SIZE = getResources().getDisplayMetrics().density * PIXEL;
+	
+	private void setSize(int s) {
+		SIZE = s;
 		X = SIZE;
 		Y = SIZE;
 		R = R_RATIO_TO_SIZE * SIZE;
@@ -114,9 +112,19 @@ public class HexView extends View {
 	}
 	
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		widthMeasureSpec = (int) (2*SIZE);
-		heightMeasureSpec = (int) (2*SIZE);
-		setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+		Log.e(TAG, "onMeasure()");
+		
+		int height = getLayoutParams().height;
+		int width = getLayoutParams().width;
+		int size = height > width ? height : width;
+
+		if (height == LayoutParams.WRAP_CONTENT || width == LayoutParams.WRAP_CONTENT) {
+			Log.d (TAG, "LayoutParams.WRAP_CONTENT");
+			size = (int) DEFAULT_SIZE;
+		}
+		
+		setSize(size);		
+		setMeasuredDimension(size*2, size*2);
 	}
 	
 	protected void onDraw(Canvas canvas) {		
