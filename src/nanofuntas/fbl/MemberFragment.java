@@ -26,9 +26,7 @@ public class MemberFragment extends Fragment {
 	private boolean DEBUG = true;
 	private String TAG = "MemberFragment";
 	
-	private ListView mListView = null;
-	private Button mDetails = null;
-		
+	private ListView mListView = null;		
 	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
 	
 	public MemberFragment() {
@@ -40,18 +38,7 @@ public class MemberFragment extends Fragment {
     public void onStart(){
     	super.onStart();    	
 
-    	initViews();
-    	
-    	mDetails.setOnClickListener(new OnClickListener(){			
-    		@Override
-			public void onClick(View arg0) {
-    			if (DEBUG) Log.d(TAG, "details Clicked!");
-    			
-				Intent i = new Intent(getActivity(), ProfileActivity.class);
-				startActivity(i);
-			}    	
-    	});
-    	
+    	mListView = (ListView) getView().findViewById(R.id.listView1);
     	ArrayList<PhotoTextItem> mItemList = getListView();
     	PhotoTextListAdapter mPhotoTextListAdapter = new PhotoTextListAdapter(getActivity(), mItemList);
         mListView.setAdapter(mPhotoTextListAdapter);
@@ -66,14 +53,7 @@ public class MemberFragment extends Fragment {
         });
         
     }
-    
-    private void initViews() {
-    	if (DEBUG) Log.d(TAG, "initViews()");
-    	
-    	mListView = (ListView) getView().findViewById(R.id.listView1);
-    	mDetails = (Button) getView().findViewById(R.id.details);
-    }
-    
+        
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {    	
@@ -84,7 +64,7 @@ public class MemberFragment extends Fragment {
     private ArrayList<PhotoTextItem> getListView(){
     	if (DEBUG) Log.d(TAG, "getListView()");
     	
-    	Drawable photo = getResources().getDrawable(R.drawable.cr2);
+    	Drawable photo = getResources().getDrawable(R.drawable.cr3);
     	Drawable condition = getResources().getDrawable(R.drawable.condition);
     	
     	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
