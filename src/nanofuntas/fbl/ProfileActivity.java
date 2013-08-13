@@ -5,7 +5,6 @@ import org.json.simple.JSONObject;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
@@ -60,6 +59,9 @@ public class ProfileActivity extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(ProfileActivity.this, PlayerRatingActivity.class);
 				i.putExtra(Config.KEY_UID, uid);
+				
+				Log.e(TAG, "name:"+name);
+				
 				i.putExtra(Config.KEY_NAME, name);
 				startActivity(i);
 			}
@@ -94,10 +96,6 @@ public class ProfileActivity extends Activity {
     	if (DEBUG) Log.d(TAG, "getAndSetPlayerStatus()");
     	
     	JSONObject status = null;
-    	/*    	
-    	SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
-    	long uid = settings.getLong(Config.KEY_UID, 0);
-    	*/
     	status = ServerIface.getPlayerStatus(uid);
     	   	
     	mPlayerName.setText( (String)status.get(Config.KEY_NAME));

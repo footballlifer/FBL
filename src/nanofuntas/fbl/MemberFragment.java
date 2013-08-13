@@ -14,11 +14,9 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -47,7 +45,6 @@ public class MemberFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				// TODO Auto-generated method stub
 				PlayerProfile pp = map.get((long)position);
 				
 				Intent i = new Intent(getActivity(), ProfileActivity.class);
@@ -106,7 +103,7 @@ public class MemberFragment extends Fragment {
     		pp = new PlayerProfile();
     		pp.setUid( (Long)profile.get(Config.KEY_UID) );
     		pp.setName( (String)profile.get(Config.KEY_NAME) );
-    		pp.setName( (String)profile.get(Config.KEY_POSITION) );
+    		pp.setPosition( (String)profile.get(Config.KEY_POSITION) );
 
     		map.put(i, pp);
     		
