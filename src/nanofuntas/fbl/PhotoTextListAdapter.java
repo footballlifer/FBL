@@ -46,7 +46,8 @@ public class PhotoTextListAdapter extends BaseAdapter {
 			
 			itemView.setViewPhoto(mItemList.get(position).getPhoto());
 			itemView.setViewCondition(mItemList.get(position).getCondition());
-			itemView.setViewName(mItemList.get(position).getName());		
+			itemView.setViewName(mItemList.get(position).getName());
+			itemView.setHexView(mItemList.get(position).getHexView());
 		}
 		
 		return itemView;

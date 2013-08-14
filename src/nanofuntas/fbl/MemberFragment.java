@@ -84,6 +84,7 @@ public class MemberFragment extends Fragment {
     	item.setPhoto(photo);
     	item.setCondition(condition);
     	item.setName("Me");
+    	//item.setHexRating(0.9f, 0.8f, 0.7f, 0.6f, 0.7f, 0.9f);
     	itemList.add(item);
     	
     	pp = new PlayerProfile(uid, "Me", "FW");
