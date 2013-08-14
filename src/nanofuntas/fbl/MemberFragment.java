@@ -23,7 +23,8 @@ import android.widget.Toast;
 public class MemberFragment extends Fragment {
 	private boolean DEBUG = true;
 	private String TAG = "MemberFragment";
-	
+	private static final float HUNDRED = 100.0f;
+
 	private ListView mListView = null;		
 	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
 	
@@ -74,46 +75,75 @@ public class MemberFragment extends Fragment {
     	
     	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
     	PhotoTextItem item = new PhotoTextItem();
-    	JSONObject profile = null;
+    	JSONObject status = null;
     	PlayerProfile pp = null;
     	
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
-    	long uid = settings.getLong(Config.KEY_UID, 0);
     	long tid = settings.getLong(Config.KEY_TID, 0);
     	
-    	item.setPhoto(photo);
-    	item.setCondition(condition);
-    	item.setName("Me");
-    	//item.setHexRating(0.9f, 0.8f, 0.7f, 0.6f, 0.7f, 0.9f);
-    	itemList.add(item);
-    	
-    	pp = new PlayerProfile(uid, "Me", "FW");
-    	map.put( (long)0, pp);
+    	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
+    	long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
     	
     	if (tid == -1) {
     		Log.d(TAG, "tid == -1, return");
     		return itemList;
     	}
     	
-    	JSONObject jsonMembersProfile = ServerIface.getMembersProfile(tid);
-    	long count = (Long) jsonMembersProfile.get(Config.KEY_MEMBERS_COUNT);    	
+    	long atkRating = 0;
+    	long dfsRating = 0;
+    	long twkRating = 0;
+    	long mtlRating = 0;
+    	long powRating = 0;
+    	long spdRating = 0;
+    	long staRating = 0;
+    	long blcRating = 0;
+    	long pasRating = 0;
+    	long shtRating = 0;
+    	long hdrRating = 0;
+    	long cutRating = 0;
+    	long ovrRating = 0;    	    	    	
     	
     	for (long i = 1; i <= count; i++) {
-    		profile = (JSONObject) jsonMembersProfile.get(Long.toString(i));
+    		status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
     		
-    		pp = new PlayerProfile();
-    		pp.setUid( (Long)profile.get(Config.KEY_UID) );
-    		pp.setName( (String)profile.get(Config.KEY_NAME) );
-    		pp.setPosition( (String)profile.get(Config.KEY_POSITION) );
-
-    		map.put(i, pp);
+        	atkRating = (Long)status.get(Config.KEY_ATTACK);
+        	dfsRating = (Long)status.get(Config.KEY_DEFENSE);
+        	twkRating = (Long)status.get(Config.KEY_TEAMWORK);
+        	mtlRating = (Long)status.get(Config.KEY_MENTAL);
+        	powRating = (Long)status.get(Config.KEY_POWER);
+        	spdRating = (Long)status.get(Config.KEY_SPEED);
+        	staRating = (Long)status.get(Config.KEY_STAMINA);
+        	blcRating = (Long)status.get(Config.KEY_BALL_CONTROL);
+        	pasRating = (Long)status.get(Config.KEY_PASS);
+        	shtRating = (Long)status.get(Config.KEY_SHOT);
+        	hdrRating = (Long)status.get(Config.KEY_HEADER);
+        	cutRating = (Long)status.get(Config.KEY_CUTTING);
+        	ovrRating = (Long)status.get(Config.KEY_OVERALL);    	    	
+        	    	
+        	float rATK = (float)atkRating / HUNDRED;
+        	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
+        	float rTWK = (float)twkRating / HUNDRED;
+        	float rMTL = (float)mtlRating / HUNDRED;
+        	float rPHY = (float)(powRating + spdRating + staRating) / (3*HUNDRED);
+        	float rTEC = (float)(blcRating + pasRating + shtRating + hdrRating) / (4*HUNDRED);
+        	
+        	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");    		    		
     		
     		item = new PhotoTextItem();
         	item.setPhoto(photo);
         	item.setCondition(condition);
-        	item.setName( (String)profile.get(Config.KEY_NAME) );
+        	item.setName( (String)status.get(Config.KEY_NAME) );
+        	item.setHexRating(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);        	
         	itemList.add(item);
+        	
+        	pp = new PlayerProfile();
+    		pp.setUid( (Long)status.get(Config.KEY_UID) );
+    		pp.setName( (String)status.get(Config.KEY_NAME) );
+    		pp.setPosition( (String)status.get(Config.KEY_POSITION) );
+    		map.put(i, pp);
+        	
     	}
+
     	
     	return itemList;
     }

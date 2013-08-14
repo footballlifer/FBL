@@ -183,15 +183,27 @@ public class ServerIface {
 		if (DEBUG) Log.i(TAG, "getMembersProfile()");
 
 		JSONObject jsonGetMembersProfile = new JSONObject();
-		jsonGetMembersProfile.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_GET_MEMBERS_PROFILE);
+		jsonGetMembersProfile.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_MEMBERS_PROFILE);
 		jsonGetMembersProfile.put(Config.KEY_TID, tid);
 		
 		JSONObject jsonResult = postNgetJson(jsonGetMembersProfile);
+		JSONObject result = (JSONObject) jsonResult.get(Config.KEY_RESULT);
+		return result;
+	}
+	
+	public static JSONObject getMembersStatus(long tid) {
+		if (DEBUG) Log.i(TAG, "getMembersStatus()");
+
+		JSONObject jsonGetMembersStatus = new JSONObject();
+		jsonGetMembersStatus.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_MEMBERS_STATUS);
+		jsonGetMembersStatus.put(Config.KEY_TID, tid);
+		
+		JSONObject jsonResult = postNgetJson(jsonGetMembersStatus);
 		// kakpple test log
 		Log.d(TAG, "JSON result:" + jsonResult);
 		
 		JSONObject result = (JSONObject) jsonResult.get(Config.KEY_RESULT);
-		return result;
+		return result;		
 	}
 
 }
