@@ -26,6 +26,7 @@ public class MemberFragment extends Fragment {
 	private static final float HUNDRED = 100.0f;
 
 	private ListView mListView = null;		
+	// this map is index - player profile map, which is used in onItemClick
 	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
 	
 	public MemberFragment() {
@@ -100,8 +101,17 @@ public class MemberFragment extends Fragment {
     	return itemList;
     }
     
+    /**
+     * This function setItemAndMap gets player status from status JSONObject
+     * and sets item(PhotoTextItem) parameter and playerProfile parameter
+     * 
+     * @param status player status including player profile and rating
+     * @param itemList itemList which shows member list 
+     * @param map index to player profile mapping
+     * @param indexToMap index of player profile to be added to map
+     */
     private void setItemAndMap(JSONObject status, 
-    ArrayList<PhotoTextItem> itemList, Map map, long indexToMap) {
+    ArrayList<PhotoTextItem> itemList, Map<Long, PlayerProfile> map, long indexToMap) {
     	if (DEBUG) Log.d(TAG, "setItemAndMap()");
     	
     	PhotoTextItem item = null; 
@@ -143,6 +153,7 @@ public class MemberFragment extends Fragment {
 		pp.setUid( (Long)status.get(Config.KEY_UID) );
 		pp.setName( (String)status.get(Config.KEY_NAME) );
 		pp.setPosition( (String)status.get(Config.KEY_POSITION) );
+		// this map must match listView position
 		map.put(indexToMap, pp);
     }
     
