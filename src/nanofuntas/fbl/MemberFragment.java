@@ -67,85 +67,83 @@ public class MemberFragment extends Fragment {
         return view;
     }   
     
-    private ArrayList<PhotoTextItem> getListView(){
+    private ArrayList<PhotoTextItem> getListView() {
     	if (DEBUG) Log.d(TAG, "getListView()");
     	
-    	Drawable photo = getResources().getDrawable(R.drawable.cr3);
-    	Drawable condition = getResources().getDrawable(R.drawable.condition);
-    	
     	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
-    	PhotoTextItem item = new PhotoTextItem();
     	JSONObject status = null;
-    	PlayerProfile pp = null;
     	
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
     	long tid = settings.getLong(Config.KEY_TID, 0);
+    	long uid = settings.getLong(Config.KEY_UID, 0);
     	
     	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
     	long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
+    	
+    	// show me in the first place in the listView
+    	for (long i = 1; i <= count; i++) {
+    		status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
+    		if ( uid == (Long)status.get(Config.KEY_UID) ) {
+    			setItemAndMap(status, itemList, map, (long)0);
+    		}
+    	}
     	
     	if (tid == -1) {
     		Log.d(TAG, "tid == -1, return");
     		return itemList;
     	}
-    	
-    	long atkRating = 0;
-    	long dfsRating = 0;
-    	long twkRating = 0;
-    	long mtlRating = 0;
-    	long powRating = 0;
-    	long spdRating = 0;
-    	long staRating = 0;
-    	long blcRating = 0;
-    	long pasRating = 0;
-    	long shtRating = 0;
-    	long hdrRating = 0;
-    	long cutRating = 0;
-    	long ovrRating = 0;    	    	    	
-    	
+
     	for (long i = 1; i <= count; i++) {
     		status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
-    		
-        	atkRating = (Long)status.get(Config.KEY_ATTACK);
-        	dfsRating = (Long)status.get(Config.KEY_DEFENSE);
-        	twkRating = (Long)status.get(Config.KEY_TEAMWORK);
-        	mtlRating = (Long)status.get(Config.KEY_MENTAL);
-        	powRating = (Long)status.get(Config.KEY_POWER);
-        	spdRating = (Long)status.get(Config.KEY_SPEED);
-        	staRating = (Long)status.get(Config.KEY_STAMINA);
-        	blcRating = (Long)status.get(Config.KEY_BALL_CONTROL);
-        	pasRating = (Long)status.get(Config.KEY_PASS);
-        	shtRating = (Long)status.get(Config.KEY_SHOT);
-        	hdrRating = (Long)status.get(Config.KEY_HEADER);
-        	cutRating = (Long)status.get(Config.KEY_CUTTING);
-        	ovrRating = (Long)status.get(Config.KEY_OVERALL);    	    	
-        	    	
-        	float rATK = (float)atkRating / HUNDRED;
-        	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
-        	float rTWK = (float)twkRating / HUNDRED;
-        	float rMTL = (float)mtlRating / HUNDRED;
-        	float rPHY = (float)(powRating + spdRating + staRating) / (3*HUNDRED);
-        	float rTEC = (float)(blcRating + pasRating + shtRating + hdrRating) / (4*HUNDRED);
-        	
-        	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");    		    		
-    		
-    		item = new PhotoTextItem();
-        	item.setPhoto(photo);
-        	item.setCondition(condition);
-        	item.setName( (String)status.get(Config.KEY_NAME) );
-        	item.setHexRating(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);        	
-        	itemList.add(item);
-        	
-        	pp = new PlayerProfile();
-    		pp.setUid( (Long)status.get(Config.KEY_UID) );
-    		pp.setName( (String)status.get(Config.KEY_NAME) );
-    		pp.setPosition( (String)status.get(Config.KEY_POSITION) );
-    		map.put(i, pp);
-        	
+    		setItemAndMap(status, itemList, map, i);
     	}
-
-    	
     	return itemList;
     }
-
+    
+    private void setItemAndMap(JSONObject status, 
+    ArrayList<PhotoTextItem> itemList, Map map, long indexToMap) {
+    	if (DEBUG) Log.d(TAG, "setItemAndMap()");
+    	
+    	PhotoTextItem item = null; 
+    	PlayerProfile pp = null;
+    	
+    	long atkRating = (Long)status.get(Config.KEY_ATTACK);
+    	long dfsRating = (Long)status.get(Config.KEY_DEFENSE);
+    	long twkRating = (Long)status.get(Config.KEY_TEAMWORK);
+    	long mtlRating = (Long)status.get(Config.KEY_MENTAL);
+    	long powRating = (Long)status.get(Config.KEY_POWER);
+    	long spdRating = (Long)status.get(Config.KEY_SPEED);
+    	long staRating = (Long)status.get(Config.KEY_STAMINA);
+    	long blcRating = (Long)status.get(Config.KEY_BALL_CONTROL);
+    	long pasRating = (Long)status.get(Config.KEY_PASS);
+    	long shtRating = (Long)status.get(Config.KEY_SHOT);
+    	long hdrRating = (Long)status.get(Config.KEY_HEADER);
+    	long cutRating = (Long)status.get(Config.KEY_CUTTING);
+    	long ovrRating = (Long)status.get(Config.KEY_OVERALL);    	    	
+    	    	
+    	float rATK = (float)atkRating / HUNDRED;
+    	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
+    	float rTWK = (float)twkRating / HUNDRED;
+    	float rMTL = (float)mtlRating / HUNDRED;
+    	float rPHY = (float)(powRating + spdRating + staRating) / (3*HUNDRED);
+    	float rTEC = (float)(blcRating + pasRating + shtRating + hdrRating) / (4*HUNDRED);
+    	
+    	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");    		    		
+		
+    	Drawable photo = getResources().getDrawable(R.drawable.cr3);
+    	Drawable condition = getResources().getDrawable(R.drawable.condition);
+		item = new PhotoTextItem();
+		item.setPhoto(photo);
+    	item.setCondition(condition);
+    	item.setName( (String)status.get(Config.KEY_NAME) );
+    	item.setHexRating(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);        	
+    	itemList.add(item);
+    	
+    	pp = new PlayerProfile();
+		pp.setUid( (Long)status.get(Config.KEY_UID) );
+		pp.setName( (String)status.get(Config.KEY_NAME) );
+		pp.setPosition( (String)status.get(Config.KEY_POSITION) );
+		map.put(indexToMap, pp);
+    }
+    
 }
