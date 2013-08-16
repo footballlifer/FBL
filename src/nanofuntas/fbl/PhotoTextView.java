@@ -11,6 +11,7 @@ public class PhotoTextView extends LinearLayout {
 	private ImageView mPhoto;
 	private ImageView mCondition;
 	private TextView mName;	
+	private TextView mPosition;
 	private HexView mHexView;
 	
 	private float rATK = 0.0f;
@@ -29,11 +30,13 @@ public class PhotoTextView extends LinearLayout {
 		mPhoto = (ImageView) findViewById(R.id.photo);
 		mCondition = (ImageView) findViewById(R.id.condition);
 		mName = (TextView) findViewById(R.id.name);
+		mPosition = (TextView) findViewById(R.id.position_item);
 		mHexView = (HexView) findViewById(R.id.hexview_item);
 		
 		mPhoto.setImageDrawable(mItem.getPhoto());
 		mCondition.setImageDrawable(mItem.getCondition());
 		mName.setText(mItem.getName());
+		mPosition.setText(mItem.getPosition());
 		
 		this.rATK = mItem.getrATK();
 		this.rTEC = mItem.getrTEC();
@@ -56,6 +59,10 @@ public class PhotoTextView extends LinearLayout {
 	
 	public void setViewName(String name){
 		mName.setText(name);
+	}
+	
+	public void setViewPosition(String position) {
+		mPosition.setText(position);
 	}
 	
 	public void setHexView(HexView hexView) {

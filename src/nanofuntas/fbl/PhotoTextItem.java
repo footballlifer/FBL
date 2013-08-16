@@ -9,6 +9,7 @@ public class PhotoTextItem {
 	private Drawable mPhoto = null;
 	private Drawable mCondition = null;
 	private String mName = null;
+	private String mPosition = null;
 	private HexView mHexView = null;
 	
 	private float rATK = 0.0f;
@@ -23,10 +24,12 @@ public class PhotoTextItem {
 	public PhotoTextItem(){
 	}
 	
-	public PhotoTextItem(Drawable photo, Drawable condition, String name, HexView hexView){
+	public PhotoTextItem(Drawable photo, Drawable condition, 
+	String name, String position, HexView hexView){
 		this.mPhoto = photo;
 		this.mCondition = condition;
 		this.mName = name;
+		this.mPosition = position;
 		this.mHexView = hexView;
 	}
 	
@@ -68,6 +71,13 @@ public class PhotoTextItem {
 		return mName;
 	}
 
+	public void setPosition(String position){
+		this.mPosition = position;
+	}
+	public String getPosition(){
+		return mPosition;
+	}
+	
 	public void setHexView(HexView hexView) {
 		this.mHexView = hexView;
 	}

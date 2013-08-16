@@ -150,6 +150,7 @@ public class MemberFragment extends Fragment {
 		item.setPhoto(photo);
     	item.setCondition(condition);
     	item.setName( (String)status.get(Config.KEY_NAME) );
+    	item.setPosition( (String)status.get(Config.KEY_POSITION) );
     	item.setHexRating(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);        	
     	itemList.add(item);
     	
@@ -160,5 +161,4 @@ public class MemberFragment extends Fragment {
 		// this map must match listView position
 		map.put(indexToMap, pp);
     }
-    
 }

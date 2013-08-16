@@ -88,6 +88,7 @@ public final class R {
         public static final int player_name=0x7f08004c;
         public static final int pname_incruit=0x7f080055;
         public static final int position=0x7f08004d;
+        public static final int position_item=0x7f080074;
         public static final int position_value=0x7f08004e;
         public static final int power=0x7f080040;
         public static final int power_rating=0x7f080019;
@@ -149,7 +150,6 @@ public final class R {
         public static final int test_text=0x7f080003;
         public static final int textView2=0x7f080073;
         public static final int textView3=0x7f080075;
-        public static final int textView4=0x7f080074;
         public static final int tname_create=0x7f080051;
         public static final int tname_join=0x7f080053;
         public static final int update_my_profile=0x7f080059;
