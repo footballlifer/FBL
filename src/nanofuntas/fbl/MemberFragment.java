@@ -28,6 +28,8 @@ public class MemberFragment extends Fragment {
 	private ListView mListView = null;		
 	// this map is index - player profile map, which is used in onItemClick
 	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
+	private Drawable photo = null;
+	private Drawable condition = null;
 	
 	public MemberFragment() {
     }
@@ -73,12 +75,21 @@ public class MemberFragment extends Fragment {
     	
     	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
     	JSONObject status = null;
+    	photo = getResources().getDrawable(R.drawable.cr3);
+    	condition = getResources().getDrawable(R.drawable.condition);
     	
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
     	long tid = settings.getLong(Config.KEY_TID, 0);
     	long uid = settings.getLong(Config.KEY_UID, 0);
     	
-    	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
+    	if (tid == -1) {
+    		Log.d(TAG, "tid == -1, return");
+    		status = ServerIface.getPlayerStatus(uid);
+    		setItemAndMap(status, itemList, map, (long)0);
+    		return itemList;
+    	}
+    	
+    	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);   	
     	long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
     	
     	// show me in the first place in the listView
@@ -87,11 +98,6 @@ public class MemberFragment extends Fragment {
     		if ( uid == (Long)status.get(Config.KEY_UID) ) {
     			setItemAndMap(status, itemList, map, (long)0);
     		}
-    	}
-    	
-    	if (tid == -1) {
-    		Log.d(TAG, "tid == -1, return");
-    		return itemList;
     	}
 
     	for (long i = 1; i <= count; i++) {
@@ -140,9 +146,7 @@ public class MemberFragment extends Fragment {
     	
     	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");    		    		
 		
-    	Drawable photo = getResources().getDrawable(R.drawable.cr3);
-    	Drawable condition = getResources().getDrawable(R.drawable.condition);
-		item = new PhotoTextItem();
+    	item = new PhotoTextItem();
 		item.setPhoto(photo);
     	item.setCondition(condition);
     	item.setName( (String)status.get(Config.KEY_NAME) );
