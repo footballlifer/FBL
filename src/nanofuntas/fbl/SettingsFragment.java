@@ -47,7 +47,6 @@ public class SettingsFragment extends Fragment {
     	editor = settings.edit();
     	
     	final long UID = settings.getLong(Config.KEY_UID, 0);
-    	final long TID = settings.getLong(Config.KEY_TID, 0);
     	
     	mCreateTeam.setOnClickListener(new OnClickListener(){
 			@Override
@@ -83,14 +82,15 @@ public class SettingsFragment extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				if (DEBUG) Log.d(TAG, "Incruit Player clicked!");
+				long tid = settings.getLong(Config.KEY_TID, 0);
 				
-				if (TID == 0) {
+				if (tid <= 0) {
 					mTestSettings.setText("Please Join or Create Team First!");
 					return;
 				} 
 				
 				String playerName = mPNameIncruit.getText().toString();
-				long uid = ServerIface.incruitPlayer(TID, playerName);
+				long uid = ServerIface.incruitPlayer(tid, playerName);
 
 				if (uid > 0) {
 					mTestSettings.setText("Player Incruited, UID:" + uid);
