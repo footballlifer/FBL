@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class PhotoTextListAdapter extends BaseAdapter {
-
+	private boolean DEBUG = true;
+	private String TAG = "PhotoTextListAdapter";
+	
 	private Context mContext = null;
 	private ArrayList<PhotoTextItem> mItemList = new ArrayList<PhotoTextItem>();
 	
@@ -48,7 +50,11 @@ public class PhotoTextListAdapter extends BaseAdapter {
 			itemView.setViewCondition(mItemList.get(position).getCondition());
 			itemView.setViewName(mItemList.get(position).getName());
 			itemView.setViewPosition(mItemList.get(position).getPosition());
-			itemView.setHexView(mItemList.get(position).getHexView());
+			//itemView.setHexView(mItemList.get(position).getHexView());
+			
+			PhotoTextItem item = mItemList.get(position);
+			itemView.setViewHexRating(item.getrATK(), item.getrTEC(), 
+			item.getrTWK(), item.getrDFS(), item.getrMTL(), item.getrPHY());
 		}
 		
 		return itemView;

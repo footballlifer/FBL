@@ -8,6 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class PhotoTextView extends LinearLayout {
+	private boolean DEBUG = true;
+	private String TAG = "PhotoTextView";
+	
 	private ImageView mPhoto;
 	private ImageView mCondition;
 	private TextView mName;	
@@ -65,7 +68,12 @@ public class PhotoTextView extends LinearLayout {
 		mPosition.setText(position);
 	}
 	
-	public void setHexView(HexView hexView) {
+	public void setViewHexView(HexView hexView) {
 		this.mHexView = hexView;
+	}
+	
+	public void setViewHexRating(float rATK, float rTEC, 
+	float rTWK, float rDFS, float rMTL, float rPHY) {
+		mHexView.setRatingAndDraw(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);
 	}
 }
