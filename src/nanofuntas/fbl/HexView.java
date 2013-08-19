@@ -144,6 +144,7 @@ public class HexView extends View {
 				
 		// draw HEX frame
 		p.setColor(Color.RED);
+		hexFrame.rewind();
 		hexFrame.moveTo(POINT_ATK.x, POINT_ATK.y);
 		hexFrame.lineTo(POINT_TEC.x, POINT_TEC.y);
 		hexFrame.lineTo(POINT_TWK.x, POINT_TWK.y);
@@ -163,6 +164,7 @@ public class HexView extends View {
 								
 		// draw rating HEXx
 		p.setColor(Color.GREEN);
+		hexValue.rewind();
 		hexValue.moveTo(POINT_ATK_RATING.x, POINT_ATK_RATING.y);
 		hexValue.lineTo(POINT_TEC_RATING.x, POINT_TEC_RATING.y);
 		hexValue.lineTo(POINT_TWK_RATING.x, POINT_TWK_RATING.y);
