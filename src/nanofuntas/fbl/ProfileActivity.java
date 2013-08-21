@@ -53,15 +53,14 @@ public class ProfileActivity extends Activity {
     	mPlayerName.setText(name);
     	mPosition.setText(position);
     	
-    	getAndSetPlayerStatus(uid);    	
+    	getAndSetPlayerStatus(uid);
     	
     	mRateMeButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				if (DEBUG) Log.d(TAG, "RateMeButton onClick()");
+				
 				Intent i = new Intent(ProfileActivity.this, PlayerRatingActivity.class);
 				i.putExtra(Config.KEY_UID, uid);
-				
-				Log.e(TAG, "name:"+name);
-				
 				i.putExtra(Config.KEY_NAME, name);
 				startActivity(i);
 			}
@@ -95,8 +94,7 @@ public class ProfileActivity extends Activity {
     private void getAndSetPlayerStatus(long uid) {
     	if (DEBUG) Log.d(TAG, "getAndSetPlayerStatus()");
     	
-    	JSONObject status = null;
-    	status = ServerIface.getPlayerStatus(uid);
+    	JSONObject status = ServerIface.getPlayerStatus(uid);
     	   	
     	mPlayerName.setText( (String)status.get(Config.KEY_NAME));
     	mPosition.setText( (String)status.get(Config.KEY_POSITION));

@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+// This class is not used right now, instead ProfileActivity is used.
 public class ProfileFragment extends Fragment {
 	private final boolean DEBUG = true;
 	private final String TAG = "PlayerProfile";

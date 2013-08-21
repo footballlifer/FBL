@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.Window;
 
 public class TabViewActivity extends FragmentActivity {
 	private final boolean DEBUG = true;
@@ -60,12 +59,10 @@ public class TabViewActivity extends FragmentActivity {
 		}
 
 		@Override
-		public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		}
+		public void onTabReselected(Tab tab, FragmentTransaction ft) {}
 
 		@Override
-		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		}
+		public void onTabUnselected(Tab tab, FragmentTransaction ft) {}
     	
     }
     

@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class LogNRegActivity extends Activity {
 	private final boolean DEBUG = true;
-	private final String TAG = "LoginNRegister";
+	private final String TAG = "LogNRegActivity";
 	
 	private EditText emailLogin;
 	private EditText pwLogin;
@@ -45,14 +45,14 @@ public class LogNRegActivity extends Activity {
 			public void onClick(View v) {
 				if (DEBUG) Log.d(TAG, "loginButton clicked!");
 				
-				String strEmailLogin = emailLogin.getText().toString();
-				String strPwLogin = pwLogin.getText().toString();
+				String email = emailLogin.getText().toString();
+				String pw = pwLogin.getText().toString();
 				
-				JSONObject result = ServerIface.login(strEmailLogin, strPwLogin);	
+				JSONObject result = ServerIface.login(email, pw);
 				long uid = (Long) result.get(Config.KEY_UID);
 				long tid = (Long) result.get(Config.KEY_TID);
 				
-				testText.setText(Long.toString(uid) + " " + Long.toString(tid));
+				testText.setText("UID:"+Long.toString(uid) + " TID:" + Long.toString(tid));
 				
 				if ( uid != -1 ) {
 					// save uid, tid
@@ -73,21 +73,21 @@ public class LogNRegActivity extends Activity {
 			public void onClick(View v) {
 				if (DEBUG) Log.d(TAG, "onCreate()");
 				
-				String strEmailReg = emailReg.getText().toString();
-				String strPwReg = pwReg.getText().toString();
-				String strPwRegRetype = pwRegRetype.getText().toString();
+				String email = emailReg.getText().toString();
+				String pw = pwReg.getText().toString();
+				String pwRetype = pwRegRetype.getText().toString();
 				
-				if ( !strPwReg.equals(strPwRegRetype) ) {
+				if ( !pw.equals(pwRetype) ) {
 					Log.d(TAG, "register password not equal!");
 					testText.setText("register password not equal!");
 					return;
 				}
 				
-				JSONObject result = ServerIface.register(strEmailReg, strPwReg);	
+				JSONObject result = ServerIface.register(email, pw);
 				long uid = (Long) result.get(Config.KEY_UID);
 				long tid = (Long) result.get(Config.KEY_TID);
 				
-				testText.setText(Long.toString(uid) + " " + Long.toString(tid));			
+				testText.setText("UID:"+Long.toString(uid) + " TID:" + Long.toString(tid));
 			}       	
         });
     }

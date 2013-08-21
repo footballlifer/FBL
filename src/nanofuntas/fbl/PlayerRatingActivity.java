@@ -3,7 +3,6 @@ package nanofuntas.fbl;
 import org.json.simple.JSONObject;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,8 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class PlayerRatingActivity extends Activity {
-	private final String TAG = "PlayerRatingActivity";
 	private final boolean DEBUG = true;
+	private final String TAG = "PlayerRatingActivity";
 
 	private final int TEN = 10;
 
@@ -72,6 +71,8 @@ public class PlayerRatingActivity extends Activity {
 		@SuppressWarnings("unchecked")
 		@Override
 		public void onClick(View v) {
+			if (DEBUG) Log.d(TAG, "SubmitButton onClick()");
+			
 			JSONObject jsonRating = new JSONObject();
 			
 			jsonRating.put(Config.KEY_ATTACK, Long.valueOf(attackRatingValue.getText().toString()));
@@ -86,11 +87,6 @@ public class PlayerRatingActivity extends Activity {
 			jsonRating.put(Config.KEY_SHOT, Long.valueOf(shotRatingValue.getText().toString()));
 			jsonRating.put(Config.KEY_HEADER, Long.valueOf(headerRatingValue.getText().toString()));
 			jsonRating.put(Config.KEY_CUTTING, Long.valueOf(cuttingRatingValue.getText().toString()));
-
-			/*
-			SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
-			long uid = settings.getLong(Config.KEY_UID, 0);
-			*/
 			
 			String result = ServerIface.ratePlayer(uid, jsonRating);
 			if (result.equals(Config.KEY_OK)) {
@@ -101,6 +97,8 @@ public class PlayerRatingActivity extends Activity {
 	};
 
 	private void initViews() {
+		if (DEBUG) Log.d(TAG, "initViews()");
+		
 		submitButton = (Button) findViewById(R.id.submit);
 		nameRating = (TextView) findViewById(R.id.name_rating);
 
@@ -145,7 +143,8 @@ public class PlayerRatingActivity extends Activity {
 
 	}
 
-	private RatingBar.OnRatingBarChangeListener mRatingBarListener = new RatingBar.OnRatingBarChangeListener() {
+	private RatingBar.OnRatingBarChangeListener mRatingBarListener = 
+			new RatingBar.OnRatingBarChangeListener() {
 
 		public void onRatingChanged(RatingBar ratingBar, float rating,
 				boolean fromUser) {

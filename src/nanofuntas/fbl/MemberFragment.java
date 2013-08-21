@@ -31,8 +31,7 @@ public class MemberFragment extends Fragment {
 	private Drawable photo = null;
 	private Drawable condition = null;
 	
-	public MemberFragment() {
-    }
+	public MemberFragment() {}
 
     public static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -47,8 +46,9 @@ public class MemberFragment extends Fragment {
         
         mListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				if (DEBUG) Log.d(TAG, "onItemClick()");
+				
 				PlayerProfile pp = map.get((long)position);
 				
 				Intent i = new Intent(getActivity(), ProfileActivity.class);

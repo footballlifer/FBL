@@ -33,8 +33,7 @@ public class SettingsFragment extends Fragment {
 	private SharedPreferences settings = null;
 	private SharedPreferences.Editor editor = null;
 	
-	public SettingsFragment() {
-    }
+	public SettingsFragment() {}
 
     public static final String ARG_SECTION_NUMBER = "section_number";
 

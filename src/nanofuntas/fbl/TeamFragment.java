@@ -32,11 +32,10 @@ public class TeamFragment extends Fragment {
 	private TextView mTeamTWKRating = null;
 	private TextView mTeamMTLRating = null;	
 	
-	ListView mKillerListView = null;
-	ListView mAssisterListView = null;		
+	private ListView mKillerListView = null;
+	private ListView mAssisterListView = null;		
 	
-	public TeamFragment() {
-    }
+	public TeamFragment() {}
 
     public static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -44,6 +43,15 @@ public class TeamFragment extends Fragment {
     public void onStart(){
     	super.onStart();        	    	
     	initViews();
+    	
+    	ArrayList<RankingPhotoTextItem> mKillerItemList = getKillerListView();
+    	RankingPhotoTextListAdapter killerAapter = new RankingPhotoTextListAdapter(getActivity(), mKillerItemList);
+    	mKillerListView.setAdapter(killerAapter);
+    	
+    	ArrayList<RankingPhotoTextItem> mAssisterItemList = getAssisterListView();
+    	RankingPhotoTextListAdapter assisterApter = new RankingPhotoTextListAdapter(getActivity(), mAssisterItemList);
+    	mAssisterListView.setAdapter(assisterApter);
+    	
     	getAndSetTeamStatus();
     }
     
@@ -70,27 +78,23 @@ public class TeamFragment extends Fragment {
     	
     	mKillerListView = (ListView) getView().findViewById(R.id.killer_list_view);
     	mAssisterListView = (ListView) getView().findViewById(R.id.assister_list_view);    	
-    	
-    	ArrayList<RankingPhotoTextItem> mKillerItemList = getKillerListView();
-    	RankingPhotoTextListAdapter killerAapter = new RankingPhotoTextListAdapter(getActivity(), mKillerItemList);
-    	mKillerListView.setAdapter(killerAapter);
-    	
-    	ArrayList<RankingPhotoTextItem> mAssisterItemList = getAssisterListView();
-    	RankingPhotoTextListAdapter assisterApter = new RankingPhotoTextListAdapter(getActivity(), mAssisterItemList);
-    	mAssisterListView.setAdapter(assisterApter);
     }
 
     private void getAndSetTeamStatus() {
     	if (DEBUG) Log.d(TAG, "getAndSetTeamStatus()");
     	
-    	JSONObject status = null;
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
     	long tid = settings.getLong(Config.KEY_TID, 0);
     	
-    	status = ServerIface.getTeamStatus(tid);
+    	if (tid <=0 ) {
+    		if (DEBUG) Log.d(TAG, "tid <= 0, return");
+    		return;
+    	}
+    	
+    	JSONObject status = ServerIface.getTeamStatus(tid);
     	Log.d(TAG, "team status:" + status);
     	
-    	mTeamName.setText( (String)status.get(Config.KEY_TEAM_NAME));
+    	mTeamName.setText( (String)status.get(Config.KEY_TEAM_NAME) );
     	
     	Long tmAtkR = (Long)status.get(Config.KEY_TEAM_ATK);
     	Long tmDfsR = (Long)status.get(Config.KEY_TEAM_DFS);
