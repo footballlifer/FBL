@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -34,6 +35,9 @@ public class TabViewActivity extends FragmentActivity {
         		.setTabListener(new TabListener<TeamFragment>(this, "TeamFragment", TeamFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText("Member")
         		.setTabListener(new TabListener<MemberFragment>(this, "MemberFragment", MemberFragment.class) ));
+        //TODO: kakpple test
+        actionBar.addTab(actionBar.newTab().setText("Tactics")
+        		.setTabListener(new TabListener<MemberFragment>(this, "Tactics", MemberFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText("Settings")
         		.setTabListener(new TabListener<SettingsFragment>(this, "SettingsFragment", SettingsFragment.class) ));
     }
@@ -54,8 +58,14 @@ public class TabViewActivity extends FragmentActivity {
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
 			if (DEBUG) Log.d(TAG, "onTabSelected()");
 			
-			mFragment = Fragment.instantiate(mActivity, mClass.getName());
-			getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
+			//TODO: kakpple test
+			if ( mTag.equals("Tactics") ) {
+				Intent i = new Intent(TabViewActivity.this, TacticBoard.class);
+				startActivity(i);
+			} else {
+				mFragment = Fragment.instantiate(mActivity, mClass.getName());
+				getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
+			}
 		}
 
 		@Override
