@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class TabViewActivity extends FragmentActivity {
 	private final boolean DEBUG = true;
@@ -27,17 +28,14 @@ public class TabViewActivity extends FragmentActivity {
         
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
+        //actionBar.setDisplayShowTitleEnabled(false);
+        //actionBar.setDisplayShowHomeEnabled(false);
 
         // For each of the sections in the app, add a tab to the action bar.
         actionBar.addTab(actionBar.newTab().setText("Team")
         		.setTabListener(new TabListener<TeamFragment>(this, "TeamFragment", TeamFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText("Member")
         		.setTabListener(new TabListener<MemberFragment>(this, "MemberFragment", MemberFragment.class) ));
-        //TODO: kakpple test
-        actionBar.addTab(actionBar.newTab().setText("Tactics")
-        		.setTabListener(new TabListener<MemberFragment>(this, "Tactics", MemberFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText("Settings")
         		.setTabListener(new TabListener<SettingsFragment>(this, "SettingsFragment", SettingsFragment.class) ));
     }
@@ -57,15 +55,8 @@ public class TabViewActivity extends FragmentActivity {
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
 			if (DEBUG) Log.d(TAG, "onTabSelected()");
-			
-			//TODO: kakpple test
-			if ( mTag.equals("Tactics") ) {
-				Intent i = new Intent(TabViewActivity.this, TacticBoard.class);
-				startActivity(i);
-			} else {
-				mFragment = Fragment.instantiate(mActivity, mClass.getName());
-				getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
-			}
+			mFragment = Fragment.instantiate(mActivity, mClass.getName());
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
 		}
 
 		@Override
@@ -92,9 +83,20 @@ public class TabViewActivity extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // remove the option menu in action bar
-    	//getMenuInflater().inflate(R.menu.activity_tabview, menu);
+    	getMenuInflater().inflate(R.menu.activity_tabview, menu);
         return true;
     }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {        
+        switch (item.getItemId()) {
+        case R.id.menu_settings:
+        	Intent i = new Intent(TabViewActivity.this, TacticBoard.class);
+			startActivity(i);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    } 
 
 }
