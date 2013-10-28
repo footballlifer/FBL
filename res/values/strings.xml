@@ -12,5 +12,6 @@
     <string name="title_activity_player_rating">PlayerRatingActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_image">ImageActivity</string>
 
 </resources>

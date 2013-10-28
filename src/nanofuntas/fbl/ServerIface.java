@@ -36,6 +36,22 @@ public class ServerIface {
 		}	
     }
     
+    //TODO: image test bytes async task
+    private static class HttpPostBytesAsyncTask extends AsyncTask<byte[] , Void, String>{
+		@Override
+		protected String doInBackground(byte[]... params) {
+			return HttpUrlService.execBytesPost(params[0]);
+		}	
+    }
+    
+  //TODO: image test bytes async task
+    private static class HttpGetBytesAsyncTask extends AsyncTask<Integer , Void, byte[]>{
+		@Override
+		protected byte[] doInBackground(Integer... params) {
+			return HttpUrlService.execBytesGet(params[0]);
+		}	
+    }
+    
 	private static JSONObject postNgetJson(JSONObject jsonReq) {
 		JSONObject jsonRsp = null;	
 		HttpPostJsonAsyncTask mHttpPostJsonAsyncTask = new HttpPostJsonAsyncTask();
@@ -51,6 +67,43 @@ public class ServerIface {
 		return jsonRsp;
 	}
     
+	//TODO image test
+	public static String uploadImage(byte[] bytesParam) {
+		if (DEBUG) Log.i(TAG, "uploadImage()");
+		String result = null;
+		HttpPostBytesAsyncTask bytesAsyncTask = new HttpPostBytesAsyncTask();
+		bytesAsyncTask.execute(bytesParam);
+		
+		try {
+			result = bytesAsyncTask.get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+
+	//TODO image test
+	public static byte[] downloadImage(int id) {
+		if (DEBUG) Log.i(TAG, "uploadImage()");
+		byte[] result = null;
+		HttpGetBytesAsyncTask bytesAsyncTask = new HttpGetBytesAsyncTask();
+		bytesAsyncTask.execute(id);
+		
+		try {
+			result = bytesAsyncTask.get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+
+	
 	@SuppressWarnings("unchecked")
 	public static JSONObject login(String strEmailLogin, String strPwLogin) {
 		if (DEBUG) Log.i(TAG, "login()");

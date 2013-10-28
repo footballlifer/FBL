@@ -2,6 +2,7 @@ package nanofuntas.fbl;
 
 import org.json.simple.JSONObject;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,9 @@ public class SettingsFragment extends Fragment {
 	private EditText mYourPosition = null;
 	private Button mUpdateMyProfile = null;
 	
+	//TODO imageTest
+	private Button mImageTest;
+	
 	private TextView mTestSettings = null;
 	
 	private SharedPreferences settings = null;
@@ -46,6 +50,15 @@ public class SettingsFragment extends Fragment {
     	editor = settings.edit();
     	
     	final long UID = settings.getLong(Config.KEY_UID, 0);
+    	
+    	//TODO imageTest
+    	mImageTest.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getView().getContext(), ImageActivity.class);
+				startActivity(i);				
+			}
+    	});
     	
     	mCreateTeam.setOnClickListener(new OnClickListener(){
 			@Override
@@ -139,7 +152,11 @@ public class SettingsFragment extends Fragment {
     	mYourPosition = (EditText) getView().findViewById(R.id.ur_position_update);
     	mUpdateMyProfile = (Button) getView().findViewById(R.id.update_my_profile);
     	
+    	//TODO imageTest 
+    	mImageTest = (Button) getView().findViewById(R.id.imageTest);
+    	
     	mTestSettings = (TextView) getView().findViewById(R.id.test_setting);
+    	
     }
     
 }
