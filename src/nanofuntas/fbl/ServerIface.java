@@ -3,6 +3,7 @@ package nanofuntas.fbl;
 import java.util.concurrent.ExecutionException;
 import org.json.simple.JSONObject;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 
 /** 
@@ -36,22 +37,6 @@ public class ServerIface {
 		}	
     }
     
-    //TODO: image test bytes async task
-    private static class HttpPostBytesAsyncTask extends AsyncTask<byte[] , Void, String>{
-		@Override
-		protected String doInBackground(byte[]... params) {
-			return HttpUrlService.execBytesPost(params[0]);
-		}	
-    }
-    
-  //TODO: image test bytes async task
-    private static class HttpGetBytesAsyncTask extends AsyncTask<Integer , Void, byte[]>{
-		@Override
-		protected byte[] doInBackground(Integer... params) {
-			return HttpUrlService.execBytesGet(params[0]);
-		}	
-    }
-    
 	private static JSONObject postNgetJson(JSONObject jsonReq) {
 		JSONObject jsonRsp = null;	
 		HttpPostJsonAsyncTask mHttpPostJsonAsyncTask = new HttpPostJsonAsyncTask();
@@ -66,44 +51,7 @@ public class ServerIface {
 		}
 		return jsonRsp;
 	}
-    
-	//TODO image test
-	public static String uploadImage(byte[] bytesParam) {
-		if (DEBUG) Log.i(TAG, "uploadImage()");
-		String result = null;
-		HttpPostBytesAsyncTask bytesAsyncTask = new HttpPostBytesAsyncTask();
-		bytesAsyncTask.execute(bytesParam);
-		
-		try {
-			result = bytesAsyncTask.get();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-		return result;
-		
-	}
-
-	//TODO image test
-	public static byte[] downloadImage(int id) {
-		if (DEBUG) Log.i(TAG, "uploadImage()");
-		byte[] result = null;
-		HttpGetBytesAsyncTask bytesAsyncTask = new HttpGetBytesAsyncTask();
-		bytesAsyncTask.execute(id);
-		
-		try {
-			result = bytesAsyncTask.get();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-		return result;
-		
-	}
-
-	
+    	
 	@SuppressWarnings("unchecked")
 	public static JSONObject login(String strEmailLogin, String strPwLogin) {
 		if (DEBUG) Log.i(TAG, "login()");
@@ -232,6 +180,7 @@ public class ServerIface {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static JSONObject getMembersProfile(long tid) {
 		if (DEBUG) Log.i(TAG, "getMembersProfile()");
 
@@ -244,6 +193,7 @@ public class ServerIface {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static JSONObject getMembersStatus(long tid) {
 		if (DEBUG) Log.i(TAG, "getMembersStatus()");
 
@@ -252,11 +202,39 @@ public class ServerIface {
 		jsonGetMembersStatus.put(Config.KEY_TID, tid);
 		
 		JSONObject jsonResult = postNgetJson(jsonGetMembersStatus);
-		// kakpple test log
-		Log.d(TAG, "JSON result:" + jsonResult);
 		
 		JSONObject result = (JSONObject) jsonResult.get(Config.KEY_RESULT);
 		return result;		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String uploadImage (byte[] imageByteArray, long id) {
+		if (DEBUG) Log.i(TAG, "getMembersStatus()");
+
+		String strImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
+		
+		JSONObject jsonImgUpload = new JSONObject();
+		jsonImgUpload.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_IMG_UPLOAD);
+		jsonImgUpload.put(Config.KEY_UID, id);
+		jsonImgUpload.put(Config.KEY_IMAGE, strImage);
+		
+		JSONObject jsonResult = postNgetJson(jsonImgUpload);
+		String result = (String) jsonResult.get(Config.KEY_RESULT);
+		return result;		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static byte[] downloadImage(long id) {
+		if (DEBUG) Log.i(TAG, "downloadImage()");
+		
+		JSONObject jsonLogin = new JSONObject();
+		jsonLogin.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_IMG_DOWNLOAD);
+		jsonLogin.put(Config.KEY_UID, id);
+		
+		JSONObject jsonResult = postNgetJson(jsonLogin);
+		String strImage = (String) jsonResult.get(Config.KEY_IMAGE);
+		byte[] result = Base64.decode(strImage, Base64.DEFAULT);
+		return result;
 	}
 
 }

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -30,12 +31,12 @@ public class ImageActivity extends Activity {
 		mUpload.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.cr);
+				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.hex);
 				ByteArrayOutputStream stream = new ByteArrayOutputStream();
 				bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
 				byte[] imageByteArray = stream.toByteArray();
-
-				String result = ServerIface.uploadImage(imageByteArray);
+				
+				String result = ServerIface.uploadImage(imageByteArray, 1);
 				
 			}
 		});
@@ -45,7 +46,7 @@ public class ImageActivity extends Activity {
 			public void onClick(View v) {
 				byte[] bytesImage = ServerIface.downloadImage(1);
 				Bitmap bitmap = BitmapFactory.decodeByteArray(bytesImage, 0, bytesImage.length);
-
+				
 				if (bitmap != null)
 					mViewDownload.setImageBitmap(bitmap);
 				else
