@@ -54,6 +54,11 @@
             android:name="nanofuntas.fbl.ImageActivity"
             android:label="@string/title_activity_image" >
         </activity>
+        <activity
+            android:name="nanofuntas.fbl.MyProfileUpdate"
+            android:label="@string/title_activity_my_profile_update" 
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

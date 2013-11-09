@@ -55,7 +55,7 @@ public class SettingsFragment extends Fragment {
     	mImageTest.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getView().getContext(), ImageActivity.class);
+				Intent i = new Intent(getView().getContext(), MyProfileUpdate.class);
 				startActivity(i);				
 			}
     	});
