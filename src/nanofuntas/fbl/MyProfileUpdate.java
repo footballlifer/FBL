@@ -79,8 +79,8 @@ public class MyProfileUpdate extends Activity {
 		intent.putExtra("crop", "true");
 		intent.putExtra("aspectX", 1);
 		intent.putExtra("aspectY", 1);
-		intent.putExtra("outputX", 200);
-		intent.putExtra("outputY", 150);
+		intent.putExtra("outputX", 256);
+		intent.putExtra("outputY", 256);
 		intent.putExtra("return-data", true);				
 
 		try {
