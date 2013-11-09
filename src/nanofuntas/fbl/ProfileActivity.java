@@ -36,7 +36,7 @@ public class ProfileActivity extends Activity {
     private TextView mCuttingRating = null;
     private TextView mOverallRating = null;
     private HexView mHexView = null;
-	 
+	
     private long uid = -1;
     private String name = null;
     private String position = null;

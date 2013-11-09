@@ -226,6 +226,7 @@ public class ServerIface {
 	@SuppressWarnings("unchecked")
 	public static byte[] downloadImage(long id) {
 		if (DEBUG) Log.i(TAG, "downloadImage()");
+		byte[] result = null;
 		
 		JSONObject jsonLogin = new JSONObject();
 		jsonLogin.put(Config.KEY_REQ_TYPE, Config.KEY_REQ_TYPE_IMG_DOWNLOAD);
@@ -233,7 +234,9 @@ public class ServerIface {
 		
 		JSONObject jsonResult = postNgetJson(jsonLogin);
 		String strImage = (String) jsonResult.get(Config.KEY_IMAGE);
-		byte[] result = Base64.decode(strImage, Base64.DEFAULT);
+		if (strImage != null)
+			result = Base64.decode(strImage, Base64.DEFAULT);
+		
 		return result;
 	}
 

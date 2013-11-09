@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -133,7 +134,11 @@ public class MyProfileUpdate extends Activity {
 			mBitmapPic.compress(Bitmap.CompressFormat.PNG, 100, stream);
 		
 		byte[] imageByteArray = stream.toByteArray();
-		String result = ServerIface.uploadImage(imageByteArray, 1);
+		
+		SharedPreferences settings = getApplicationContext().getSharedPreferences(Config.FBL_SETTINGS, 0);
+    	long uid = settings.getLong(Config.KEY_UID, 0);
+		
+		String result = ServerIface.uploadImage(imageByteArray, uid);
 	} 
 
 	private void downloadImage() {

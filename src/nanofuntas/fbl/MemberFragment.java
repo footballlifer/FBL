@@ -8,6 +8,9 @@ import org.json.simple.JSONObject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,7 +31,7 @@ public class MemberFragment extends Fragment {
 	private ListView mListView = null;		
 	// this map is index - player profile map, which is used in onItemClick
 	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
-	private Drawable photo = null;
+	private Drawable mPhoto = null;
 	private Drawable condition = null;
 	
 	public MemberFragment() {}
@@ -75,7 +78,7 @@ public class MemberFragment extends Fragment {
     	
     	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
     	JSONObject status = null;
-    	photo = getResources().getDrawable(R.drawable.cr3);
+    	mPhoto = getResources().getDrawable(R.drawable.cr3);
     	condition = getResources().getDrawable(R.drawable.condition);
     	
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
@@ -146,8 +149,18 @@ public class MemberFragment extends Fragment {
     	
     	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");    		    		
 		
+    	//TODO test image
+    	long uid = (Long)status.get(Config.KEY_UID);
+    	byte[] b = ServerIface.downloadImage(uid);
+    	if (b != null)
+    		mPhoto =  new BitmapDrawable(BitmapFactory.decodeByteArray(b, 0, b.length));
+    	else 
+        	mPhoto = getResources().getDrawable(R.drawable.cr3);
+
     	item = new PhotoTextItem();
-		item.setPhoto(photo);
+		
+    	if (mPhoto != null)
+    		item.setPhoto(mPhoto);
     	item.setCondition(condition);
     	item.setName( (String)status.get(Config.KEY_NAME) );
     	item.setPosition( (String)status.get(Config.KEY_POSITION) );
