@@ -2,6 +2,8 @@ package nanofuntas.fbl;
 
 import java.io.ByteArrayOutputStream;
 
+import org.json.simple.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -18,25 +20,63 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MyProfileUpdate extends Activity {
+	private final boolean DEBUG = true;
+	private final String TAG = "MyProfileUpdate";
+	
 	private ImageView mProfilePhoto;
 	private AlertDialog mPhotoDialog;
 	private Bitmap mBitmapPic;
 	
+	private EditText mNameUpdate;
+	private EditText mPositionUpdate;
+	private Button mProfileUpdate;
+	
 	private final int CAMERA_CAPTURE = 1;
 	private final int CAMERA_CAPTURE_CROP = 2;
 	private final int PICK_FROM_GALLERY = 3;
+	
+	private SharedPreferences settings;
+	private SharedPreferences.Editor editor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_profile_update);
 	    
+		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
+    	editor = settings.edit();
+    	final long UID = settings.getLong(Config.KEY_UID, 0);
+		
+		mNameUpdate = (EditText) findViewById(R.id.name_update);
+		mPositionUpdate = (EditText) findViewById(R.id.position_update);
+		mProfileUpdate = (Button) findViewById(R.id.profile_update);
+		
+		mProfileUpdate.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String name = mNameUpdate.getText().toString();
+				String position = mPositionUpdate.getText().toString();
+				
+				JSONObject myProfile = new JSONObject();
+				myProfile.put(Config.KEY_NAME, name);
+				myProfile.put(Config.KEY_POSITION, position);
+				
+				String result = ServerIface.updateMyProfile(UID, myProfile);
+				if (result.equals(Config.KEY_OK)) {
+					Toast.makeText(getApplication(), "My Profile updated OK", Toast.LENGTH_SHORT).show();
+				}
+			}			
+		});
+		
 		mProfilePhoto = (ImageView) findViewById(R.id.profile_photo);
 
+		
 		downloadImage();
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -51,7 +91,7 @@ public class MyProfileUpdate extends Activity {
     				break;
             	}
             }
-	    });    
+	    });
 	    mPhotoDialog = builder.create();	
 		
 	    mProfilePhoto.setOnClickListener(new OnClickListener() {

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@android:color/black" >
+
+    <TextView
+        android:id="@+id/create_team"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Team"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@color/DarkGray" 
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/join_team"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Join Team"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@color/DarkGray" 
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/incruit_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Incruit Player"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@color/DarkGray" 
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/update_my_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update My Profile"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@color/DarkGray" 
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    
+</LinearLayout>

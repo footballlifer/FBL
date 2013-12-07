@@ -56,8 +56,20 @@
         </activity>
         <activity
             android:name="nanofuntas.fbl.MyProfileUpdate"
-            android:label="@string/title_activity_my_profile_update" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_my_profile_update"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="nanofuntas.fbl.CreateTeamActivity"
+            android:label="@string/title_activity_create_team" >
+        </activity>
+        <activity
+            android:name="nanofuntas.fbl.JoinTeamActivity"
+            android:label="@string/title_activity_join_team" >
+        </activity>
+        <activity
+            android:name="nanofuntas.fbl.IncruitPlayerActivity"
+            android:label="@string/title_activity_incruit_player" >
         </activity>
     </application>
 
