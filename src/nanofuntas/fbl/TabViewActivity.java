@@ -1,5 +1,6 @@
 package nanofuntas.fbl;
 
+import nanofuntas.fbl.tb.TacticBoard;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;

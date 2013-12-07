@@ -1,5 +1,9 @@
-package nanofuntas.fbl;
+package nanofuntas.fbl.tb;
 
+import nanofuntas.fbl.R;
+import nanofuntas.fbl.R.id;
+import nanofuntas.fbl.R.layout;
+import nanofuntas.fbl.tb.ColorPaletteDialog.OnColorSelectedListener;
 import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package nanofuntas.fbl;
+package nanofuntas.fbl.tb;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import nanofuntas.fbl.R;
+import nanofuntas.fbl.R.drawable;
+import nanofuntas.fbl.R.id;
+import nanofuntas.fbl.R.layout;
+
 
 import android.annotation.TargetApi;
 import android.app.Activity;

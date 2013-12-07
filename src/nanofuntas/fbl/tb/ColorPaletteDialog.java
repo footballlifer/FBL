@@ -1,5 +1,8 @@
-package nanofuntas.fbl;
+package nanofuntas.fbl.tb;
 
+import nanofuntas.fbl.R;
+import nanofuntas.fbl.R.id;
+import nanofuntas.fbl.R.layout;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;

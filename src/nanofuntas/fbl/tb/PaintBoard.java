@@ -1,7 +1,10 @@
-package nanofuntas.fbl;
+package nanofuntas.fbl.tb;
 
 import java.io.OutputStream;
 import java.util.Stack;
+
+import nanofuntas.fbl.R;
+import nanofuntas.fbl.R.drawable;
 
 import android.content.Context;
 import android.graphics.Bitmap;

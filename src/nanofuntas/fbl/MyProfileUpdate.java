@@ -54,11 +54,7 @@ public class MyProfileUpdate extends Activity {
     	final long UID = settings.getLong(Config.KEY_UID, 0);
 		
 		mNameUpdate = (EditText) findViewById(R.id.name_update);
-		
-		
 		mPositionUpdate = (EditText) findViewById(R.id.pos_update);
-		
-		
 		mProfileUpdate = (Button) findViewById(R.id.profile_update);
 		
 		mProfileUpdate.setOnClickListener(new OnClickListener() {
@@ -75,7 +71,7 @@ public class MyProfileUpdate extends Activity {
 				if (result.equals(Config.KEY_OK)) {
 					Toast.makeText(getApplication(), "My Profile updated OK", Toast.LENGTH_SHORT).show();
 				}
-			}			
+			}
 		});
 		
 		mProfilePhoto = (ImageView) findViewById(R.id.profile_photo);
