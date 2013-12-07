@@ -1,119 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@android:color/black">
-    <Button
-        android:id="@+id/create_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tname_create"
-        android:layout_alignRight="@+id/tname_create"
-        android:layout_below="@+id/tname_create"
-        android:background="@android:color/darker_gray"
-        android:text="Create Team"
-        android:textColor="@android:color/white" />
-  	<Button
-     	android:id="@+id/join_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tname_join"
-        android:layout_alignRight="@+id/tname_join"
-        android:layout_below="@+id/tname_join"
-        android:text="Join Team" 
-        android:background="@android:color/darker_gray"
-    	android:textColor="@android:color/white"        />
-    <Button
-        android:id="@+id/incruit_player"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pname_incruit"
-        android:layout_alignRight="@+id/pname_incruit"
-        android:layout_below="@+id/pname_incruit"
-        android:text="Incruit Player" 
-        android:background="@android:color/darker_gray"
-    	android:textColor="@android:color/white" />
-    <EditText
-        android:id="@+id/ur_position_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ur_name_update"
-        android:layout_centerHorizontal="true"
-        android:hint="Your Position"
-        android:ems="10" 
-        android:textColor="@android:color/white" />
-    <Button
-        android:id="@+id/update_my_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ur_position_update"
-        android:layout_alignRight="@+id/ur_position_update"
-        android:layout_below="@+id/ur_position_update"
-        android:text="Update My Profile"
-        android:background="@android:color/darker_gray"
-    	android:textColor="@android:color/white" />
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@android:color/black" >
 
     <TextView
-        android:id="@+id/test_setting"
-        android:layout_width="wrap_content"
+        android:id="@+id/create_team"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/update_my_profile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:text="info"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
+        android:text="Create Team"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@color/DarkGray" 
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/tname_join"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/join_team"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/create_team"
-        android:layout_below="@+id/create_team"
-        android:ems="10"
-        android:hint="Team Name"
-        android:textColor="@android:color/white" />
-
-    <EditText
-        android:id="@+id/tname_create"
-        android:layout_width="wrap_content"
+        android:text="Join Team"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@color/DarkGray" 
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/incruit_player"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ur_name_update"
-        android:layout_alignParentTop="true"
-        android:ems="10"
-        android:hint="Team Name"
-        android:textColor="@android:color/white" />
-
-    <EditText
-        android:id="@+id/pname_incruit"
-        android:layout_width="wrap_content"
+        android:text="Incruit Player"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@color/DarkGray" 
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/update_my_profile"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/join_team"
-        android:layout_below="@+id/join_team"
-        android:ems="10"
-        android:hint="Player Name"
-        android:textColor="@android:color/white" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/ur_name_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ur_position_update"
-        android:layout_below="@+id/incruit_player"
-        android:ems="10"
-        android:hint="Your Name"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/imageTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/update_my_profile"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/update_my_profile"
-        android:text="Image Test" />
-
-</RelativeLayout>
+        android:text="Update My Profile"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@color/DarkGray" 
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    
+</LinearLayout>

@@ -54,7 +54,11 @@ public class MyProfileUpdate extends Activity {
     	final long UID = settings.getLong(Config.KEY_UID, 0);
 		
 		mNameUpdate = (EditText) findViewById(R.id.name_update);
-		mPositionUpdate = (EditText) findViewById(R.id.position_update);
+		
+		
+		mPositionUpdate = (EditText) findViewById(R.id.pos_update);
+		
+		
 		mProfileUpdate = (Button) findViewById(R.id.profile_update);
 		
 		mProfileUpdate.setOnClickListener(new OnClickListener() {

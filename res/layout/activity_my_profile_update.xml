@@ -18,7 +18,7 @@
         android:src="@drawable/cr" />
 
     <TextView
-        android:id="@+id/name_update"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_photo"
@@ -26,43 +26,40 @@
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/name_update"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/name_update"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
+	<EditText
+	    android:id="@+id/name_update"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textView1"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/textView1"
+	    android:ems="10" />
 
     <TextView
-        android:id="@+id/position_update"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
+        android:layout_alignLeft="@+id/pos_update"
+        android:layout_below="@+id/name_update"
         android:text="Position"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/pos_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/position_update"
-        android:layout_alignRight="@+id/editText1"
-        android:layout_below="@+id/position_update"
+        android:layout_alignLeft="@+id/profile_update"
+        android:layout_alignRight="@+id/name_update"
+        android:layout_below="@+id/textView2"
         android:ems="10" />
 
     <Button
         android:id="@+id/profile_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_below="@+id/editText2"
+        android:layout_alignLeft="@+id/name_update"
+        android:layout_alignRight="@+id/name_update"
+        android:layout_below="@+id/pos_update"
         android:text="Update" />
 
 </RelativeLayout>
