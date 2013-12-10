@@ -28,14 +28,5 @@
 
         <requestFocus />
     </EditText>
-
-    <Button
-        android:id="@+id/create_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/team_name_create"
-        android:layout_alignRight="@+id/team_name_create"
-        android:layout_below="@+id/team_name_create"
-        android:text="Create Team" />
-
+    
 </RelativeLayout>
