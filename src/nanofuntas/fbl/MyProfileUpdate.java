@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -35,14 +34,14 @@ public class MyProfileUpdate extends Activity {
 	
 	private EditText mNameUpdate;
 	private EditText mPositionUpdate;
-	private Button mProfileUpdate;
 	
 	private final int CAMERA_CAPTURE = 1;
 	private final int CAMERA_CAPTURE_CROP = 2;
 	private final int PICK_FROM_GALLERY = 3;
 	
 	private SharedPreferences settings;
-	private SharedPreferences.Editor editor;
+	
+	private long UID;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,34 +49,13 @@ public class MyProfileUpdate extends Activity {
 		setContentView(R.layout.activity_my_profile_update);
 	    
 		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
-    	editor = settings.edit();
-    	final long UID = settings.getLong(Config.KEY_UID, 0);
+    	UID = settings.getLong(Config.KEY_UID, 0);
 		
 		mNameUpdate = (EditText) findViewById(R.id.name_update);
 		mPositionUpdate = (EditText) findViewById(R.id.pos_update);
-		mProfileUpdate = (Button) findViewById(R.id.profile_update);
-		
-		mProfileUpdate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String name = mNameUpdate.getText().toString();
-				String position = mPositionUpdate.getText().toString();
-				
-				JSONObject myProfile = new JSONObject();
-				myProfile.put(Config.KEY_NAME, name);
-				myProfile.put(Config.KEY_POSITION, position);
-				
-				String result = ServerIface.updateMyProfile(UID, myProfile);
-				if (result.equals(Config.KEY_OK)) {
-					Toast.makeText(getApplication(), "My Profile updated OK", Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
-		
 		mProfilePhoto = (ImageView) findViewById(R.id.profile_photo);
-
 		
-		downloadImage();
+		downloadImage(UID);
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    builder.setItems(R.array.photo_array,  new DialogInterface.OnClickListener() {
@@ -167,6 +145,20 @@ public class MyProfileUpdate extends Activity {
     	}
     }
 
+    private void updateMyInfo() {
+    	String name = mNameUpdate.getText().toString();
+		String position = mPositionUpdate.getText().toString();
+		
+		JSONObject myProfile = new JSONObject();
+		myProfile.put(Config.KEY_NAME, name);
+		myProfile.put(Config.KEY_POSITION, position);
+		
+		String result = ServerIface.updateMyProfile(UID, myProfile);
+		if (result.equals(Config.KEY_OK)) {
+			Toast.makeText(getApplication(), "My Profile updated OK", Toast.LENGTH_SHORT).show();
+		}
+    }
+    
 	private void uploadImage() {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		
@@ -181,8 +173,13 @@ public class MyProfileUpdate extends Activity {
 		String result = ServerIface.uploadImage(imageByteArray, uid);
 	} 
 
-	private void downloadImage() {
-		byte[] bytesImage = ServerIface.downloadImage(1);
+	private void downloadImage(long uid) {
+		byte[] bytesImage = ServerIface.downloadImage(uid);
+		if ( bytesImage == null ) {
+			if (DEBUG) Log.d(TAG, "downloadImage(" + uid + "):" + "returned null");
+			return; 
+		}
+		
 		Bitmap bitmap = BitmapFactory.decodeByteArray(bytesImage, 0, bytesImage.length);
 		
 		if (bitmap != null)
@@ -202,6 +199,8 @@ public class MyProfileUpdate extends Activity {
         switch (item.getItemId()) {
         case R.id.menu_save:
         	uploadImage();
+        	//TODO: if name and position are null, do not update
+        	updateMyInfo();
         	return true;
         default:
             return super.onOptionsItemSelected(item);
