@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,10 +17,8 @@ public class IncruitPlayerActivity extends Activity {
 	private final String TAG = "IncruitPlayerActivity";
 	
 	private EditText mPlayerNameIncruit;
-	private Button mIncruitPlayer;
 	
 	private SharedPreferences settings;
-	private SharedPreferences.Editor editor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,37 +26,31 @@ public class IncruitPlayerActivity extends Activity {
 		setContentView(R.layout.activity_incruit_player);
 		
 		mPlayerNameIncruit = (EditText) findViewById(R.id.player_name_incruit);
-		mIncruitPlayer = (Button) findViewById(R.id.incruit_player);
-		
 		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
-    	editor = settings.edit();
-		
-		mPlayerNameIncruit.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				if (DEBUG) Log.d(TAG, "Incruit Player clicked!");
-				long tid = settings.getLong(Config.KEY_TID, 0);
-				
-				if (tid <= 0) {
-					Toast.makeText(getApplication(), 
-							"Please Join or Create Team First!", Toast.LENGTH_SHORT).show();
-					return;
-				} 
-				
-				String playerName = mPlayerNameIncruit.getText().toString();
-				long uid = ServerIface.incruitPlayer(tid, playerName);
-
-				if (uid > 0) {
-					Toast.makeText(getApplication(), 
-							"Player Incruited, UID:" + uid, Toast.LENGTH_SHORT).show();
-				} else {
-					Toast.makeText(getApplication(), 
-							"No such Player, UID:" + uid, Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
 	}
 
+	private void incruitPlayer() {
+		if (DEBUG) Log.d(TAG, "Incruit Player clicked!");
+		long tid = settings.getLong(Config.KEY_TID, 0);
+		
+		if (tid <= 0) {
+			Toast.makeText(getApplication(), 
+					"Please Join or Create Team First!", Toast.LENGTH_SHORT).show();
+			return;
+		} 
+		
+		String playerName = mPlayerNameIncruit.getText().toString();
+		long uid = ServerIface.incruitPlayer(tid, playerName);
+
+		if (uid > 0) {
+			Toast.makeText(getApplication(), 
+					"Player Incruited, UID:" + uid, Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(getApplication(), 
+					"No such Player, UID:" + uid, Toast.LENGTH_SHORT).show();
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -65,4 +58,15 @@ public class IncruitPlayerActivity extends Activity {
 		return true;
 	}
 
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {        
+        switch (item.getItemId()) {
+        case R.id.menu_incruit:
+        	incruitPlayer();
+        	return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+	
 }
