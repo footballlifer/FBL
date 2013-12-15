@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LogNRegActivity extends Activity {
 	private final boolean DEBUG = true;
@@ -48,6 +49,18 @@ public class LogNRegActivity extends Activity {
 				String email = emailLogin.getText().toString();
 				String pw = pwLogin.getText().toString();
 				
+				if (email.equals("")) { 
+					Log.d(TAG, "Please fill in email");
+					Toast.makeText(getApplication(), "Please fill in email", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
+				if (pw.equals("")) { 
+					Log.d(TAG, "Please fill in password");
+					Toast.makeText(getApplication(), "Please fill in password", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
 				JSONObject result = ServerIface.login(email, pw);
 				long uid = (Long) result.get(Config.KEY_UID);
 				long tid = (Long) result.get(Config.KEY_TID);
@@ -76,6 +89,24 @@ public class LogNRegActivity extends Activity {
 				String email = emailReg.getText().toString();
 				String pw = pwReg.getText().toString();
 				String pwRetype = pwRegRetype.getText().toString();
+				
+				if (email.equals("")) { 
+					Log.d(TAG, "Please fill in email");
+					Toast.makeText(getApplication(), "Please fill in email", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
+				if (pw.equals("")) { 
+					Log.d(TAG, "Please fill in password");
+					Toast.makeText(getApplication(), "Please fill in password", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
+				if (pwRetype.equals("")) { 
+					Log.d(TAG, "Please fill in password again");
+					Toast.makeText(getApplication(), "Please fill in password again", Toast.LENGTH_LONG).show();
+					return;
+				}
 				
 				if ( !pw.equals(pwRetype) ) {
 					Log.d(TAG, "register password not equal!");
