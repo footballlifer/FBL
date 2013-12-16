@@ -28,11 +28,11 @@ public class MemberFragment extends Fragment {
 	private String TAG = "MemberFragment";
 	private static final float HUNDRED = 100.0f;
 
-	private ListView mListView = null;		
+	private ListView mListView;		
 	// this map is index - player profile map, which is used in onItemClick
 	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
-	private Drawable mPhoto = null;
-	private Drawable condition = null;
+	private Drawable mPhoto;
+	private Drawable condition;
 	
 	public MemberFragment() {}
 
@@ -51,8 +51,8 @@ public class MemberFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 				if (DEBUG) Log.d(TAG, "onItemClick()");
-				
-				PlayerProfile pp = map.get((long)position);
+				// map index starts from 1
+				PlayerProfile pp = map.get((long)position+1);
 				
 				Intent i = new Intent(getActivity(), ProfileActivity.class);
 				i.putExtra(Config.KEY_UID, pp.getUid());
@@ -83,26 +83,10 @@ public class MemberFragment extends Fragment {
     	
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
     	long tid = settings.getLong(Config.KEY_TID, 0);
-    	long uid = settings.getLong(Config.KEY_UID, 0);
     	
-    	if (tid == -1) {
-    		Log.d(TAG, "tid == -1, return");
-    		status = ServerIface.getPlayerStatus(uid);
-    		setItemAndMap(status, itemList, map, (long)0);
-    		return itemList;
-    	}
-    	
-    	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);   	
+    	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
     	long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
     	
-    	// show me in the first place in the listView
-    	for (long i = 1; i <= count; i++) {
-    		status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
-    		if ( uid == (Long)status.get(Config.KEY_UID) ) {
-    			setItemAndMap(status, itemList, map, (long)0);
-    		}
-    	}
-
     	for (long i = 1; i <= count; i++) {
     		status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
     		setItemAndMap(status, itemList, map, i);

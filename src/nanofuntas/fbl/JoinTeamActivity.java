@@ -17,7 +17,6 @@ public class JoinTeamActivity extends Activity {
 	private final String TAG = "JoinTeamActivity";
 	
 	private EditText mTeamNameJoin;
-	private Button mJoinTeam;
 	
 	private SharedPreferences settings;
 	private SharedPreferences.Editor editor;
@@ -30,7 +29,6 @@ public class JoinTeamActivity extends Activity {
 		setContentView(R.layout.activity_join_team);
 		
 		mTeamNameJoin = (EditText) findViewById(R.id.team_name_join);
-		mJoinTeam = (Button) findViewById(R.id.join_team);
 		
 		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
     	editor = settings.edit();
@@ -68,5 +66,4 @@ public class JoinTeamActivity extends Activity {
             return super.onOptionsItemSelected(item);
         }
     }
-	
 }

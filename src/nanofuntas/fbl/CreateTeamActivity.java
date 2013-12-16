@@ -22,6 +22,7 @@ public class CreateTeamActivity extends Activity {
 	private SharedPreferences.Editor editor;
 	
 	private long UID;
+	private long TID;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,18 @@ public class CreateTeamActivity extends Activity {
 		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
     	editor = settings.edit();
     	UID = settings.getLong(Config.KEY_UID, 0);
+    	TID = settings.getLong(Config.KEY_TID, 0);
 	}
 
 	private void createTeam() {
 		if (DEBUG) Log.d(TAG, "Create Team clicked!");
+		
+		if (TID > 0) {
+			if (DEBUG) Log.d(TAG, "You already in a team, cant make a team");
+			Toast.makeText(getApplication(), 
+					"You already in a team, cant make a team",  Toast.LENGTH_LONG).show();
+			return;
+		}
 		
 		String teamName = mTeamName.getText().toString();
 		long tid = ServerIface.createTeam(UID, teamName);
@@ -65,5 +74,4 @@ public class CreateTeamActivity extends Activity {
             return super.onOptionsItemSelected(item);
         }
     }
-	
 }
