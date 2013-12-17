@@ -1,6 +1,14 @@
-package nanofuntas.fbl;
+package nanofuntas.fbl.settings;
 
 import java.io.ByteArrayOutputStream;
+
+import nanofuntas.fbl.Config;
+import nanofuntas.fbl.R;
+import nanofuntas.fbl.ServerIface;
+import nanofuntas.fbl.R.array;
+import nanofuntas.fbl.R.id;
+import nanofuntas.fbl.R.layout;
+import nanofuntas.fbl.R.menu;
 
 import org.json.simple.JSONObject;
 

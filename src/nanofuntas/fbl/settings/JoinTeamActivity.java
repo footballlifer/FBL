@@ -1,5 +1,11 @@
-package nanofuntas.fbl;
+package nanofuntas.fbl.settings;
 
+import nanofuntas.fbl.Config;
+import nanofuntas.fbl.R;
+import nanofuntas.fbl.ServerIface;
+import nanofuntas.fbl.R.id;
+import nanofuntas.fbl.R.layout;
+import nanofuntas.fbl.R.menu;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,63 +18,55 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class CreateTeamActivity extends Activity {
+public class JoinTeamActivity extends Activity {
 	private final boolean DEBUG = true;
-	private final String TAG = "CreateTeamActivity";
+	private final String TAG = "JoinTeamActivity";
 	
-	private EditText mTeamName;
+	private EditText mTeamNameJoin;
 	
 	private SharedPreferences settings;
 	private SharedPreferences.Editor editor;
 	
 	private long UID;
-	private long TID;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_team);
+		setContentView(R.layout.activity_join_team);
 		
-		mTeamName = (EditText) findViewById(R.id.team_name_create);
+		mTeamNameJoin = (EditText) findViewById(R.id.team_name_join);
 		
 		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
     	editor = settings.edit();
+    	
     	UID = settings.getLong(Config.KEY_UID, 0);
-    	TID = settings.getLong(Config.KEY_TID, 0);
 	}
 
-	private void createTeam() {
-		if (DEBUG) Log.d(TAG, "Create Team clicked!");
+	private void joinTeam() {
+		if (DEBUG) Log.d(TAG, "Join Team clicked!");
 		
-		if (TID > 0) {
-			if (DEBUG) Log.d(TAG, "You already in a team, cant make a team");
-			Toast.makeText(getApplication(), 
-					"You already in a team, cant make a team",  Toast.LENGTH_LONG).show();
-			return;
-		}
-		
-		String teamName = mTeamName.getText().toString();
-		long tid = ServerIface.createTeam(UID, teamName);
+		String teamName = mTeamNameJoin.getText().toString();
+		long tid = ServerIface.joinTeam(UID, teamName);
 		
 		editor.putLong(Config.KEY_TID, tid);
-		editor.commit();
+		editor.commit();	
 		
 		Toast.makeText(getApplication(), 
-				"Team Created, TID:" + Long.toString(tid), Toast.LENGTH_SHORT).show();
+				"You Joined, TID:" + Long.toString(tid), Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_team, menu);
+		getMenuInflater().inflate(R.menu.join_team, menu);
 		return true;
 	}
-
+	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {        
         switch (item.getItemId()) {
-        case R.id.menu_create:
-        	createTeam();
+        case R.id.menu_join:
+        	joinTeam();
         	return true;
         default:
             return super.onOptionsItemSelected(item);

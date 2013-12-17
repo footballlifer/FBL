@@ -1,5 +1,11 @@
-package nanofuntas.fbl;
+package nanofuntas.fbl.settings;
 
+import nanofuntas.fbl.Config;
+import nanofuntas.fbl.R;
+import nanofuntas.fbl.ServerIface;
+import nanofuntas.fbl.R.id;
+import nanofuntas.fbl.R.layout;
+import nanofuntas.fbl.R.menu;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;

@@ -1,5 +1,9 @@
 package nanofuntas.fbl;
 
+import nanofuntas.fbl.settings.CreateTeamActivity;
+import nanofuntas.fbl.settings.IncruitPlayerActivity;
+import nanofuntas.fbl.settings.JoinTeamActivity;
+import nanofuntas.fbl.settings.MyProfileUpdate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
