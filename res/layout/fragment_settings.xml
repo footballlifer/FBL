@@ -2,48 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@android:color/black" >
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
 
     <TextView
         android:id="@+id/create_team"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Team"
         android:layout_margin="5dp"
-        android:padding="10dp"
-        android:background="@color/DarkGray" 
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:background="@color/DarkGray"
+        android:padding="7dp"
+        android:text="Create Team"
+        android:textColor="@android:color/white" 
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+    
     <TextView
         android:id="@+id/join_team"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Join Team"
         android:layout_margin="5dp"
-        android:padding="10dp"
-        android:background="@color/DarkGray" 
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:background="@color/DarkGray"
+        android:padding="7dp"
+        android:text="Join Team"
+        android:textColor="@android:color/white" 
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
     
     <TextView
         android:id="@+id/incruit_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Incruit Player"
         android:layout_margin="5dp"
-        android:padding="10dp"
-        android:background="@color/DarkGray" 
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:background="@color/DarkGray"
+        android:padding="7dp"
+        android:text="Incruit Player"
+        android:textColor="@android:color/white" 
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
     
     <TextView
         android:id="@+id/update_my_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update My Profile"
         android:layout_margin="5dp"
-        android:padding="10dp"
-        android:background="@color/DarkGray" 
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
+        android:background="@color/DarkGray"
+        android:padding="7dp"
+        android:text="Update My Profile"
+        android:textColor="@android:color/white" 
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+	<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
     
 </LinearLayout>

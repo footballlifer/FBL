@@ -15,6 +15,8 @@ public class HexView extends View {
 	private final boolean DEBUG = true;
 	private final String TAG = "HexView";
 	
+	private Context mContext;
+	
 	// tuning ratio to size
 	private final float R_RATIO_TO_SIZE = 0.7f; //Radius of HEX
 	private final float DELTA_X_RATIO_TO_SIZE = 0.12f;
@@ -68,19 +70,23 @@ public class HexView extends View {
 	
 	public HexView(Context context) {
 		super(context);
+		this.mContext = context;
 	}
 	public HexView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		this.mContext = context;
 	}
 	
 	public HexView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		this.mContext = context;
 	}
 	
 	//rATK, rTEC, rTWK, rDFS, rMTL, rPHY is ratio smaller than 1
 	public HexView(Context context, 
 			float rATK, float rTEC, float rTWK, float rDFS, float rMTL, float rPHY) {
 		super(context);
+		this.mContext = context;
 		this.ratioATK = rATK;
 		this.ratioTEC = rTEC;
 		this.ratioTWK = rTWK;
@@ -131,7 +137,10 @@ public class HexView extends View {
 		if (DEBUG) Log.d(TAG, "onDraw()");
 		
 		// draw HEX on rectangle of (0,0,2X,2Y)
-		p.setColor(Color.GRAY);
+		
+		final int dark_gray = mContext.getResources().getColor(android.R.color.darker_gray);
+		p.setColor(dark_gray);
+		//p.setColor(Color.LTGRAY);
 		canvas.drawRect(0, 0, 2*X, 2*Y, p);
 		
 		// points of HEX frame
