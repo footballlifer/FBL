@@ -229,9 +229,9 @@ public final class R {
         public static final int header_rating=0x7f0a0039;
         public static final int header_rating_bar=0x7f0a003a;
         public static final int header_rating_value=0x7f0a003b;
-        public static final int hex_view=0x7f0a0042;
+        public static final int hex_view=0x7f0a0041;
         public static final int hexview_item=0x7f0a0076;
-        public static final int imageView1=0x7f0a0041;
+        public static final int imageView1=0x7f0a0042;
         public static final int imageView2=0x7f0a0081;
         public static final int imageView3=0x7f0a0083;
         public static final int img_o=0x7f0a008d;

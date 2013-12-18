@@ -2,13 +2,18 @@ package nanofuntas.fbl;
 
 import org.json.simple.JSONObject;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ProfileActivity extends Activity {
@@ -19,6 +24,7 @@ public class ProfileActivity extends Activity {
 	
     private TextView mPlayerName;
     private TextView mPosition;
+    private ImageView mImageView;
     
     private TextView mAttackRating;
     private TextView mDefenseRating;
@@ -38,7 +44,7 @@ public class ProfileActivity extends Activity {
     private long mUid = -1;
     private String mNameStr;
     private String mPositionStr;
-    
+        
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,14 +57,27 @@ public class ProfileActivity extends Activity {
     	mPlayerName.setText(mNameStr);
     	mPosition.setText(mPositionStr);
     	
+    	setImageView(mUid);
     	getAndSetPlayerStatus(mUid);
 	}
 
+    private void setImageView(long uid) {
+    	byte[] b = ServerIface.downloadImage(uid);
+    	Drawable mPhoto = null;
+
+    	if (b != null)
+    		mPhoto =  new BitmapDrawable(BitmapFactory.decodeByteArray(b, 0, b.length));
+    	else 
+        	mPhoto = getResources().getDrawable(R.drawable.cr3);
+    	mImageView.setImageDrawable(mPhoto);
+    }
+    
     private void initView() {
     	if (DEBUG) Log.d(TAG, "initView()");
     	
     	mPlayerName = (TextView) findViewById(R.id.player_name);
     	mPosition = (TextView) findViewById(R.id.position_value);
+    	mImageView = (ImageView) findViewById(R.id.imageView1);
     	
     	mAttackRating = (TextView) findViewById(R.id.attack_rating);
     	mDefenseRating = (TextView) findViewById(R.id.defense_rating);

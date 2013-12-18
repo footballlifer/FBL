@@ -11,12 +11,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/cr" />
         
         <nanofuntas.fbl.HexView
             android:id="@+id/hex_view"
@@ -24,6 +18,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_toRightOf="@+id/imageView1" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/cr" />
         
     </RelativeLayout>
 
