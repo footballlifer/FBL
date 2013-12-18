@@ -8,8 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class ProfileActivity extends Activity {
@@ -18,28 +17,27 @@ public class ProfileActivity extends Activity {
 	
 	private final float HUNDRED = 100.0f;
 	
-    private TextView mPlayerName = null;
-    private TextView mPosition = null;
-    private Button mRateMeButton = null;
+    private TextView mPlayerName;
+    private TextView mPosition;
     
-    private TextView mAttackRating = null;
-    private TextView mDefenseRating = null;
-    private TextView mTeamworkRating = null;
-    private TextView mMentalRating = null;
-    private TextView mPowerRating = null;
-    private TextView mSpeedRating = null;
-    private TextView mStaminaRating = null;
-    private TextView mBallControlRating = null;
-    private TextView mPassRating = null;
-    private TextView mShotRating = null;
-    private TextView mHeaderRating = null;
-    private TextView mCuttingRating = null;
-    private TextView mOverallRating = null;
-    private HexView mHexView = null;
+    private TextView mAttackRating;
+    private TextView mDefenseRating;
+    private TextView mTeamworkRating;
+    private TextView mMentalRating;
+    private TextView mPowerRating;
+    private TextView mSpeedRating;
+    private TextView mStaminaRating;
+    private TextView mBallControlRating;
+    private TextView mPassRating;
+    private TextView mShotRating;
+    private TextView mHeaderRating;
+    private TextView mCuttingRating;
+    private TextView mOverallRating;
+    private HexView mHexView;
 	
-    private long uid = -1;
-    private String name = null;
-    private String position = null;
+    private long mUid = -1;
+    private String mNameStr;
+    private String mPositionStr;
     
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +45,13 @@ public class ProfileActivity extends Activity {
 		setContentView(R.layout.activity_profile);
 		initView();
 		
-		uid = getIntent().getExtras().getLong(Config.KEY_UID);		
-    	name = getIntent().getExtras().getString(Config.KEY_NAME);
-    	position = getIntent().getExtras().getString(Config.KEY_POSITION);
-    	mPlayerName.setText(name);
-    	mPosition.setText(position);
+		mUid = getIntent().getExtras().getLong(Config.KEY_UID);		
+		mNameStr = getIntent().getExtras().getString(Config.KEY_NAME);
+    	mPositionStr = getIntent().getExtras().getString(Config.KEY_POSITION);
+    	mPlayerName.setText(mNameStr);
+    	mPosition.setText(mPositionStr);
     	
-    	getAndSetPlayerStatus(uid);
-    	
-    	mRateMeButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				if (DEBUG) Log.d(TAG, "RateMeButton onClick()");
-				
-				Intent i = new Intent(ProfileActivity.this, PlayerRatingActivity.class);
-				i.putExtra(Config.KEY_UID, uid);
-				i.putExtra(Config.KEY_NAME, name);
-				startActivity(i);
-			}
-		});
+    	getAndSetPlayerStatus(mUid);
 	}
 
     private void initView() {
@@ -72,7 +59,6 @@ public class ProfileActivity extends Activity {
     	
     	mPlayerName = (TextView) findViewById(R.id.player_name);
     	mPosition = (TextView) findViewById(R.id.position_value);
-    	mRateMeButton = (Button) findViewById(R.id.rate_me);
     	
     	mAttackRating = (TextView) findViewById(R.id.attack_rating);
     	mDefenseRating = (TextView) findViewById(R.id.defense_rating);
@@ -89,6 +75,15 @@ public class ProfileActivity extends Activity {
     	mOverallRating = (TextView) findViewById(R.id.overall_rating);
     	
     	mHexView = (HexView) findViewById(R.id.hex_view);
+    }
+    
+    private void startRateActivity() {
+    	if (DEBUG) Log.d(TAG, "RateMeButton onClick()");
+		
+		Intent i = new Intent(ProfileActivity.this, PlayerRatingActivity.class);
+		i.putExtra(Config.KEY_UID, mUid);
+		i.putExtra(Config.KEY_NAME, mNameStr);
+		startActivity(i);
     }
     
     private void getAndSetPlayerStatus(long uid) {
@@ -157,5 +152,16 @@ public class ProfileActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_profile, menu);
 		return true;
 	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {        
+        switch (item.getItemId()) {
+        case R.id.menu_rate:
+        	startRateActivity();
+        	return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

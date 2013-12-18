@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -21,85 +22,77 @@ public class PlayerRatingActivity extends Activity {
 
 	private final int TEN = 10;
 
-	private Button submitButton = null;
-	private TextView nameRating = null;
+	private TextView nameRating;
 
-	private RatingBar attackRatingBar = null;
-	private RatingBar defenseRatingBar = null;
-	private RatingBar teamworkRatingBar = null;
-	private RatingBar mentalRatingBar = null;
-	private RatingBar powerRatingBar = null;
-	private RatingBar speedRatingBar = null;
-	private RatingBar staminaRatingBar = null;
-	private RatingBar ballControlRatingBar = null;
-	private RatingBar passRatingBar = null;
-	private RatingBar shotRatingBar = null;
-	private RatingBar headerRatingBar = null;
-	private RatingBar cuttingRatingBar = null;
+	private RatingBar attackRatingBar;
+	private RatingBar defenseRatingBar;
+	private RatingBar teamworkRatingBar;
+	private RatingBar mentalRatingBar;
+	private RatingBar powerRatingBar;
+	private RatingBar speedRatingBar;
+	private RatingBar staminaRatingBar;
+	private RatingBar ballControlRatingBar;
+	private RatingBar passRatingBar;
+	private RatingBar shotRatingBar;
+	private RatingBar headerRatingBar;
+	private RatingBar cuttingRatingBar;
 
-	private TextView attackRatingValue = null;
-	private TextView defenseRatingValue = null;
-	private TextView teamworkRatingValue = null;
-	private TextView mentalRatingValue = null;
-	private TextView powerRatingValue = null;
-	private TextView speedRatingValue = null;
-	private TextView staminaRatingValue = null;
-	private TextView ballControlRatingValue = null;
-	private TextView passRatingValue = null;
-	private TextView shotRatingValue = null;
-	private TextView headerRatingValue = null;
-	private TextView cuttingRatingValue = null;
+	private TextView attackRatingValue;
+	private TextView defenseRatingValue;
+	private TextView teamworkRatingValue;
+	private TextView mentalRatingValue;
+	private TextView powerRatingValue;
+	private TextView speedRatingValue;
+	private TextView staminaRatingValue;
+	private TextView ballControlRatingValue;
+	private TextView passRatingValue;
+	private TextView shotRatingValue;
+	private TextView headerRatingValue;
+	private TextView cuttingRatingValue;
 
-	private long uid = -1;
-	private String name = null;	
+	private long mUid = -1;
+	private String mName;	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_player_rating);
 		initViews();
 
-		uid = getIntent().getExtras().getLong(Config.KEY_UID);
-		name = getIntent().getExtras().getString(Config.KEY_NAME);
-		nameRating.setText(name);
-		
-		submitButton.setOnClickListener(submitOnClickListener);
+		mUid = getIntent().getExtras().getLong(Config.KEY_UID);
+		mName = getIntent().getExtras().getString(Config.KEY_NAME);
+		nameRating.setText(mName);		
 	}
-
-	OnClickListener submitOnClickListener = new OnClickListener() {
-		@SuppressWarnings("unchecked")
-		@Override
-		public void onClick(View v) {
-			if (DEBUG) Log.d(TAG, "SubmitButton onClick()");
-			
-			JSONObject jsonRating = new JSONObject();
-			
-			jsonRating.put(Config.KEY_ATTACK, Long.valueOf(attackRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_DEFENSE, Long.valueOf(defenseRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_TEAMWORK, Long.valueOf(teamworkRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_MENTAL, Long.valueOf(mentalRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_POWER, Long.valueOf(powerRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_SPEED, Long.valueOf(speedRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_STAMINA, Long.valueOf(staminaRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_BALL_CONTROL, Long.valueOf(ballControlRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_PASS, Long.valueOf(passRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_SHOT, Long.valueOf(shotRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_HEADER, Long.valueOf(headerRatingValue.getText().toString()));
-			jsonRating.put(Config.KEY_CUTTING, Long.valueOf(cuttingRatingValue.getText().toString()));
-			
-			String result = ServerIface.ratePlayer(uid, jsonRating);
-			if (result.equals(Config.KEY_OK)) {
-				Toast.makeText(getApplicationContext(), "Submit successful", Toast.LENGTH_SHORT).show();
-			}
+	
+	@SuppressWarnings("unchecked")
+	private void submit() {
+		if (DEBUG) Log.d(TAG, "SubmitButton onClick()");
+		
+		JSONObject jsonRating = new JSONObject();
+		
+		jsonRating.put(Config.KEY_ATTACK, Long.valueOf(attackRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_DEFENSE, Long.valueOf(defenseRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_TEAMWORK, Long.valueOf(teamworkRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_MENTAL, Long.valueOf(mentalRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_POWER, Long.valueOf(powerRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_SPEED, Long.valueOf(speedRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_STAMINA, Long.valueOf(staminaRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_BALL_CONTROL, Long.valueOf(ballControlRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_PASS, Long.valueOf(passRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_SHOT, Long.valueOf(shotRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_HEADER, Long.valueOf(headerRatingValue.getText().toString()));
+		jsonRating.put(Config.KEY_CUTTING, Long.valueOf(cuttingRatingValue.getText().toString()));
+		
+		String result = ServerIface.ratePlayer(mUid, jsonRating);
+		if (result.equals(Config.KEY_OK)) {
+			Toast.makeText(getApplicationContext(), "Submit successful", Toast.LENGTH_SHORT).show();
 		}
-
-	};
-
+	}
+	
 	private void initViews() {
 		if (DEBUG) Log.d(TAG, "initViews()");
 		
-		submitButton = (Button) findViewById(R.id.submit);
 		nameRating = (TextView) findViewById(R.id.name_rating);
 
 		attackRatingBar = (RatingBar) findViewById(R.id.attack_rating_bar);
@@ -196,5 +189,16 @@ public class PlayerRatingActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_player_rating, menu);
 		return true;
 	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {        
+        switch (item.getItemId()) {
+        case R.id.menu_submit:
+        	submit();
+        	return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@android:color/black">
+    android:background="@android:color/darker_gray">
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -460,16 +460,5 @@
         android:text="NAME"
         android:textAppearance="?android:attr/textAppearanceMedium" 
         android:textColor="@android:color/white"/>
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="Submit" 
-        android:background="@android:color/darker_gray"
-    	android:textColor="@android:color/white"/>
     
 </RelativeLayout>
