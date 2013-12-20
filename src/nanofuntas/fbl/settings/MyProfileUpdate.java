@@ -180,9 +180,8 @@ public class MyProfileUpdate extends Activity {
 			mBitmapPic.compress(Bitmap.CompressFormat.PNG, 100, stream);
 		
 		byte[] imageByteArray = stream.toByteArray();
-    	long uid = Utils.getMyUid();
 		
-		String result = ServerIface.uploadImage(imageByteArray, uid);
+		String result = ServerIface.uploadImage(imageByteArray, UID);
 	} 
 
 	private void downloadImage(long uid) {
