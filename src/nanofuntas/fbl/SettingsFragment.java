@@ -19,10 +19,11 @@ public class SettingsFragment extends Fragment {
 	private final boolean DEBUG = true; 
 	private final String TAG = "SettingFragment2";
 	
-	private TextView createTeam;
-	private TextView joinTeam;
-	private TextView incruitPlayer;
-	private TextView updateMyProfile;
+	private TextView mCreateTeam;
+	private TextView mJoinTeam;
+	private TextView mIncruitPlayer;
+	private TextView mUpdateMyProfile;
+	private TextView mLogOut;
 	
 	public SettingsFragment() {}
 
@@ -33,7 +34,7 @@ public class SettingsFragment extends Fragment {
     	super.onStart();        	    	
     	initViews();
     	
-    	createTeam.setOnClickListener(new OnClickListener() {
+    	mCreateTeam.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				Intent i = new Intent(getView().getContext(), CreateTeamActivity.class);
@@ -41,7 +42,7 @@ public class SettingsFragment extends Fragment {
 			}    		
     	});
     	
-    	joinTeam.setOnClickListener(new OnClickListener() {
+    	mJoinTeam.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				Intent i = new Intent(getView().getContext(), JoinTeamActivity.class);
@@ -49,7 +50,7 @@ public class SettingsFragment extends Fragment {
 			}    		
     	});
     	
-    	incruitPlayer.setOnClickListener(new OnClickListener() {
+    	mIncruitPlayer.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				Intent i = new Intent(getView().getContext(), IncruitPlayerActivity.class);
@@ -57,12 +58,21 @@ public class SettingsFragment extends Fragment {
 			}    		
     	});
     	
-    	updateMyProfile.setOnClickListener(new OnClickListener() {
+    	mUpdateMyProfile.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				Intent i = new Intent(getView().getContext(), MyProfileUpdate.class);
 				startActivity(i);
 			}    		
+    	});
+    	
+    	mLogOut.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				Utils.removeLoginIdPw();
+				Intent i = new Intent(getView().getContext(), LogNRegActivity.class);
+				startActivity(i);
+			}
     	});
     }
     
@@ -75,10 +85,10 @@ public class SettingsFragment extends Fragment {
 
     private void initViews() {
     	if (DEBUG) Log.d(TAG, "initViews()");  
-    	createTeam = (TextView) getView().findViewById(R.id.create_team);
-    	joinTeam = (TextView) getView().findViewById(R.id.join_team);
-    	incruitPlayer = (TextView) getView().findViewById(R.id.incruit_player);
-    	updateMyProfile = (TextView) getView().findViewById(R.id.update_my_profile);    
+    	mCreateTeam = (TextView) getView().findViewById(R.id.create_team);
+    	mJoinTeam = (TextView) getView().findViewById(R.id.join_team);
+    	mIncruitPlayer = (TextView) getView().findViewById(R.id.incruit_player);
+    	mUpdateMyProfile = (TextView) getView().findViewById(R.id.update_my_profile);
+    	mLogOut = (TextView) getView().findViewById(R.id.log_out);
     }
-    
 }

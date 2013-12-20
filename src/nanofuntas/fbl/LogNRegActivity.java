@@ -46,6 +46,7 @@ public class LogNRegActivity extends Activity {
         String email = Utils.getMyLoginID();
         String pw = Utils.getMyLoginPW();
         
+        // if not loged in ever, LoginID and LoginPW return "NULL" string default
         if (!email.equals("NULL") && !pw.equals("NULL")) {
 			JSONObject result = ServerIface.login(email, pw);
 			Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);

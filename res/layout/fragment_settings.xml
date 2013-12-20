@@ -72,5 +72,20 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/white" />
+	
+	<TextView
+        android:id="@+id/log_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/DarkGray"
+        android:padding="7dp"
+        android:text="Log out"
+        android:textColor="@android:color/white" 
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+	<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
     
 </LinearLayout>

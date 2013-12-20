@@ -59,6 +59,12 @@ public class Utils {
 		return pw;
 	}
 	
+	public static void removeLoginIdPw() {
+		editor.remove(Config.KEY_LOGIN_ID);
+		editor.remove(Config.KEY_LOGIN_PW);
+		editor.commit();
+	}
+	
 	public static void initSharedPreference(Context context) {
 		if (DEBUG) Log.d(TAG, "initSharedPreference()");
 		settings = context.getSharedPreferences(Config.FBL_SETTINGS, 0);
