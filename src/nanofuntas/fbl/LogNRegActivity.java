@@ -70,14 +70,7 @@ public class LogNRegActivity extends Activity {
 				if ( uid != -1 ) {
 					Utils.setMyUid(getApplicationContext(), uid);
 					Utils.setMyTid(getApplicationContext(), tid);
-					/*
-					// save uid, tid
-					SharedPreferences settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
-					SharedPreferences.Editor editor = settings.edit();
-					editor.putLong(Config.KEY_UID, uid);
-					editor.putLong(Config.KEY_TID, tid);
-					editor.commit();
-					*/
+
 					Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);
 					startActivity(i);
 				}
