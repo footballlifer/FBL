@@ -79,7 +79,7 @@
                 android:layout_alignBottom="@+id/textView3"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/textView3"
-                android:src="@drawable/condition" />
+                android:src="@drawable/arrow_green" />
         </RelativeLayout>
     </RelativeLayout>
     

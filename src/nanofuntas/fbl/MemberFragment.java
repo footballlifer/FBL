@@ -3,12 +3,12 @@ package nanofuntas.fbl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import org.json.simple.JSONObject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -32,7 +32,9 @@ public class MemberFragment extends Fragment {
 	// this map is index - player profile map, which is used in onItemClick
 	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
 	private Drawable mPhoto;
-	private Drawable condition;
+	private Drawable mArrowGreen;
+	private Drawable mArrowYellow;
+	private Drawable mArrowRed;
 	
 	public MemberFragment() {}
 
@@ -42,6 +44,10 @@ public class MemberFragment extends Fragment {
     public void onStart(){
     	super.onStart();    	
 
+    	mArrowGreen = getResources().getDrawable(R.drawable.arrow_green);
+    	mArrowYellow = getResources().getDrawable(R.drawable.arrow_yellow);
+    	mArrowRed = getResources().getDrawable(R.drawable.arrow_red);
+    	
     	mListView = (ListView) getView().findViewById(R.id.listView1);
     	ArrayList<PhotoTextItem> mItemList = getListView();
     	PhotoTextListAdapter mPhotoTextListAdapter = new PhotoTextListAdapter(getActivity(), mItemList);
@@ -79,7 +85,6 @@ public class MemberFragment extends Fragment {
     	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
     	JSONObject status = null;
     	mPhoto = getResources().getDrawable(R.drawable.cr3);
-    	condition = getResources().getDrawable(R.drawable.condition);
     	
     	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
     	long tid = settings.getLong(Config.KEY_TID, 0);
@@ -145,7 +150,9 @@ public class MemberFragment extends Fragment {
 		
     	if (mPhoto != null)
     		item.setPhoto(mPhoto);
-    	item.setCondition(condition);
+    	
+    	//item.setCondition(mArrowRed);
+    	setRandomCondition(item);
     	item.setName( (String)status.get(Config.KEY_NAME) );
     	item.setPosition( (String)status.get(Config.KEY_POSITION) );
     	item.setHexRating(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);        	
@@ -158,4 +165,22 @@ public class MemberFragment extends Fragment {
 		// this map must match listView position
 		map.put(indexToMap, pp);
     }
+    
+    private void setRandomCondition(PhotoTextItem item) {
+    	Random rand = new Random(System.currentTimeMillis());
+    	switch (rand.nextInt(3)) {
+    	case 0:
+        	item.setCondition(mArrowGreen);
+        	break;
+    	case 1: 
+        	item.setCondition(mArrowYellow);
+        	break;
+    	case 2:
+        	item.setCondition(mArrowRed);
+        	break;
+        default:
+        	Log.d(TAG, "setRandomArrow(), default case");
+    	}
+    }
+    
 }
