@@ -1,20 +1,13 @@
 package nanofuntas.fbl.settings;
 
-import nanofuntas.fbl.Config;
 import nanofuntas.fbl.R;
 import nanofuntas.fbl.ServerIface;
-import nanofuntas.fbl.R.id;
-import nanofuntas.fbl.R.layout;
-import nanofuntas.fbl.R.menu;
+import nanofuntas.fbl.Utils;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,21 +16,18 @@ public class IncruitPlayerActivity extends Activity {
 	private final String TAG = "IncruitPlayerActivity";
 	
 	private EditText mPlayerNameIncruit;
-	
-	private SharedPreferences settings;
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_incruit_player);
 		
 		mPlayerNameIncruit = (EditText) findViewById(R.id.player_name_incruit);
-		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
 	}
 
 	private void incruitPlayer() {
 		if (DEBUG) Log.d(TAG, "Incruit Player clicked!");
-		long tid = settings.getLong(Config.KEY_TID, 0);
+		long tid = Utils.getMyTid();
 		
 		if (tid <= 0) {
 			Toast.makeText(getApplication(), 
@@ -46,14 +36,14 @@ public class IncruitPlayerActivity extends Activity {
 		} 
 		
 		String playerName = mPlayerNameIncruit.getText().toString();
-		long uid = ServerIface.incruitPlayer(tid, playerName);
+		long urid = ServerIface.incruitPlayer(tid, playerName);
 
-		if (uid > 0) {
+		if (urid > 0) {
 			Toast.makeText(getApplication(), 
-					"Player Incruited, UID:" + uid, Toast.LENGTH_SHORT).show();
+					"Player Incruited, UID:" + urid, Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(getApplication(), 
-					"No such Player, UID:" + uid, Toast.LENGTH_SHORT).show();
+					"No such Player, UID:" + urid, Toast.LENGTH_SHORT).show();
 		}
 	}
 	

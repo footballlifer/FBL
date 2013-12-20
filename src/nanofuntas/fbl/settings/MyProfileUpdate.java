@@ -5,10 +5,7 @@ import java.io.ByteArrayOutputStream;
 import nanofuntas.fbl.Config;
 import nanofuntas.fbl.R;
 import nanofuntas.fbl.ServerIface;
-import nanofuntas.fbl.R.array;
-import nanofuntas.fbl.R.id;
-import nanofuntas.fbl.R.layout;
-import nanofuntas.fbl.R.menu;
+import nanofuntas.fbl.Utils;
 
 import org.json.simple.JSONObject;
 
@@ -17,7 +14,6 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -46,9 +42,7 @@ public class MyProfileUpdate extends Activity {
 	private final int CAMERA_CAPTURE = 1;
 	private final int CAMERA_CAPTURE_CROP = 2;
 	private final int PICK_FROM_GALLERY = 3;
-	
-	private SharedPreferences settings;
-	
+		
 	private long UID;
 	
 	@Override
@@ -56,8 +50,7 @@ public class MyProfileUpdate extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_profile_update);
 	    
-		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
-    	UID = settings.getLong(Config.KEY_UID, 0);
+    	UID = Utils.getMyUid();
 		
 		mNameUpdate = (EditText) findViewById(R.id.name_update);
 		mPositionUpdate = (EditText) findViewById(R.id.pos_update);
@@ -153,9 +146,22 @@ public class MyProfileUpdate extends Activity {
     	}
     }
 
-    private void updateMyInfo() {
+    @SuppressWarnings("unchecked")
+	private void updateMyInfo() {
     	String name = mNameUpdate.getText().toString();
 		String position = mPositionUpdate.getText().toString();
+		
+		if (name.equals("")) { 
+			Log.d(TAG, "Please fill in name");
+			Toast.makeText(getApplication(), "Please fill in name", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		if (position.equals("")) { 
+			Log.d(TAG, "Please fill in position");
+			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
+			return;
+		}
 		
 		JSONObject myProfile = new JSONObject();
 		myProfile.put(Config.KEY_NAME, name);
@@ -174,9 +180,7 @@ public class MyProfileUpdate extends Activity {
 			mBitmapPic.compress(Bitmap.CompressFormat.PNG, 100, stream);
 		
 		byte[] imageByteArray = stream.toByteArray();
-		
-		SharedPreferences settings = getApplicationContext().getSharedPreferences(Config.FBL_SETTINGS, 0);
-    	long uid = settings.getLong(Config.KEY_UID, 0);
+    	long uid = Utils.getMyUid();
 		
 		String result = ServerIface.uploadImage(imageByteArray, uid);
 	} 
@@ -207,7 +211,6 @@ public class MyProfileUpdate extends Activity {
         switch (item.getItemId()) {
         case R.id.menu_save:
         	uploadImage();
-        	//TODO: if name and position are null, do not update
         	updateMyInfo();
         	return true;
         default:

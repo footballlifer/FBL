@@ -1,20 +1,13 @@
 package nanofuntas.fbl.settings;
 
-import nanofuntas.fbl.Config;
 import nanofuntas.fbl.R;
 import nanofuntas.fbl.ServerIface;
-import nanofuntas.fbl.R.id;
-import nanofuntas.fbl.R.layout;
-import nanofuntas.fbl.R.menu;
+import nanofuntas.fbl.Utils;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,9 +16,6 @@ public class CreateTeamActivity extends Activity {
 	private final String TAG = "CreateTeamActivity";
 	
 	private EditText mTeamName;
-	
-	private SharedPreferences settings;
-	private SharedPreferences.Editor editor;
 	
 	private long UID;
 	private long TID;
@@ -37,10 +27,8 @@ public class CreateTeamActivity extends Activity {
 		
 		mTeamName = (EditText) findViewById(R.id.team_name_create);
 		
-		settings = getSharedPreferences(Config.FBL_SETTINGS, 0);
-    	editor = settings.edit();
-    	UID = settings.getLong(Config.KEY_UID, 0);
-    	TID = settings.getLong(Config.KEY_TID, 0);
+    	UID = Utils.getMyUid();
+    	TID = Utils.getMyTid();
 	}
 
 	private void createTeam() {
@@ -56,8 +44,7 @@ public class CreateTeamActivity extends Activity {
 		String teamName = mTeamName.getText().toString();
 		long tid = ServerIface.createTeam(UID, teamName);
 		
-		editor.putLong(Config.KEY_TID, tid);
-		editor.commit();
+		Utils.setMyTid(tid);
 		
 		Toast.makeText(getApplication(), 
 				"Team Created, TID:" + Long.toString(tid), Toast.LENGTH_SHORT).show();

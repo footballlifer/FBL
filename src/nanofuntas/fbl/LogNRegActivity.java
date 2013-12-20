@@ -40,6 +40,8 @@ public class LogNRegActivity extends Activity {
         setContentView(R.layout.activity_log_n_reg);
         
         initViews();
+        // initialize SharedPreference in Utils for the first time and only once
+        Utils.initSharedPreference(getApplicationContext());
         
         loginButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -68,8 +70,8 @@ public class LogNRegActivity extends Activity {
 				testText.setText("UID:"+Long.toString(uid) + " TID:" + Long.toString(tid));
 				
 				if ( uid != -1 ) {
-					Utils.setMyUid(getApplicationContext(), uid);
-					Utils.setMyTid(getApplicationContext(), tid);
+					Utils.setMyUid(uid);
+					Utils.setMyTid(tid);
 
 					Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);
 					startActivity(i);
