@@ -75,7 +75,9 @@ public class Config {
 	public static final String KEY_PLAYER_PROFILE = "RATING";
 	public static final String KEY_MEMBERS_COUNT = "MEMBERS_COUNT";
 	public static final String KEY_IMAGE = "IMAGE";
-	
+	public static final String KEY_LOGIN_ID = "LOGIN_ID";
+	public static final String KEY_LOGIN_PW = "LOGIN_PW";
+
 	public static final String FBL_SETTINGS = "FBL_SETTINGS";
 	
 	public static final String[] PLAYER_PROFILE_ARRAY = {

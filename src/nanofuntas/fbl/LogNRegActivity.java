@@ -43,6 +43,16 @@ public class LogNRegActivity extends Activity {
         // initialize SharedPreference in Utils for the first time and only once
         Utils.initSharedPreference(getApplicationContext());
         
+        String email = Utils.getMyLoginID();
+        String pw = Utils.getMyLoginPW();
+        
+        if (!email.equals("NULL") && !pw.equals("NULL")) {
+			JSONObject result = ServerIface.login(email, pw);
+			Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);
+			startActivity(i);
+			finish();
+        }
+        
         loginButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -72,9 +82,12 @@ public class LogNRegActivity extends Activity {
 				if ( uid != -1 ) {
 					Utils.setMyUid(uid);
 					Utils.setMyTid(tid);
-
+					Utils.setMyLoginID(email);
+					Utils.setMyLoginPW(pw);
+					
 					Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);
 					startActivity(i);
+					finish();
 				}
 			}     	 
         });
