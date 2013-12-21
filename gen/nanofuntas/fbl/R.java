@@ -393,12 +393,11 @@ public final class R {
         public static final int app_name=0x7f070000;
         public static final int hello_world=0x7f070001;
         public static final int menu_settings=0x7f070002;
-        public static final int title_activity_create_team=0x7f07000d;
-        public static final int title_activity_image=0x7f07000b;
-        public static final int title_activity_incruit_player=0x7f07000f;
-        public static final int title_activity_join_team=0x7f07000e;
+        public static final int title_activity_create_team=0x7f07000c;
+        public static final int title_activity_incruit_player=0x7f07000e;
+        public static final int title_activity_join_team=0x7f07000d;
         public static final int title_activity_log_n_reg=0x7f070003;
-        public static final int title_activity_my_profile_update=0x7f07000c;
+        public static final int title_activity_my_profile_update=0x7f07000b;
         public static final int title_activity_player_rating=0x7f070008;
         public static final int title_activity_profile=0x7f070009;
         public static final int title_activity_tabview=0x7f070007;

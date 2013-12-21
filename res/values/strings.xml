@@ -4,18 +4,17 @@
     <string name="app_name">FBL</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_log_n_reg">LoginNRegister</string>
+    <string name="title_activity_log_n_reg"></string>
     <string name="title_section3">Section 3</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section1">Section 1</string>
-    <string name="title_activity_tabview">TabViewActivity</string>
-    <string name="title_activity_player_rating">PlayerRatingActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_tabview"></string>
+    <string name="title_activity_player_rating">Player Rating</string>
+    <string name="title_activity_profile">Profile</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_image">ImageActivity</string>
-    <string name="title_activity_my_profile_update">MyProfileUpdate</string>
-    <string name="title_activity_create_team">CreateTeamActivity</string>
-    <string name="title_activity_join_team">JoinTeamActivity</string>
-    <string name="title_activity_incruit_player">IncruitPlayerActivity</string>
+    <string name="title_activity_my_profile_update">Profile Update</string>
+    <string name="title_activity_create_team">Create Team</string>
+    <string name="title_activity_join_team">Join Team</string>
+    <string name="title_activity_incruit_player">Incruit Player</string>
 
 </resources>
