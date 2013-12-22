@@ -1,16 +1,16 @@
 package nanofuntas.fbl;
 
+import nanofuntas.fbl.settings.MyProfileUpdate;
+
 import org.json.simple.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -86,7 +86,7 @@ public class LogNRegActivity extends Activity {
 					Utils.setMyLoginID(email);
 					Utils.setMyLoginPW(pw);
 					
-					Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);
+					Intent i = new Intent(LogNRegActivity.this, MyProfileUpdate.class);
 					startActivity(i);
 					finish();
 				}

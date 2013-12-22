@@ -3,8 +3,10 @@ package nanofuntas.fbl.settings;
 import java.io.ByteArrayOutputStream;
 
 import nanofuntas.fbl.Config;
+import nanofuntas.fbl.LogNRegActivity;
 import nanofuntas.fbl.R;
 import nanofuntas.fbl.ServerIface;
+import nanofuntas.fbl.TabViewActivity;
 import nanofuntas.fbl.Utils;
 
 import org.json.simple.JSONObject;
@@ -211,7 +213,9 @@ public class MyProfileUpdate extends Activity {
         case R.id.menu_save:
         	uploadImage();
         	updateMyInfo();
-        	return true;
+        	Intent i = new Intent(MyProfileUpdate.this, TabViewActivity.class);
+			startActivity(i);
+			return true;
         default:
             return super.onOptionsItemSelected(item);
         }
