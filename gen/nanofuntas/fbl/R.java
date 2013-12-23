@@ -197,6 +197,7 @@ public final class R {
         public static final int selector=0x7f02001c;
     }
     public static final class id {
+        public static final int action_settings=0x7f0a009e;
         public static final int adding_text=0x7f0a0089;
         public static final int assister_list_view=0x7f0a0075;
         public static final int assister_ranking=0x7f0a0074;
@@ -364,19 +365,20 @@ public final class R {
         public static final int activity_my_profile_update=0x7f030004;
         public static final int activity_player_rating=0x7f030005;
         public static final int activity_profile=0x7f030006;
-        public static final int activity_tabview=0x7f030007;
-        public static final int activity_tactic_board=0x7f030008;
-        public static final int color_dialog=0x7f030009;
-        public static final int edit_text_dialog=0x7f03000a;
-        public static final int fragment_member=0x7f03000b;
-        public static final int fragment_profile=0x7f03000c;
-        public static final int fragment_settings=0x7f03000d;
-        public static final int fragment_team=0x7f03000e;
-        public static final int item_view=0x7f03000f;
-        public static final int ranking_item_view=0x7f030010;
-        public static final int submenu_list=0x7f030011;
-        public static final int text_dialog=0x7f030012;
-        public static final int view_bar=0x7f030013;
+        public static final int activity_splash_screen=0x7f030007;
+        public static final int activity_tabview=0x7f030008;
+        public static final int activity_tactic_board=0x7f030009;
+        public static final int color_dialog=0x7f03000a;
+        public static final int edit_text_dialog=0x7f03000b;
+        public static final int fragment_member=0x7f03000c;
+        public static final int fragment_profile=0x7f03000d;
+        public static final int fragment_settings=0x7f03000e;
+        public static final int fragment_team=0x7f03000f;
+        public static final int item_view=0x7f030010;
+        public static final int ranking_item_view=0x7f030011;
+        public static final int submenu_list=0x7f030012;
+        public static final int text_dialog=0x7f030013;
+        public static final int view_bar=0x7f030014;
     }
     public static final class menu {
         public static final int activity_log_n_reg=0x7f090000;
@@ -387,6 +389,7 @@ public final class R {
         public static final int incruit_player=0x7f090005;
         public static final int join_team=0x7f090006;
         public static final int my_profile_update=0x7f090007;
+        public static final int splash_screen=0x7f090008;
     }
     public static final class string {
         public static final int action_settings=0x7f07000a;
@@ -400,6 +403,7 @@ public final class R {
         public static final int title_activity_my_profile_update=0x7f07000b;
         public static final int title_activity_player_rating=0x7f070008;
         public static final int title_activity_profile=0x7f070009;
+        public static final int title_activity_splash_screen=0x7f07000f;
         public static final int title_activity_tabview=0x7f070007;
         public static final int title_section1=0x7f070006;
         public static final int title_section2=0x7f070005;

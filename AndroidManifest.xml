@@ -14,20 +14,21 @@
     <application
         android:icon="@drawable/launch_icon5"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" 
-        android:screenOrientation="portrait" >
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme" >
         <activity
             android:name="nanofuntas.fbl.LogNRegActivity"
-            android:label="@string/title_activity_log_n_reg" 
+            android:label="@string/title_activity_log_n_reg"
             android:screenOrientation="portrait" >
-            <intent-filter android:label="@string/app_name">
+            <intent-filter android:label="@string/app_name" >
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="nanofuntas.fbl.TabViewActivity"
-            android:label="@string/title_activity_tabview" 
+            android:label="@string/title_activity_tabview"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +36,7 @@
         </activity>
         <activity
             android:name="nanofuntas.fbl.PlayerRatingActivity"
-            android:label="@string/title_activity_player_rating" 
+            android:label="@string/title_activity_player_rating"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,7 +44,7 @@
         </activity>
         <activity
             android:name="nanofuntas.fbl.ProfileActivity"
-            android:label="@string/title_activity_profile" 
+            android:label="@string/title_activity_profile"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -61,18 +62,22 @@
         </activity>
         <activity
             android:name="nanofuntas.fbl.settings.CreateTeamActivity"
-            android:label="@string/title_activity_create_team" 
+            android:label="@string/title_activity_create_team"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="nanofuntas.fbl.settings.JoinTeamActivity"
-            android:label="@string/title_activity_join_team" 
+            android:label="@string/title_activity_join_team"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="nanofuntas.fbl.settings.IncruitPlayerActivity"
-            android:label="@string/title_activity_incruit_player" 
+            android:label="@string/title_activity_incruit_player"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="nanofuntas.fbl.SplashScreenActivity"
+            android:label="@string/title_activity_splash_screen" >
         </activity>
     </application>
 

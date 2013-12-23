@@ -182,5 +182,4 @@ public class MemberFragment extends Fragment {
         	Log.d(TAG, "setRandomArrow(), default case");
     	}
     }
-    
 }

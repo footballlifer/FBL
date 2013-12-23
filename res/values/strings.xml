@@ -16,5 +16,6 @@
     <string name="title_activity_create_team">Create Team</string>
     <string name="title_activity_join_team">Join Team</string>
     <string name="title_activity_incruit_player">Incruit Player</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
 
 </resources>
