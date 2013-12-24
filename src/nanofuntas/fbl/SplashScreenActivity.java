@@ -1,5 +1,7 @@
 package nanofuntas.fbl;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -16,15 +18,18 @@ public class SplashScreenActivity extends Activity {
 		
 		FblSQLiteHelper db = new FblSQLiteHelper(this);
 		
-		db.addPlayerRating(makePlayerRating(12));
+		db.addPlayerRating(makePlayerRating(3));
 		
-		PlayerRating pr = db.getPlayerRating(12);
+		//PlayerRating pr = db.getPlayerRating(1);
+		//List<PlayerRating> listPR = db.getAllPlayerRating();
+		db.deletePlayerRating(makePlayerRating(4));
+		//Log.d(TAG, "" + listPR);
 	}
 
 	//TODO: test method
 	private PlayerRating makePlayerRating(int i) {
 		PlayerRating pr = new PlayerRating();
-		pr.setUid(i);
+		pr.setUid(1);
 		pr.setAttack(i);
 		pr.setDefense(i);
 		pr.setTeamwork(i);

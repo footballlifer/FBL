@@ -1,5 +1,8 @@
 package nanofuntas.fbl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,21 +20,21 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 	private static final String PLAYER_RATING_TABLE = "player_rating";
 	private static final String CREATE_PLAYER_RATING_TABLE 
 		= "CREATE TABLE " + PLAYER_RATING_TABLE + " ( " 
-				//+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "  
-				+ Config.KEY_UID + " INTEGER, "  			
-				+ Config.KEY_ATTACK + " INTEGER, "
-				+ Config.KEY_DEFENSE + " INTEGER, "
-				+ Config.KEY_TEAMWORK + " INTEGER, "
-				+ Config.KEY_MENTAL + " INTEGER, "
-				+ Config.KEY_POWER + " INTEGER, "
-				+ Config.KEY_SPEED + " INTEGER, "
-				+ Config.KEY_STAMINA + " INTEGER, "
-				+ Config.KEY_BALL_CONTROL + " INTEGER, "
-				+ Config.KEY_PASS + " INTEGER, "
-				+ Config.KEY_SHOT + " INTEGER, "
-				+ Config.KEY_HEADER + " INTEGER, "
-				+ Config.KEY_CUTTING + " INTEGER, "
-				+ Config.KEY_OVERALL + " INTEGER )";
+		//+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "  
+		+ Config.KEY_UID + " INTEGER, "  			
+		+ Config.KEY_ATTACK + " INTEGER, "
+		+ Config.KEY_DEFENSE + " INTEGER, "
+		+ Config.KEY_TEAMWORK + " INTEGER, "
+		+ Config.KEY_MENTAL + " INTEGER, "
+		+ Config.KEY_POWER + " INTEGER, "
+		+ Config.KEY_SPEED + " INTEGER, "
+		+ Config.KEY_STAMINA + " INTEGER, "
+		+ Config.KEY_BALL_CONTROL + " INTEGER, "
+		+ Config.KEY_PASS + " INTEGER, "
+		+ Config.KEY_SHOT + " INTEGER, "
+		+ Config.KEY_HEADER + " INTEGER, "
+		+ Config.KEY_CUTTING + " INTEGER, "
+		+ Config.KEY_OVERALL + " INTEGER )";
 	
 	private static final String[] COLUMNS = {
 		Config.KEY_UID,
@@ -68,6 +71,62 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 	public void addPlayerRating(PlayerRating pr) {
 		if (DEBUG) Log.d(TAG, "addPlayerRating()");
 		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromPlayerRating(pr);
+		db.insert(PLAYER_RATING_TABLE, null, values);
+		db.close();
+	}
+	
+	public PlayerRating getPlayerRating(int uid) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query(PLAYER_RATING_TABLE, 
+				COLUMNS,
+				" " + Config.KEY_UID + " = ?", 
+				new String[] {String.valueOf(uid)},
+				null, null, null, null);
+		
+		if (cursor != null)
+			cursor.moveToFirst();
+		
+		PlayerRating pr = makePlayerRatingFromCursor(cursor);
+		db.close();
+		return pr;
+	}
+	
+	public List<PlayerRating> getAllPlayerRating() {
+		List<PlayerRating> listPR = new ArrayList<PlayerRating>();
+		String query = "SELECT * FROM " + PLAYER_RATING_TABLE;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		if (cursor.moveToFirst()) {
+			do {
+				PlayerRating pr = makePlayerRatingFromCursor(cursor);
+				listPR.add(pr);
+			} while(cursor.moveToNext());
+		}
+		db.close();
+		return listPR;
+	}
+	
+	public int updatePlayerRating(PlayerRating pr) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromPlayerRating(pr);
+		
+		int i = db.update(PLAYER_RATING_TABLE, values,
+				Config.KEY_UID + " =?", 
+				new String[] {String.valueOf(pr.getUid())});
+		db.close();
+		return i;
+	}
+	
+	public void deletePlayerRating(PlayerRating pr) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(PLAYER_RATING_TABLE, 
+				Config.KEY_UID + " = ?", 
+				new String[] {String.valueOf(pr.getUid())});
+		db.close();
+	}
+	
+	private ContentValues makeValuesFromPlayerRating(PlayerRating pr) {
 		ContentValues values = new ContentValues();
 		
 		values.put(Config.KEY_UID, pr.getUid());
@@ -85,25 +144,12 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		values.put(Config.KEY_CUTTING, pr.getCutting());
 		values.put(Config.KEY_OVERALL, pr.getOverall());
 		
-		db.insert(PLAYER_RATING_TABLE, null, values);
+		return values;
 	}
 	
-	public PlayerRating getPlayerRating(int uid) {
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.query(PLAYER_RATING_TABLE, 
-				COLUMNS,
-				" " + Config.KEY_UID + " = ?", 
-				new String[] {String.valueOf(uid)},
-				null, null, null, null);
-		
-		if (cursor != null)
-			cursor.moveToFirst();
-		if (cursor == null) {
-			Log.d(TAG, "cursor == null");
-			return null;
-		}
-		
+	private PlayerRating makePlayerRatingFromCursor(Cursor cursor) {
 		PlayerRating pr = new PlayerRating();
+		
 		pr.setUid(Integer.parseInt(cursor.getString(0)));
 		pr.setAttack(Integer.parseInt(cursor.getString(1)));
 		pr.setDefense(Integer.parseInt(cursor.getString(2)));
