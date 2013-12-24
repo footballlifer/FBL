@@ -1,5 +1,7 @@
 package nanofuntas.fbl;
 
+import java.util.List;
+
 import org.json.simple.JSONObject;
 
 import android.app.Activity;
@@ -108,24 +110,22 @@ public class ProfileActivity extends Activity {
     private void getAndSetPlayerStatus(long uid) {
     	if (DEBUG) Log.d(TAG, "getAndSetPlayerStatus()");
     	
-    	JSONObject status = ServerIface.getPlayerStatus(uid);
-    	   	
-    	mPlayerName.setText( (String)status.get(Config.KEY_NAME));
-    	mPosition.setText( (String)status.get(Config.KEY_POSITION));
+    	FblSQLiteHelper db = new FblSQLiteHelper(this);
+		PlayerRating pr = db.getPlayerRating((int)uid);
     	
-    	Long atkRating = (Long)status.get(Config.KEY_ATTACK);
-    	Long dfsRating = (Long)status.get(Config.KEY_DEFENSE);
-    	Long twkRating = (Long)status.get(Config.KEY_TEAMWORK);
-    	Long mtlRating = (Long)status.get(Config.KEY_MENTAL);
-    	Long powRating = (Long)status.get(Config.KEY_POWER);
-    	Long spdRating = (Long)status.get(Config.KEY_SPEED);
-    	Long staRating = (Long)status.get(Config.KEY_STAMINA);
-    	Long blcRating = (Long)status.get(Config.KEY_BALL_CONTROL);
-    	Long pasRating = (Long)status.get(Config.KEY_PASS);
-    	Long shtRating = (Long)status.get(Config.KEY_SHOT);
-    	Long hdrRating = (Long)status.get(Config.KEY_HEADER);
-    	Long cutRating = (Long)status.get(Config.KEY_CUTTING);
-    	Long ovrRating = (Long)status.get(Config.KEY_OVERALL);    	    	
+		Long atkRating = pr.getAttack();
+    	Long dfsRating = pr.getDefense();
+    	Long twkRating = pr.getTeamwork();
+    	Long mtlRating = pr.getMental();
+    	Long powRating = pr.getPower();
+    	Long spdRating = pr.getSpeed();
+    	Long staRating = pr.getStamina();
+    	Long blcRating = pr.getBallControl();
+    	Long pasRating = pr.getPass();
+    	Long shtRating = pr.getShot();
+    	Long hdrRating = pr.getHeader();
+    	Long cutRating = pr.getCutting();
+    	Long ovrRating = pr.getOverall(); 	    	
     	
     	setTextAndColor(mAttackRating, atkRating);
     	setTextAndColor(mDefenseRating, dfsRating);
