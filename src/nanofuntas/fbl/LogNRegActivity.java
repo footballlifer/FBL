@@ -39,26 +39,21 @@ public class LogNRegActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_n_reg);
         
-        //TODO: database test code
-    	Intent ii = new Intent(LogNRegActivity.this, SplashScreenActivity.class);
-		startActivity(ii);
-		finish();
-        
         initViews();
         // initialize SharedPreference in Utils for the first time and only once
         Utils.initSharedPreference(getApplicationContext());
-        /*
+        
         String email = Utils.getMyLoginID();
         String pw = Utils.getMyLoginPW();
         
         // if not loged in ever, LoginID and LoginPW return "NULL" string default
         if (!email.equals("NULL") && !pw.equals("NULL")) {
 			JSONObject result = ServerIface.login(email, pw);
-			Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);
+			Intent i = new Intent(LogNRegActivity.this, SplashScreenActivity.class);
 			startActivity(i);
 			finish();
         }
-        */
+        
         loginButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

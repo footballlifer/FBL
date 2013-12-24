@@ -86,14 +86,16 @@ public class MemberFragment extends Fragment {
     	JSONObject status = null;
     	mPhoto = getResources().getDrawable(R.drawable.cr3);
     	
-    	SharedPreferences settings = getActivity().getSharedPreferences(Config.FBL_SETTINGS, 0);
-    	long tid = settings.getLong(Config.KEY_TID, 0);
+    	long tid = Utils.getMyTid();
     	
     	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
     	long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
     	
     	for (long i = 1; i <= count; i++) {
     		status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
+    		
+    		
+    		
     		setItemAndMap(status, itemList, map, i);
     	}
     	return itemList;

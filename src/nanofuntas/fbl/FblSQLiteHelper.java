@@ -68,6 +68,18 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		this.onCreate(db);
 	}
 	
+	public void createPlayerRatingTable() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL(CREATE_PLAYER_RATING_TABLE);
+		db.close();
+	}
+	
+	public void dropPlayerRatingTable() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_RATING_TABLE);
+		db.close();
+	}
+	
 	public void addPlayerRating(PlayerRating pr) {
 		if (DEBUG) Log.d(TAG, "addPlayerRating()");
 		SQLiteDatabase db = this.getWritableDatabase();
