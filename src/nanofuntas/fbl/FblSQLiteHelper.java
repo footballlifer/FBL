@@ -36,7 +36,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		+ Config.KEY_CUTTING + " INTEGER, "
 		+ Config.KEY_OVERALL + " INTEGER )";
 	
-	private static final String[] COLUMNS = {
+	private static final String[] PLAYER_RATING_COLUMNS = {
 		Config.KEY_UID,
 		Config.KEY_ATTACK,
 		Config.KEY_DEFENSE,
@@ -53,6 +53,18 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		Config.KEY_OVERALL,
 	};
 	
+	private static final String PLAYER_PROFILE_TABLE = "player_profile";
+	private static final String CREATE_PLAYER_PROFILE_TABLE 
+		= "CREATE TABLE " + PLAYER_PROFILE_TABLE + " ( " 
+		+ Config.KEY_UID + " INTEGER, "  			
+		+ Config.KEY_NAME + " TEXT, "
+		+ Config.KEY_POSITION + " TEXT )";
+	
+	private static final String[] PLAYER_PROFILE_COLUMNS = {
+		Config.KEY_UID,
+		Config.KEY_NAME,
+		Config.KEY_POSITION,};
+	
 	public FblSQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -60,23 +72,27 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_PLAYER_RATING_TABLE);
+		db.execSQL(CREATE_PLAYER_PROFILE_TABLE);
 	}
 	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVer, int newVer) {
 		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_RATING_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_PROFILE_TABLE);
 		this.onCreate(db);
 	}
 	
-	public void createPlayerRatingTable() {
+	public void createAllTables() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL(CREATE_PLAYER_RATING_TABLE);
+		db.execSQL(CREATE_PLAYER_PROFILE_TABLE);
 		db.close();
 	}
 	
-	public void dropPlayerRatingTable() {
+	public void dropAllTables() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_RATING_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_PROFILE_TABLE);
 		db.close();
 	}
 	
@@ -88,10 +104,52 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
+	public void addPlayerProfile(PlayerProfile pp) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromPlayerProfile(pp);
+		db.insert(PLAYER_PROFILE_TABLE, null, values);
+		db.close();
+	}
+	
+	private ContentValues makeValuesFromPlayerProfile(PlayerProfile pp) {
+		ContentValues values = new ContentValues();
+		
+		values.put(Config.KEY_UID, pp.getUid());
+		values.put(Config.KEY_NAME, pp.getName());
+		values.put(Config.KEY_POSITION, pp.getPosition());
+		
+		return values;
+	}
+	
+	public List<PlayerProfile> getAllPlayerProfile() {
+		List<PlayerProfile> listPP = new ArrayList<PlayerProfile>();
+		String query = "SELECT * FROM " + PLAYER_PROFILE_TABLE;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		if (cursor.moveToFirst()) {
+			do {
+				PlayerProfile pp = makePlayerProfileFromCursor(cursor);
+				listPP.add(pp);
+			} while(cursor.moveToNext());
+		}
+		db.close();
+		return listPP;
+	}
+	
+	private PlayerProfile makePlayerProfileFromCursor(Cursor cursor) {
+		PlayerProfile pp = new PlayerProfile();
+		
+		pp.setUid(Integer.parseInt(cursor.getString(0)));
+		pp.setName(cursor.getString(1));
+		pp.setPosition(cursor.getString(2));
+		
+		return pp;
+	}
+	
 	public PlayerRating getPlayerRating(int uid) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(PLAYER_RATING_TABLE, 
-				COLUMNS,
+				PLAYER_RATING_COLUMNS,
 				" " + Config.KEY_UID + " = ?", 
 				new String[] {String.valueOf(uid)},
 				null, null, null, null);

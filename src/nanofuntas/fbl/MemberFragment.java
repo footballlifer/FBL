@@ -2,6 +2,7 @@ package nanofuntas.fbl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -83,21 +84,18 @@ public class MemberFragment extends Fragment {
     	if (DEBUG) Log.d(TAG, "getListView()");
     	
     	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
-    	JSONObject status = null;
     	mPhoto = getResources().getDrawable(R.drawable.cr3);
     	
-    	long tid = Utils.getMyTid();
+		FblSQLiteHelper db = new FblSQLiteHelper(getActivity());
+		List<PlayerRating> listPR = db.getAllPlayerRating();
+    	List<PlayerProfile> listPP = db.getAllPlayerProfile();
     	
-    	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
-    	long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
-    	
-    	for (long i = 1; i <= count; i++) {
-    		status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
-    		
-    		
-    		
-    		setItemAndMap(status, itemList, map, i);
+    	for (long i = 1; i <= listPR.size(); i++) {
+    		PlayerRating pr = listPR.get((int)(i-1));
+    		PlayerProfile pp = listPP.get((int)(i-1));
+    		setItemAndMap(pr, pp, itemList, map, i);
     	}
+    	
     	return itemList;
     }
     
@@ -110,27 +108,26 @@ public class MemberFragment extends Fragment {
      * @param map index to player profile mapping
      * @param indexToMap index of player profile to be added to map
      */
-    private void setItemAndMap(JSONObject status, 
+    private void setItemAndMap(PlayerRating pr, PlayerProfile pp,  
     ArrayList<PhotoTextItem> itemList, Map<Long, PlayerProfile> map, long indexToMap) {
     	if (DEBUG) Log.d(TAG, "setItemAndMap()");
     	
     	PhotoTextItem item = null; 
-    	PlayerProfile pp = null;
     	
-    	long atkRating = (Long)status.get(Config.KEY_ATTACK);
-    	long dfsRating = (Long)status.get(Config.KEY_DEFENSE);
-    	long twkRating = (Long)status.get(Config.KEY_TEAMWORK);
-    	long mtlRating = (Long)status.get(Config.KEY_MENTAL);
-    	long powRating = (Long)status.get(Config.KEY_POWER);
-    	long spdRating = (Long)status.get(Config.KEY_SPEED);
-    	long staRating = (Long)status.get(Config.KEY_STAMINA);
-    	long blcRating = (Long)status.get(Config.KEY_BALL_CONTROL);
-    	long pasRating = (Long)status.get(Config.KEY_PASS);
-    	long shtRating = (Long)status.get(Config.KEY_SHOT);
-    	long hdrRating = (Long)status.get(Config.KEY_HEADER);
-    	long cutRating = (Long)status.get(Config.KEY_CUTTING);
-    	long ovrRating = (Long)status.get(Config.KEY_OVERALL);    	    	
-    	    	
+    	long atkRating = pr.getAttack();
+    	long dfsRating = pr.getDefense();
+    	long twkRating = pr.getTeamwork();
+    	long mtlRating = pr.getMental();
+    	long powRating = pr.getPower();
+    	long spdRating = pr.getSpeed();
+    	long staRating = pr.getStamina();
+    	long blcRating = pr.getBallControl();
+    	long pasRating = pr.getPass();
+    	long shtRating = pr.getShot();
+    	long hdrRating = pr.getHeader();
+    	long cutRating = pr.getCutting();
+    	long ovrRating = pr.getOverall();	    	
+    	
     	float rATK = (float)atkRating / HUNDRED;
     	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
     	float rTWK = (float)twkRating / HUNDRED;
@@ -141,7 +138,7 @@ public class MemberFragment extends Fragment {
     	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");    		    		
 		
     	//TODO test image
-    	long uid = (Long)status.get(Config.KEY_UID);
+    	long uid = pr.getUid();
     	byte[] b = ServerIface.downloadImage(uid);
     	if (b != null)
     		mPhoto =  new BitmapDrawable(BitmapFactory.decodeByteArray(b, 0, b.length));
@@ -153,18 +150,18 @@ public class MemberFragment extends Fragment {
     	if (mPhoto != null)
     		item.setPhoto(mPhoto);
     	
+    	//TODO:
+    	String name = pp.getName();
+    	String position = pp.getPosition();
+    	
     	//item.setCondition(mArrowRed);
     	setRandomCondition(item);
-    	item.setName( (String)status.get(Config.KEY_NAME) );
-    	item.setPosition( (String)status.get(Config.KEY_POSITION) );
+    	item.setName(name);
+    	item.setPosition(position);
     	item.setHexRating(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);        	
     	itemList.add(item);
     	
-    	pp = new PlayerProfile();
-		pp.setUid( (Long)status.get(Config.KEY_UID) );
-		pp.setName( (String)status.get(Config.KEY_NAME) );
-		pp.setPosition( (String)status.get(Config.KEY_POSITION) );
-		// this map must match listView position
+    	// this map must match listView position
 		map.put(indexToMap, pp);
     }
     

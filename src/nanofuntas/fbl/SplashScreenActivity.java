@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 
 public class SplashScreenActivity extends Activity {
@@ -18,8 +19,8 @@ public class SplashScreenActivity extends Activity {
 		
 		FblSQLiteHelper db = new FblSQLiteHelper(this);
 		
-		db.dropPlayerRatingTable();
-		db.createPlayerRatingTable();
+		db.dropAllTables();
+		db.createAllTables();
 
 		long tid = Utils.getMyTid();
     	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
@@ -60,6 +61,20 @@ public class SplashScreenActivity extends Activity {
     		pr.setOverall(ovrRating);
     		
     		db.addPlayerRating(pr);
+    		
+    		String name = (String)status.get(Config.KEY_NAME);
+    		String position = (String)status.get(Config.KEY_POSITION);
+    		
+    		//TODO:
+    		Log.d(TAG, "name = " + name);
+    		Log.d(TAG, "position = " + position);
+    		
+    		PlayerProfile pp = new PlayerProfile();
+    		pp.setUid(uid);
+    		pp.setName(name);
+    		pp.setPosition(position);
+    		
+    		db.addPlayerProfile(pp);
     	}
 		
     	Intent i = new Intent(SplashScreenActivity.this, TabViewActivity.class);
