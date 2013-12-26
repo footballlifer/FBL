@@ -1,32 +1,76 @@
 package nanofuntas.fbl;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import org.json.simple.JSONObject;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.Menu;
 
 public class SplashScreenActivity extends Activity {
 	private final boolean DEBUG = true;
 	private final String TAG = "SplashScreenActivity";
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if (DEBUG) Log.d(TAG, "onCreate()");
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash_screen);
 		
 		FblSQLiteHelper db = new FblSQLiteHelper(this);
-		
 		db.dropAllTables();
 		db.createAllTables();
 
 		long tid = Utils.getMyTid();
-    	JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
-    	long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
+    	final JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
 
-    	for (long i = 1; i <= count; i++) {
+    	new LoadImageThread(jsonMembersStatus).start();    	
+    	savePlayerStatusToDB(jsonMembersStatus, db);
+		
+    	Intent i = new Intent(SplashScreenActivity.this, TabViewActivity.class);
+		startActivity(i);
+		finish();
+	}
+	
+	private class LoadImageThread extends Thread {
+		private JSONObject jsonMembersStatus;
+		LoadImageThread(JSONObject jsonMembersStatus) {
+			this.jsonMembersStatus = jsonMembersStatus;
+		}
+		
+		@Override
+		public void run() {
+			if (DEBUG) Log.d(TAG, "start loadImage thread");
+			final long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
+	    	for (long i = 1; i <= count; i++) {
+				JSONObject status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
+				long uid = (Long)status.get(Config.KEY_UID);
+				byte[] byteArray = ServerIface.downloadImage(uid);
+				Bitmap bitmap = null;
+				if (byteArray != null) {
+					bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+				}
+				if (bitmap != null)
+					saveProfileBitmap(bitmap, uid);
+			}
+		}
+	}
+	
+	private void savePlayerStatusToDB(JSONObject jsonMembersStatus, FblSQLiteHelper db) {
+    	if (DEBUG) Log.d(TAG, "savePlayerStatusToDB()");
+		final long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
+		for (long i = 1; i <= count; i++) {
     		JSONObject status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
     		
     		long uid = (Long)status.get(Config.KEY_UID);
@@ -72,10 +116,32 @@ public class SplashScreenActivity extends Activity {
     		
     		db.addPlayerProfile(pp);
     	}
+	}
+	
+	private void saveProfileBitmap(Bitmap bitmap, long uid) {
+		if (DEBUG) Log.d(TAG, "saveProfileBitmap(), uid=" + uid);
 		
-    	Intent i = new Intent(SplashScreenActivity.this, TabViewActivity.class);
-		startActivity(i);
-		finish();
+		String root = Environment.getExternalStorageDirectory().toString();
+		String myAppName = "FBL";
+
+		File imageDir = new File(root+ "/" + myAppName);
+		if (!imageDir.exists()) 
+			imageDir.mkdir();
+		
+		File imagePath = new File(root+ "/" + myAppName + "/" + uid + ".png");
+		if (imagePath.exists ()) 
+			imagePath.delete(); 
+		
+		try {
+			FileOutputStream fos = new FileOutputStream(imagePath);
+			bitmap.compress(CompressFormat.PNG, 100, fos);
+			fos.flush();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

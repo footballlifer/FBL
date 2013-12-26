@@ -1,19 +1,21 @@
 package nanofuntas.fbl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.json.simple.JSONObject;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -137,11 +139,11 @@ public class MemberFragment extends Fragment {
     	
     	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");    		    		
 		
-    	//TODO test image
     	long uid = pr.getUid();
-    	byte[] b = ServerIface.downloadImage(uid);
-    	if (b != null)
-    		mPhoto =  new BitmapDrawable(BitmapFactory.decodeByteArray(b, 0, b.length));
+    	Bitmap bitmap = Utils.getProfileImage(uid);
+    	
+    	if (bitmap != null)
+    		mPhoto =  new BitmapDrawable(bitmap);
     	else 
         	mPhoto = getResources().getDrawable(R.drawable.cr3);
 
@@ -150,11 +152,9 @@ public class MemberFragment extends Fragment {
     	if (mPhoto != null)
     		item.setPhoto(mPhoto);
     	
-    	//TODO:
     	String name = pp.getName();
     	String position = pp.getPosition();
     	
-    	//item.setCondition(mArrowRed);
     	setRandomCondition(item);
     	item.setName(name);
     	item.setPosition(position);

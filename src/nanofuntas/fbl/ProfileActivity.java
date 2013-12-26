@@ -1,13 +1,8 @@
 package nanofuntas.fbl;
 
-import java.util.List;
-
-import org.json.simple.JSONObject;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -64,13 +59,14 @@ public class ProfileActivity extends Activity {
 	}
 
     private void setImageView(long uid) {
-    	byte[] b = ServerIface.downloadImage(uid);
     	Drawable mPhoto = null;
-
-    	if (b != null)
-    		mPhoto =  new BitmapDrawable(BitmapFactory.decodeByteArray(b, 0, b.length));
+    	Bitmap bitmap = Utils.getProfileImage(uid);
+    	
+    	if (bitmap != null)
+    		mPhoto =  new BitmapDrawable(bitmap);
     	else 
         	mPhoto = getResources().getDrawable(R.drawable.cr3);
+
     	mImageView.setImageDrawable(mPhoto);
     }
     
