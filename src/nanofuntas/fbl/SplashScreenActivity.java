@@ -65,10 +65,6 @@ public class SplashScreenActivity extends Activity {
     		String name = (String)status.get(Config.KEY_NAME);
     		String position = (String)status.get(Config.KEY_POSITION);
     		
-    		//TODO:
-    		Log.d(TAG, "name = " + name);
-    		Log.d(TAG, "position = " + position);
-    		
     		PlayerProfile pp = new PlayerProfile();
     		pp.setUid(uid);
     		pp.setName(name);
