@@ -48,7 +48,7 @@ public class LogNRegActivity extends Activity {
         
         // if not loged in ever, LoginID and LoginPW return "NULL" string default
         if (!email.equals("NULL") && !pw.equals("NULL")) {
-			JSONObject result = ServerIface.login(email, pw);
+			//JSONObject result = ServerIface.login(email, pw);
 			Intent i = new Intent(LogNRegActivity.this, SplashScreenActivity.class);
 			startActivity(i);
 			finish();
