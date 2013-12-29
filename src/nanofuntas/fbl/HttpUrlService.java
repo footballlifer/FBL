@@ -3,7 +3,6 @@
  */
 package nanofuntas.fbl;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -15,8 +14,6 @@ import java.net.URL;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 /**

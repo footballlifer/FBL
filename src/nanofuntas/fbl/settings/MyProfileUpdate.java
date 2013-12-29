@@ -6,6 +6,7 @@ import nanofuntas.fbl.Config;
 import nanofuntas.fbl.LogNRegActivity;
 import nanofuntas.fbl.R;
 import nanofuntas.fbl.ServerIface;
+import nanofuntas.fbl.SplashScreenActivity;
 import nanofuntas.fbl.TabViewActivity;
 import nanofuntas.fbl.Utils;
 
@@ -213,7 +214,7 @@ public class MyProfileUpdate extends Activity {
         case R.id.menu_save:
         	uploadImage();
         	updateMyInfo();
-        	Intent i = new Intent(MyProfileUpdate.this, TabViewActivity.class);
+        	Intent i = new Intent(MyProfileUpdate.this, SplashScreenActivity.class);
 			startActivity(i);
 			return true;
         default:

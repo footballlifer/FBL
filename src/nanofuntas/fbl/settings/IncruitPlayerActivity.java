@@ -2,8 +2,10 @@ package nanofuntas.fbl.settings;
 
 import nanofuntas.fbl.R;
 import nanofuntas.fbl.ServerIface;
+import nanofuntas.fbl.SplashScreenActivity;
 import nanofuntas.fbl.Utils;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -59,6 +61,8 @@ public class IncruitPlayerActivity extends Activity {
         switch (item.getItemId()) {
         case R.id.menu_incruit:
         	incruitPlayer();
+        	Intent i = new Intent(IncruitPlayerActivity.this, SplashScreenActivity.class);
+			startActivity(i);
         	return true;
         default:
             return super.onOptionsItemSelected(item);
