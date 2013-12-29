@@ -2,6 +2,7 @@ package nanofuntas.fbl;
 
 public class PlayerRating {
 	private long mUid;
+	// TODO: all the following items should be int
 	private long mAttack;
 	private long mDefense;
 	private long mTeamwork;

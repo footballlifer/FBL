@@ -3,7 +3,6 @@ package nanofuntas.fbl;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -107,33 +106,33 @@ public class ProfileActivity extends Activity {
     	FblSQLiteHelper db = new FblSQLiteHelper(this);
 		PlayerRating pr = db.getPlayerRating((int)uid);
     	
-		Long atkRating = pr.getAttack();
-    	Long dfsRating = pr.getDefense();
-    	Long twkRating = pr.getTeamwork();
-    	Long mtlRating = pr.getMental();
-    	Long powRating = pr.getPower();
-    	Long spdRating = pr.getSpeed();
-    	Long staRating = pr.getStamina();
-    	Long blcRating = pr.getBallControl();
-    	Long pasRating = pr.getPass();
-    	Long shtRating = pr.getShot();
-    	Long hdrRating = pr.getHeader();
-    	Long cutRating = pr.getCutting();
-    	Long ovrRating = pr.getOverall(); 	    	
+		int atkRating = (int) pr.getAttack();
+    	int dfsRating = (int) pr.getDefense();
+    	int twkRating = (int) pr.getTeamwork();
+    	int mtlRating = (int) pr.getMental();
+    	int powRating = (int) pr.getPower();
+    	int spdRating = (int) pr.getSpeed();
+    	int staRating = (int) pr.getStamina();
+    	int blcRating = (int) pr.getBallControl();
+    	int pasRating = (int) pr.getPass();
+    	int shtRating = (int) pr.getShot();
+    	int hdrRating = (int) pr.getHeader();
+    	int cutRating = (int) pr.getCutting();
+    	int ovrRating = (int) pr.getOverall(); 	    	
     	
-    	setTextAndColor(mAttackRating, atkRating);
-    	setTextAndColor(mDefenseRating, dfsRating);
-    	setTextAndColor(mTeamworkRating, twkRating);
-    	setTextAndColor(mMentalRating, mtlRating);
-    	setTextAndColor(mPowerRating, powRating);
-    	setTextAndColor(mSpeedRating, spdRating);
-    	setTextAndColor(mStaminaRating, staRating);
-    	setTextAndColor(mBallControlRating, blcRating);
-    	setTextAndColor(mShotRating, shtRating);
-    	setTextAndColor(mPassRating, pasRating);
-    	setTextAndColor(mHeaderRating, hdrRating);
-    	setTextAndColor(mCuttingRating, cutRating);
-    	setTextAndColor(mOverallRating, ovrRating);
+    	Utils.setTextAndColor(mAttackRating, atkRating);
+    	Utils.setTextAndColor(mDefenseRating, dfsRating);
+    	Utils.setTextAndColor(mTeamworkRating, twkRating);
+    	Utils.setTextAndColor(mMentalRating, mtlRating);
+    	Utils.setTextAndColor(mPowerRating, powRating);
+    	Utils.setTextAndColor(mSpeedRating, spdRating);
+    	Utils.setTextAndColor(mStaminaRating, staRating);
+    	Utils.setTextAndColor(mBallControlRating, blcRating);
+    	Utils.setTextAndColor(mShotRating, shtRating);
+    	Utils.setTextAndColor(mPassRating, pasRating);
+    	Utils.setTextAndColor(mHeaderRating, hdrRating);
+    	Utils.setTextAndColor(mCuttingRating, cutRating);
+    	Utils.setTextAndColor(mOverallRating, ovrRating);
     	    	
     	float rATK = (float)atkRating / HUNDRED;
     	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
@@ -145,18 +144,6 @@ public class ProfileActivity extends Activity {
     	//Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");
     	
     	mHexView.setRatingAndDraw(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);
-    }
-    
-    private void setTextAndColor(TextView tv, Long rating) {
-    	if( 0<= rating && rating <= 79) {
-    		tv.setTextColor(Color.WHITE);
-    	} else if (80 <= rating && rating <= 89) {
-    		tv.setTextColor(Color.YELLOW);
-    	} else if (90 <= rating && rating <= 100) {
-    		tv.setTextColor(Color.RED);
-    	}
-
-    	tv.setText( rating.toString());
     }
     
 	@Override

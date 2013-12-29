@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.TextView;
 
 public class Utils {
 	private final static boolean DEBUG = true;
@@ -94,4 +96,17 @@ public class Utils {
     	Bitmap bitmap = BitmapFactory.decodeStream(fis);
     	return bitmap;
 	}
+		
+	public static void setTextAndColor(TextView tv, int rating) {
+    	if( 0<= rating && rating <= 79) {
+    		tv.setTextColor(Color.WHITE);
+    	} else if (80 <= rating && rating <= 89) {
+    		tv.setTextColor(Color.YELLOW);
+    	} else if (90 <= rating && rating <= 100) {
+    		tv.setTextColor(Color.RED);
+    	}
+
+    	tv.setText( Integer.toString(rating));
+
+    }
 }

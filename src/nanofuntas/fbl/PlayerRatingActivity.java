@@ -3,7 +3,6 @@ package nanofuntas.fbl;
 import org.json.simple.JSONObject;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -139,47 +138,36 @@ public class PlayerRatingActivity extends Activity {
 		public void onRatingChanged(RatingBar ratingBar, float rating,
 				boolean fromUser) {
 			if (ratingBar.getId() == attackRatingBar.getId()) {
-				setTextAndColor(attackRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(attackRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == defenseRatingBar.getId()) {
-				setTextAndColor(defenseRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(defenseRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == teamworkRatingBar.getId()) {
-				setTextAndColor(teamworkRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(teamworkRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == mentalRatingBar.getId()) {
-				setTextAndColor(mentalRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(mentalRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == powerRatingBar.getId()) {
-				setTextAndColor(powerRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(powerRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == speedRatingBar.getId()) {
-				setTextAndColor(speedRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(speedRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == staminaRatingBar.getId()) {
-				setTextAndColor(staminaRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(staminaRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == ballControlRatingBar.getId()) {
-				setTextAndColor(ballControlRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(ballControlRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == passRatingBar.getId()) {
-				setTextAndColor(passRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(passRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == shotRatingBar.getId()) {
-				setTextAndColor(shotRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(shotRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == headerRatingBar.getId()) {
-				setTextAndColor(headerRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(headerRatingValue, (int) (rating*TEN));
 			} else if (ratingBar.getId() == cuttingRatingBar.getId()) {
-				setTextAndColor(cuttingRatingValue, (int) (rating*TEN));
+				Utils.setTextAndColor(cuttingRatingValue, (int) (rating*TEN));
 			} else {
 				if (DEBUG) Log.e(TAG, "no ratingBar ID matches");
 			}
 		}
 	};
 
-	private void setTextAndColor(TextView tv, int rating) {
-    	if( 0<= rating && rating <= 79) {
-    		tv.setTextColor(Color.WHITE);
-    	} else if (80 <= rating && rating <= 89) {
-    		tv.setTextColor(Color.YELLOW);
-    	} else if (90 <= rating && rating <= 100) {
-    		tv.setTextColor(Color.RED);
-    	}
 
-    	tv.setText( Integer.toString(rating));
-
-    }
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
