@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class SettingsFragment extends Fragment {
@@ -70,6 +69,11 @@ public class SettingsFragment extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				Utils.removeLoginIdPw();
+				
+				FblSQLiteHelper db = new FblSQLiteHelper(getActivity());
+				db.dropAllTables();
+				db.createAllTables();
+				
 				Intent i = new Intent(getView().getContext(), LogNRegActivity.class);
 				startActivity(i);
 			}
