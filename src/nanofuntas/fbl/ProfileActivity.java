@@ -39,9 +39,7 @@ public class ProfileActivity extends Activity {
     private HexView mHexView;
 	
     private long mUid = -1;
-    private String mNameStr;
-    private String mPositionStr;
-        
+    
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,10 +47,11 @@ public class ProfileActivity extends Activity {
 		initView();
 		
 		mUid = getIntent().getExtras().getLong(Config.KEY_UID);		
-		mNameStr = getIntent().getExtras().getString(Config.KEY_NAME);
-    	mPositionStr = getIntent().getExtras().getString(Config.KEY_POSITION);
-    	mPlayerName.setText(mNameStr);
-    	mPosition.setText(mPositionStr);
+		
+		FblSQLiteHelper db = new FblSQLiteHelper(this);
+    	PlayerProfile pp = db.getPlayerProfile(mUid);    	
+    	mPlayerName.setText(pp.getName());
+    	mPosition.setText(pp.getPosition());
     	
     	setImageView(mUid);
     	getAndSetPlayerStatus(mUid);
@@ -99,7 +98,6 @@ public class ProfileActivity extends Activity {
 		
 		Intent i = new Intent(ProfileActivity.this, PlayerRatingActivity.class);
 		i.putExtra(Config.KEY_UID, mUid);
-		i.putExtra(Config.KEY_NAME, mNameStr);
 		startActivity(i);
     }
     

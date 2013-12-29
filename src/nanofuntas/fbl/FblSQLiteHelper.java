@@ -108,7 +108,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public PlayerProfile getPlayerProfile(int uid) {
+	public PlayerProfile getPlayerProfile(long uid) {
 		if (DEBUG) Log.d(TAG, "getPlayerProfile(), uid="+uid);
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(PLAYER_PROFILE_TABLE, 
@@ -192,7 +192,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public PlayerRating getPlayerRating(int uid) {
+	public PlayerRating getPlayerRating(long uid) {
 		if (DEBUG) Log.d(TAG, "getPlayerRating(), uid="+uid);
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(PLAYER_RATING_TABLE, 

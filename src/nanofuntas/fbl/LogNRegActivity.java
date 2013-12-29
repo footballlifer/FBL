@@ -78,6 +78,7 @@ public class LogNRegActivity extends Activity {
 				long uid = (Long) result.get(Config.KEY_UID);
 				long tid = (Long) result.get(Config.KEY_TID);
 				
+				//TODO: remove test Text
 				testText.setText("UID:"+Long.toString(uid) + " TID:" + Long.toString(tid));
 				
 				if ( uid != -1 ) {

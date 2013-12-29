@@ -8,10 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +47,6 @@ public class PlayerRatingActivity extends Activity {
 	private TextView cuttingRatingValue;
 
 	private long mUid = -1;
-	private String mName;	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +56,10 @@ public class PlayerRatingActivity extends Activity {
 		initViews();
 
 		mUid = getIntent().getExtras().getLong(Config.KEY_UID);
-		mName = getIntent().getExtras().getString(Config.KEY_NAME);
-		nameRating.setText(mName);		
+		
+		FblSQLiteHelper db = new FblSQLiteHelper(this);
+    	PlayerProfile pp = db.getPlayerProfile(mUid);    	    	
+		nameRating.setText(pp.getName());		
 	}
 	
 	@SuppressWarnings("unchecked")

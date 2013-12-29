@@ -29,6 +29,8 @@ public class SplashScreenActivity extends Activity {
 		setContentView(R.layout.activity_splash_screen);
 		
 		FblSQLiteHelper db = new FblSQLiteHelper(this);
+		
+		//TODO: update table instead of re-create tables
 		db.dropAllTables();
 		db.createAllTables();
 

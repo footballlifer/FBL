@@ -1,8 +1,5 @@
 package nanofuntas.fbl;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,11 +8,9 @@ import java.util.Random;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +28,8 @@ public class MemberFragment extends Fragment {
 
 	private ListView mListView;		
 	// this map is index - player profile map, which is used in onItemClick
-	private Map<Long, PlayerProfile> map = new HashMap<Long, PlayerProfile>();
+	private Map<Long, Long> map = new HashMap<Long, Long>();
+	
 	private Drawable mPhoto;
 	private Drawable mArrowGreen;
 	private Drawable mArrowYellow;
@@ -50,7 +46,8 @@ public class MemberFragment extends Fragment {
     	mArrowGreen = getResources().getDrawable(R.drawable.arrow_green);
     	mArrowYellow = getResources().getDrawable(R.drawable.arrow_yellow);
     	mArrowRed = getResources().getDrawable(R.drawable.arrow_red);
-    	
+    	mPhoto = getResources().getDrawable(R.drawable.cr3);
+
     	mListView = (ListView) getView().findViewById(R.id.listView1);
     	ArrayList<PhotoTextItem> mItemList = getListView();
     	PhotoTextListAdapter mPhotoTextListAdapter = new PhotoTextListAdapter(getActivity(), mItemList);
@@ -60,42 +57,40 @@ public class MemberFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 				if (DEBUG) Log.d(TAG, "onItemClick()");
-				// map index starts from 1
-				PlayerProfile pp = map.get((long)position+1);
+				// map index starts from 0
+				long uid = map.get((long)position);
 				
 				Intent i = new Intent(getActivity(), ProfileActivity.class);
-				i.putExtra(Config.KEY_UID, pp.getUid());
-				i.putExtra(Config.KEY_NAME, pp.getName());
-				i.putExtra(Config.KEY_POSITION, pp.getPosition());
+				i.putExtra(Config.KEY_UID, uid);
 				startActivity(i);
 				
 				Toast.makeText(getActivity(), "Position:" + position, Toast.LENGTH_SHORT).show();
 			}
         });
-        
     }
-        
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {    	
     	View view = inflater.inflate(R.layout.fragment_member, container, false);
         return view;
-    }   
+    }
     
     private ArrayList<PhotoTextItem> getListView() {
     	if (DEBUG) Log.d(TAG, "getListView()");
     	
     	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
-    	mPhoto = getResources().getDrawable(R.drawable.cr3);
     	
 		FblSQLiteHelper db = new FblSQLiteHelper(getActivity());
 		List<PlayerRating> listPR = db.getAllPlayerRating();
     	List<PlayerProfile> listPP = db.getAllPlayerProfile();
     	
-    	for (long i = 1; i <= listPR.size(); i++) {
-    		PlayerRating pr = listPR.get((int)(i-1));
-    		PlayerProfile pp = listPP.get((int)(i-1));
-    		setItemAndMap(pr, pp, itemList, map, i);
+    	for (long i = 0; i < listPR.size(); i++) {
+    		PlayerRating pr = listPR.get((int)i);
+    		PlayerProfile pp = listPP.get((int)i);
+    		setItem(pr, pp, itemList);
+    		// this map must match listView position
+    		map.put(i, pr.getUid());
     	}
     	
     	return itemList;
@@ -110,12 +105,33 @@ public class MemberFragment extends Fragment {
      * @param map index to player profile mapping
      * @param indexToMap index of player profile to be added to map
      */
-    private void setItemAndMap(PlayerRating pr, PlayerProfile pp,  
-    ArrayList<PhotoTextItem> itemList, Map<Long, PlayerProfile> map, long indexToMap) {
-    	if (DEBUG) Log.d(TAG, "setItemAndMap()");
+    private void setItem(PlayerRating pr, PlayerProfile pp, 
+    ArrayList<PhotoTextItem> itemList) {
+    	if (DEBUG) Log.d(TAG, "setItem()");
     	
-    	PhotoTextItem item = null; 
+    	PhotoTextItem item = new PhotoTextItem();
+    	//set condition
+    	setRandomCondition(item);
+
+    	// set player profile
+    	String name = pp.getName();
+    	String position = pp.getPosition();
+    	item.setName(name);
+    	item.setPosition(position);
     	
+    	// set image of item
+    	long uid = pr.getUid();
+    	Bitmap bitmap = Utils.getProfileImage(uid);
+    	
+    	if (bitmap != null)
+    		mPhoto =  new BitmapDrawable(bitmap);
+    	else 
+        	mPhoto = getResources().getDrawable(R.drawable.cr3);
+    	
+    	if (mPhoto != null)
+    		item.setPhoto(mPhoto);
+    	
+    	// set hex of item
     	long atkRating = pr.getAttack();
     	long dfsRating = pr.getDefense();
     	long twkRating = pr.getTeamwork();
@@ -137,32 +153,10 @@ public class MemberFragment extends Fragment {
     	float rPHY = (float)(powRating + spdRating + staRating) / (3*HUNDRED);
     	float rTEC = (float)(blcRating + pasRating + shtRating + hdrRating) / (4*HUNDRED);
     	
-    	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");    		    		
-		
-    	long uid = pr.getUid();
-    	Bitmap bitmap = Utils.getProfileImage(uid);
-    	
-    	if (bitmap != null)
-    		mPhoto =  new BitmapDrawable(bitmap);
-    	else 
-        	mPhoto = getResources().getDrawable(R.drawable.cr3);
-
-    	item = new PhotoTextItem();
-		
-    	if (mPhoto != null)
-    		item.setPhoto(mPhoto);
-    	
-    	String name = pp.getName();
-    	String position = pp.getPosition();
-    	
-    	setRandomCondition(item);
-    	item.setName(name);
-    	item.setPosition(position);
+    	Log.d(TAG, " "+rATK+" "+rTEC+" "+rTWK+" "+rDFS+" "+rMTL+" "+rPHY+" ");
     	item.setHexRating(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);        	
-    	itemList.add(item);
     	
-    	// this map must match listView position
-		map.put(indexToMap, pp);
+    	itemList.add(item);
     }
     
     private void setRandomCondition(PhotoTextItem item) {
