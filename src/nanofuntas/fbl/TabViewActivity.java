@@ -34,10 +34,10 @@ public class TabViewActivity extends FragmentActivity {
 
         // For each of the sections in the app, add a tab to the action bar.
         // Remove team fragment 
-        /*
+        
         actionBar.addTab(actionBar.newTab().setText("Team")
         		.setTabListener(new TabListener<TeamFragment>(this, "TeamFragment", TeamFragment.class) ));
-        */
+        
         actionBar.addTab(actionBar.newTab().setText("Member")
         		.setTabListener(new TabListener<MemberFragment>(this, "MemberFragment", MemberFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText("Settings")

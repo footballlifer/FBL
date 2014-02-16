@@ -32,8 +32,8 @@ public class TeamFragment extends Fragment {
 	private TextView mTeamTWKRating = null;
 	private TextView mTeamMTLRating = null;	
 	
-	private ListView mKillerListView = null;
-	private ListView mAssisterListView = null;		
+	//private ListView mKillerListView = null;
+	//private ListView mAssisterListView = null;		
 	
 	public TeamFragment() {}
 
@@ -43,7 +43,7 @@ public class TeamFragment extends Fragment {
     public void onStart(){
     	super.onStart();        	    	
     	initViews();
-    	
+    	/*
     	ArrayList<RankingPhotoTextItem> mKillerItemList = getKillerListView();
     	RankingPhotoTextListAdapter killerAapter = new RankingPhotoTextListAdapter(getActivity(), mKillerItemList);
     	mKillerListView.setAdapter(killerAapter);
@@ -51,7 +51,7 @@ public class TeamFragment extends Fragment {
     	ArrayList<RankingPhotoTextItem> mAssisterItemList = getAssisterListView();
     	RankingPhotoTextListAdapter assisterApter = new RankingPhotoTextListAdapter(getActivity(), mAssisterItemList);
     	mAssisterListView.setAdapter(assisterApter);
-    	
+    	*/
     	getAndSetTeamStatus();
     }
     
@@ -76,8 +76,8 @@ public class TeamFragment extends Fragment {
     	mTeamTWKRating = (TextView) getView().findViewById(R.id.team_twk_rating);
     	mTeamMTLRating = (TextView) getView().findViewById(R.id.team_mtl_rating);
     	
-    	mKillerListView = (ListView) getView().findViewById(R.id.killer_list_view);
-    	mAssisterListView = (ListView) getView().findViewById(R.id.assister_list_view);    	
+    	//mKillerListView = (ListView) getView().findViewById(R.id.killer_list_view);
+    	//mAssisterListView = (ListView) getView().findViewById(R.id.assister_list_view);    	
     }
 
     private void getAndSetTeamStatus() {
@@ -139,6 +139,9 @@ public class TeamFragment extends Fragment {
     	tv.setText( rating.toString());
     }
     
+    
+    
+    /*
     private ArrayList<RankingPhotoTextItem> getKillerListView(){
     	//TODO: KillerListView
     	
@@ -202,5 +205,5 @@ public class TeamFragment extends Fragment {
     	return itemList;
     	
     }     
-    
+    */
 }
