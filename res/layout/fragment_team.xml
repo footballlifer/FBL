@@ -47,7 +47,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/team_overall_rating"
+                android:id="@+id/team_ove_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/team_overall"
@@ -62,7 +62,7 @@
                 android:id="@+id/team_atk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/team_overall_rating"
+                android:layout_below="@+id/team_ove_rating"
                 android:layout_marginTop="10dp"
                 android:text="ATK"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -204,7 +204,7 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/attack_rating"
+                android:id="@+id/team_attack_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -224,12 +224,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/defense_rating"
+                android:id="@+id/team_defense_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/defense"
                 android:layout_alignBottom="@+id/defense"
-                android:layout_alignLeft="@+id/attack_rating"
+                android:layout_alignLeft="@+id/team_attack_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -244,12 +244,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/teamwork_rating"
+                android:id="@+id/team_teamwork_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/teamwork"
                 android:layout_alignBottom="@+id/teamwork"
-                android:layout_alignLeft="@+id/defense_rating"
+                android:layout_alignLeft="@+id/team_defense_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -264,12 +264,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/mental_rating"
+                android:id="@+id/team_mental_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/mental"
                 android:layout_alignBottom="@+id/mental"
-                android:layout_alignLeft="@+id/teamwork_rating"
+                android:layout_alignLeft="@+id/team_teamwork_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -284,12 +284,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/power_rating"
+                android:id="@+id/team_power_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/power"
                 android:layout_alignBottom="@+id/power"
-                android:layout_alignLeft="@+id/mental_rating"
+                android:layout_alignLeft="@+id/team_mental_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -304,12 +304,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/speed_rating"
+                android:id="@+id/team_speed_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/speed"
                 android:layout_alignBottom="@+id/speed"
-                android:layout_alignLeft="@+id/power_rating"
+                android:layout_alignLeft="@+id/team_power_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -324,12 +324,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/stamina_rating"
+                android:id="@+id/team_stamina_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/stamina"
                 android:layout_alignBottom="@+id/stamina"
-                android:layout_alignLeft="@+id/speed_rating"
+                android:layout_alignLeft="@+id/team_speed_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -351,7 +351,7 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/ball_control_rating"
+                android:id="@+id/team_ball_control_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -371,12 +371,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/pass_rating"
+                android:id="@+id/team_pass_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/pass"
                 android:layout_alignBottom="@+id/pass"
-                android:layout_alignLeft="@+id/ball_control_rating"
+                android:layout_alignLeft="@+id/team_ball_control_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -391,12 +391,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/shot_rating"
+                android:id="@+id/team_shot_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/shot"
                 android:layout_alignBottom="@+id/shot"
-                android:layout_alignLeft="@+id/pass_rating"
+                android:layout_alignLeft="@+id/team_pass_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -411,12 +411,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/header_rating"
+                android:id="@+id/team_header_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/header"
                 android:layout_alignBottom="@+id/header"
-                android:layout_alignLeft="@+id/shot_rating"
+                android:layout_alignLeft="@+id/team_shot_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -431,12 +431,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/cutting_rating"
+                android:id="@+id/team_cutting_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/cutting"
                 android:layout_alignBottom="@+id/cutting"
-                android:layout_alignLeft="@+id/header_rating"
+                android:layout_alignLeft="@+id/team_header_rating"
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
@@ -451,12 +451,12 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/overall_rating"
+                android:id="@+id/team_overall_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/overall"
                 android:layout_alignBottom="@+id/averall"
-                android:layout_alignLeft="@+id/cutting_rating"       
+                android:layout_alignLeft="@+id/team_cutting_rating"       
                 android:text="00"
                 android:textAppearance="?android:attr/textAppearanceMedium" 
                 android:textColor="@android:color/white"/>
