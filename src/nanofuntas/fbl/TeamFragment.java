@@ -122,19 +122,6 @@ public class TeamFragment extends Fragment {
     	Utils.setTextAndColor(mTeamMTLRating, (int)tmMtlR);    	
     	Utils.setTextAndColor(mTeamOVERating, (int)tmOvrR);
     	
-    	float tmAtkRatio = (float)tmAtkR / HUNDRED;
-    	float tmDfsRatio = (float)tmDfsR / HUNDRED;
-    	float tmTecRatio = (float)tmTecR / HUNDRED;
-    	float tmPhyRatio = (float)tmPhyR / HUNDRED;
-    	float tmTwkRatio = (float)tmTwkR / HUNDRED;
-    	float tmMtlRatio = (float)tmMtlR / HUNDRED;
-    	    	
-    	Log.d(TAG, " "+tmAtkRatio+" "+tmDfsRatio+" "+tmTecRatio+" "
-    			+tmPhyRatio+" "+tmTwkRatio+" "+tmMtlRatio+" ");
-    	
-    	mTeamHexView.setRatingAndDraw(tmAtkRatio, tmDfsRatio, 
-    			tmTecRatio, tmPhyRatio, tmTwkRatio, tmMtlRatio);
-    	
     	long atkRating = (Long)status.get(Config.KEY_ATTACK);
     	long dfsRating = (Long)status.get(Config.KEY_DEFENSE);
     	long twkRating = (Long)status.get(Config.KEY_TEAMWORK);
@@ -163,6 +150,14 @@ public class TeamFragment extends Fragment {
     	Utils.setTextAndColor(mTeamCuttingRating, (int)cutRating);
     	Utils.setTextAndColor(mTeamOverallRating, (int)ovrRating);
     	
+    	float rATK = (float)atkRating / HUNDRED;
+    	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
+    	float rTWK = (float)twkRating / HUNDRED;
+    	float rMTL = (float)mtlRating / HUNDRED;
+    	float rPHY = (float)(powRating + spdRating + staRating) / (3*HUNDRED);
+    	float rTEC = (float)(blcRating + pasRating + shtRating + hdrRating) / (4*HUNDRED);
+    	
+    	mTeamHexView.setRatingAndDraw(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);
     }
     
 }
