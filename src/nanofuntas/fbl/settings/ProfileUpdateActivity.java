@@ -31,7 +31,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MyProfileUpdate extends Activity {
+public class ProfileUpdateActivity extends Activity {
 	private final boolean DEBUG = true;
 	private final String TAG = "MyProfileUpdate";
 	
@@ -41,6 +41,10 @@ public class MyProfileUpdate extends Activity {
 	
 	private EditText mNameUpdate;
 	private EditText mPositionUpdate;
+	private EditText mAgeUpdate;
+	private EditText mHeightUpdate;
+	private EditText mWeightUpdate;
+	private EditText mFootUpdate;
 	
 	private final int CAMERA_CAPTURE = 1;
 	private final int CAMERA_CAPTURE_CROP = 2;
@@ -51,14 +55,10 @@ public class MyProfileUpdate extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_my_profile_update);
+		setContentView(R.layout.activity_profile_update);
 	    
     	UID = Utils.getMyUid();
-		
-		mNameUpdate = (EditText) findViewById(R.id.name_update);
-		mPositionUpdate = (EditText) findViewById(R.id.pos_update);
-		mProfilePhoto = (ImageView) findViewById(R.id.profile_photo);
-		
+    	initViews();
 		downloadImage(UID);
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -84,6 +84,16 @@ public class MyProfileUpdate extends Activity {
 		});
 	}
 
+	private void initViews() {
+		mProfilePhoto = (ImageView) findViewById(R.id.profile_photo);
+		mNameUpdate = (EditText) findViewById(R.id.name_update);
+		mPositionUpdate = (EditText) findViewById(R.id.pos_update);
+		mAgeUpdate = (EditText) findViewById(R.id.age_update);
+		mHeightUpdate = (EditText) findViewById(R.id.height_update);
+		mWeightUpdate = (EditText) findViewById(R.id.weight_update);
+		mFootUpdate = (EditText) findViewById(R.id.foot_update);
+	}
+	
 	private void takePhoto() {
 		try {
         	Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -153,14 +163,37 @@ public class MyProfileUpdate extends Activity {
 	private void updateMyInfo() {
     	String name = mNameUpdate.getText().toString();
 		String position = mPositionUpdate.getText().toString();
+		String age = mAgeUpdate.getText().toString();
+		String height = mHeightUpdate.getText().toString();
+		String weight = mWeightUpdate.getText().toString();
+		String foot = mFootUpdate.getText().toString();
 		
 		if (name.equals("")) { 
 			Log.d(TAG, "Please fill in name");
 			Toast.makeText(getApplication(), "Please fill in name", Toast.LENGTH_LONG).show();
 			return;
 		}
-		
 		if (position.equals("")) { 
+			Log.d(TAG, "Please fill in position");
+			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (age.equals("")) { 
+			Log.d(TAG, "Please fill in position");
+			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (height.equals("")) { 
+			Log.d(TAG, "Please fill in position");
+			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (weight.equals("")) { 
+			Log.d(TAG, "Please fill in position");
+			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (foot.equals("")) { 
 			Log.d(TAG, "Please fill in position");
 			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
 			return;
@@ -169,6 +202,10 @@ public class MyProfileUpdate extends Activity {
 		JSONObject myProfile = new JSONObject();
 		myProfile.put(Config.KEY_NAME, name);
 		myProfile.put(Config.KEY_POSITION, position);
+		myProfile.put(Config.KEY_AGE, age);
+		myProfile.put(Config.KEY_HEIGHT, height);
+		myProfile.put(Config.KEY_WEIGHT, weight);
+		myProfile.put(Config.KEY_FOOT, foot);
 		
 		String result = ServerIface.updateMyProfile(UID, myProfile);
 		if (result.equals(Config.KEY_OK)) {
@@ -214,7 +251,7 @@ public class MyProfileUpdate extends Activity {
         case R.id.menu_save:
         	uploadImage();
         	updateMyInfo();
-        	Intent i = new Intent(MyProfileUpdate.this, SplashScreenActivity.class);
+        	Intent i = new Intent(ProfileUpdateActivity.this, SplashScreenActivity.class);
 			startActivity(i);
 			return true;
         default:

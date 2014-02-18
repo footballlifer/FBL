@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="nanofuntas.fbl.settings.MyProfileUpdate"
+            android:name="nanofuntas.fbl.settings.ProfileUpdateActivity"
             android:label="@string/title_activity_my_profile_update"
             android:screenOrientation="portrait" >
         </activity>

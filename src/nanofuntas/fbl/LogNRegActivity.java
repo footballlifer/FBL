@@ -1,6 +1,6 @@
 package nanofuntas.fbl;
 
-import nanofuntas.fbl.settings.MyProfileUpdate;
+import nanofuntas.fbl.settings.ProfileUpdateActivity;
 
 import org.json.simple.JSONObject;
 
@@ -86,7 +86,7 @@ public class LogNRegActivity extends Activity {
 					Utils.setMyLoginID(email);
 					Utils.setMyLoginPW(pw);
 					
-					Intent i = new Intent(LogNRegActivity.this, MyProfileUpdate.class);
+					Intent i = new Intent(LogNRegActivity.this, ProfileUpdateActivity.class);
 					startActivity(i);
 					finish();
 				}

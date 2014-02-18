@@ -3,7 +3,7 @@ package nanofuntas.fbl;
 import nanofuntas.fbl.settings.CreateTeamActivity;
 import nanofuntas.fbl.settings.IncruitPlayerActivity;
 import nanofuntas.fbl.settings.JoinTeamActivity;
-import nanofuntas.fbl.settings.MyProfileUpdate;
+import nanofuntas.fbl.settings.ProfileUpdateActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -60,7 +60,7 @@ public class SettingsFragment extends Fragment {
     	mUpdateMyProfile.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent i = new Intent(getView().getContext(), MyProfileUpdate.class);
+				Intent i = new Intent(getView().getContext(), ProfileUpdateActivity.class);
 				startActivity(i);
 			}    		
     	});
