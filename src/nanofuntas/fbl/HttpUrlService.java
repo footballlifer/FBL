@@ -44,7 +44,7 @@ public class HttpUrlService {
 		
 		String strResult = null;
 		//URL mURL = null;
-		HttpURLConnection mHttpURLConn = null;
+		HttpURLConnection conn = null;
 		OutputStream outStrm = null;
 		ObjectOutputStream objOutStrm = null;
 		InputStream inStrm = null;
@@ -53,29 +53,29 @@ public class HttpUrlService {
 		try{
 			String url = URL_FBLS;
 			URL mURL = new URL(url);
-			mHttpURLConn = (HttpURLConnection) mURL.openConnection();
+			conn = (HttpURLConnection) mURL.openConnection();
 			
-			mHttpURLConn.setDoOutput(true);
-			mHttpURLConn.setDoInput(true);
-			mHttpURLConn.setUseCaches(false);		
-			mHttpURLConn.setRequestMethod("POST");
-			mHttpURLConn.setConnectTimeout(HTTP_CONNECT_TIMEOUT);
-			mHttpURLConn.setReadTimeout(HTTP_READ_TIMEOUT);
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.setUseCaches(false);		
+			conn.setRequestMethod("POST");
+			conn.setConnectTimeout(HTTP_CONNECT_TIMEOUT);
+			conn.setReadTimeout(HTTP_READ_TIMEOUT);
 	
-			mHttpURLConn.connect();
+			conn.connect();
 			
 			// write output data to be sent
-			outStrm = mHttpURLConn.getOutputStream();
+			outStrm = conn.getOutputStream();
 			objOutStrm = new ObjectOutputStream(outStrm);
 			objOutStrm.writeObject(strParam);
 			objOutStrm.flush();
 					
 			// Log HTTP status code for debugging
-			int httpStatCode = mHttpURLConn.getResponseCode();
+			int httpStatCode = conn.getResponseCode();
 			if(DEBUG) Log.i( TAG, "HTTP status code: " + Integer.toString(httpStatCode) );
 			
 			// get data from server and parse it to string
-			inStrm = mHttpURLConn.getInputStream();
+			inStrm = conn.getInputStream();
 			objInStrm = new ObjectInputStream(inStrm);	
 			strResult = (String) objInStrm.readObject();
 			
@@ -88,7 +88,7 @@ public class HttpUrlService {
 		} finally{
 			try{
 				// release resources
-				if(mHttpURLConn != null) mHttpURLConn.disconnect();
+				if(conn != null) conn.disconnect();
 				if(outStrm != null) outStrm.close();
 				if(objOutStrm != null) objOutStrm.close();
 				if(inStrm != null) inStrm.close();
