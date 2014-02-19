@@ -81,8 +81,10 @@ public class Config {
 	public static final String KEY_IMAGE = "IMAGE";
 	public static final String KEY_LOGIN_ID = "LOGIN_ID";
 	public static final String KEY_LOGIN_PW = "LOGIN_PW";
-
+	public static final String KEY_FIRST_LAUNCH = "FIRST_LAUNCH";
+	
 	public static final String FBL_SETTINGS = "FBL_SETTINGS";
+	
 	
 	public static final String[] PLAYER_PROFILE_ARRAY = {
 		KEY_NAME,

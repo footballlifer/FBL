@@ -6,9 +6,9 @@ import org.json.simple.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -80,13 +80,23 @@ public class LogNRegActivity extends Activity {
 						"UID:"+Long.toString(uid) + " TID:" + Long.toString(tid),  
 						Toast.LENGTH_LONG).show();
 				
-				if ( uid != -1 ) {
-					Utils.setMyUid(uid);
-					Utils.setMyTid(tid);
-					Utils.setMyLoginID(email);
-					Utils.setMyLoginPW(pw);
+				if ( uid == -1 ) return;
+				
+				Utils.setMyUid(uid);
+				Utils.setMyTid(tid);
+				Utils.setMyLoginID(email);
+				Utils.setMyLoginPW(pw);
 					
+				SharedPreferences sp = getSharedPreferences(Config.FBL_SETTINGS, 0);
+				boolean firstLaunch = sp.getBoolean(Config.KEY_FIRST_LAUNCH, false);
+				if (firstLaunch == false) {
+					SharedPreferences.Editor editor = sp.edit();
+					editor.putBoolean(Config.KEY_FIRST_LAUNCH, true).commit();
 					Intent i = new Intent(LogNRegActivity.this, ProfileUpdateActivity.class);
+					startActivity(i);
+					finish();
+				} else {
+					Intent i = new Intent(LogNRegActivity.this, TabViewActivity.class);
 					startActivity(i);
 					finish();
 				}
