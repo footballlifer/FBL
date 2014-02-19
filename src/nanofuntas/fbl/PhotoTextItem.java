@@ -163,23 +163,18 @@ class PhotoTextView extends LinearLayout {
 	public void setViewPhoto(Drawable photo){
 		mPhoto.setImageDrawable(photo);
 	}
-	
 	public void setViewCondition(Drawable condition) {
 		mCondition.setImageDrawable(condition);
-	}
-	
+	}	
 	public void setViewName(String name){
 		mName.setText(name);
-	}
-	
+	}	
 	public void setViewPosition(String position) {
 		mPosition.setText(position);
-	}
-	
+	}	
 	public void setViewHexView(HexView hexView) {
 		this.mHexView = hexView;
-	}
-	
+	}	
 	public void setViewHexRating(float rATK, float rTEC, 
 	float rTWK, float rDFS, float rMTL, float rPHY) {
 		mHexView.setRatingAndDraw(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);

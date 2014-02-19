@@ -41,15 +41,14 @@ import android.widget.AdapterView.OnItemClickListener;
 public class TabViewActivity extends FragmentActivity {
 	private final boolean DEBUG = true;
 	private final String TAG = "TabViewActivity";
-	
-    private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
+    
+	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (DEBUG) Log.d(TAG, "onCreate()");
     	    	
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_tabview);
         
         final ActionBar actionBar = getActionBar();
@@ -57,16 +56,15 @@ public class TabViewActivity extends FragmentActivity {
         //actionBar.setDisplayShowTitleEnabled(false);
         //actionBar.setDisplayShowHomeEnabled(false);
 
-        // For each of the sections in the app, add a tab to the action bar.
-        // Remove team fragment 
-        
         actionBar.addTab(actionBar.newTab().setText("Team")
-        		.setTabListener(new TabListener<TeamFragment>(this, "TeamFragment", TeamFragment.class) ));
-        
+        		.setTabListener(new TabListener<TeamFragment>(this, 
+        				"TeamFragment", TeamFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText("Member")
-        		.setTabListener(new TabListener<MemberFragment>(this, "MemberFragment", MemberFragment.class) ));
+        		.setTabListener(new TabListener<MemberFragment>(this, 
+        				"MemberFragment", MemberFragment.class) ));
         actionBar.addTab(actionBar.newTab().setText("Settings")
-        		.setTabListener(new TabListener<SettingsFragment>(this, "SettingsFragment", SettingsFragment.class) ));
+        		.setTabListener(new TabListener<SettingsFragment>(this, 
+        				"SettingsFragment", SettingsFragment.class) ));
     }
 
     public class TabListener<T extends Fragment> implements ActionBar.TabListener {
@@ -267,16 +265,100 @@ public class TabViewActivity extends FragmentActivity {
         	Utils.setTextAndColor(mTeamCuttingRating, (int)cutRating);
         	Utils.setTextAndColor(mTeamOverallRating, (int)ovrRating);
         	
-        	float rATK = (float)atkRating / HUNDRED;
+        	float rATK = (float)(atkRating) / (HUNDRED);
         	float rDFS = (float)(dfsRating + cutRating) / (2*HUNDRED);
-        	float rTWK = (float)twkRating / HUNDRED;
-        	float rMTL = (float)mtlRating / HUNDRED;
+        	float rTWK = (float)(twkRating) / (HUNDRED);
+        	float rMTL = (float)(mtlRating) / (HUNDRED);
         	float rPHY = (float)(powRating + spdRating + staRating) / (3*HUNDRED);
         	float rTEC = (float)(blcRating + pasRating + shtRating + hdrRating) / (4*HUNDRED);
         	
         	mTeamHexView.setRatingAndDraw(rATK, rTEC, rTWK, rDFS, rMTL, rPHY);
         }
         
+    }
+    
+    
+    public static class SettingsFragment extends Fragment {
+    	private final boolean DEBUG = true; 
+    	private final String TAG = "SettingFragment2";
+    	
+    	private TextView mCreateTeam;
+    	private TextView mJoinTeam;
+    	private TextView mIncruitPlayer;
+    	private TextView mUpdateMyProfile;
+    	private TextView mLogOut;
+    	
+    	public SettingsFragment() {}
+
+        public static final String ARG_SECTION_NUMBER = "section_number";
+
+        @Override
+        public void onStart(){
+        	super.onStart();        	    	
+        	initViews();
+        	
+        	mCreateTeam.setOnClickListener(new OnClickListener() {
+    			@Override
+    			public void onClick(View arg0) {
+    				Intent i = new Intent(getView().getContext(), CreateTeamActivity.class);
+    				startActivity(i);
+    			}    		
+        	});
+        	
+        	mJoinTeam.setOnClickListener(new OnClickListener() {
+    			@Override
+    			public void onClick(View arg0) {
+    				Intent i = new Intent(getView().getContext(), JoinTeamActivity.class);
+    				startActivity(i);
+    			}    		
+        	});
+        	
+        	mIncruitPlayer.setOnClickListener(new OnClickListener() {
+    			@Override
+    			public void onClick(View arg0) {
+    				Intent i = new Intent(getView().getContext(), IncruitPlayerActivity.class);
+    				startActivity(i);
+    			}    		
+        	});
+        	
+        	mUpdateMyProfile.setOnClickListener(new OnClickListener() {
+    			@Override
+    			public void onClick(View arg0) {
+    				Intent i = new Intent(getView().getContext(), ProfileUpdateActivity.class);
+    				startActivity(i);
+    			}    		
+        	});
+        	
+        	mLogOut.setOnClickListener(new OnClickListener() {
+    			@Override
+    			public void onClick(View arg0) {
+    				Utils.removeLoginIdPw();
+    				
+    				FblSQLiteHelper db = new FblSQLiteHelper(getActivity());
+    				db.dropAllTables();
+    				db.createAllTables();
+    				
+    				Intent i = new Intent(getView().getContext(), LogNRegActivity.class);
+    				startActivity(i);
+    			}
+        	});
+        }
+        
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {    	
+        	View view = inflater.inflate(R.layout.fragment_settings, container, false);
+            return view;
+        }
+
+        private void initViews() {
+        	if (DEBUG) Log.d(TAG, "initViews()");  
+        	mCreateTeam = (TextView) getView().findViewById(R.id.create_team);
+        	mJoinTeam = (TextView) getView().findViewById(R.id.join_team);
+        	mIncruitPlayer = (TextView) getView().findViewById(R.id.incruit_player);
+        	mUpdateMyProfile = (TextView) getView().findViewById(R.id.update_my_profile);
+        	mLogOut = (TextView) getView().findViewById(R.id.log_out);
+        }
     }
     
     public static class MemberFragment extends Fragment {
@@ -307,9 +389,9 @@ public class TabViewActivity extends FragmentActivity {
         	mPhoto = getResources().getDrawable(R.drawable.cr3);
 
         	mListView = (ListView) getView().findViewById(R.id.listView1);
-        	ArrayList<PhotoTextItem> mItemList = getListView();
-        	PhotoTextListAdapter mPhotoTextListAdapter = new PhotoTextListAdapter(getActivity(), mItemList);
-            mListView.setAdapter(mPhotoTextListAdapter);
+        	ArrayList<PhotoTextItem> list = getListView();
+        	PhotoTextListAdapter adapter = new PhotoTextListAdapter(getActivity(), list);
+            mListView.setAdapter(adapter);
             
             mListView.setOnItemClickListener(new OnItemClickListener() {
     			@Override
@@ -433,89 +515,8 @@ public class TabViewActivity extends FragmentActivity {
             	Log.d(TAG, "setRandomArrow(), default case");
         	}
         }
+
     }
     
-    public static class SettingsFragment extends Fragment {
-    	private final boolean DEBUG = true; 
-    	private final String TAG = "SettingFragment2";
-    	
-    	private TextView mCreateTeam;
-    	private TextView mJoinTeam;
-    	private TextView mIncruitPlayer;
-    	private TextView mUpdateMyProfile;
-    	private TextView mLogOut;
-    	
-    	public SettingsFragment() {}
-
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        @Override
-        public void onStart(){
-        	super.onStart();        	    	
-        	initViews();
-        	
-        	mCreateTeam.setOnClickListener(new OnClickListener() {
-    			@Override
-    			public void onClick(View arg0) {
-    				Intent i = new Intent(getView().getContext(), CreateTeamActivity.class);
-    				startActivity(i);
-    			}    		
-        	});
-        	
-        	mJoinTeam.setOnClickListener(new OnClickListener() {
-    			@Override
-    			public void onClick(View arg0) {
-    				Intent i = new Intent(getView().getContext(), JoinTeamActivity.class);
-    				startActivity(i);
-    			}    		
-        	});
-        	
-        	mIncruitPlayer.setOnClickListener(new OnClickListener() {
-    			@Override
-    			public void onClick(View arg0) {
-    				Intent i = new Intent(getView().getContext(), IncruitPlayerActivity.class);
-    				startActivity(i);
-    			}    		
-        	});
-        	
-        	mUpdateMyProfile.setOnClickListener(new OnClickListener() {
-    			@Override
-    			public void onClick(View arg0) {
-    				Intent i = new Intent(getView().getContext(), ProfileUpdateActivity.class);
-    				startActivity(i);
-    			}    		
-        	});
-        	
-        	mLogOut.setOnClickListener(new OnClickListener() {
-    			@Override
-    			public void onClick(View arg0) {
-    				Utils.removeLoginIdPw();
-    				
-    				FblSQLiteHelper db = new FblSQLiteHelper(getActivity());
-    				db.dropAllTables();
-    				db.createAllTables();
-    				
-    				Intent i = new Intent(getView().getContext(), LogNRegActivity.class);
-    				startActivity(i);
-    			}
-        	});
-        }
-        
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {    	
-        	View view = inflater.inflate(R.layout.fragment_settings, container, false);
-            return view;
-        }
-
-        private void initViews() {
-        	if (DEBUG) Log.d(TAG, "initViews()");  
-        	mCreateTeam = (TextView) getView().findViewById(R.id.create_team);
-        	mJoinTeam = (TextView) getView().findViewById(R.id.join_team);
-        	mIncruitPlayer = (TextView) getView().findViewById(R.id.incruit_player);
-        	mUpdateMyProfile = (TextView) getView().findViewById(R.id.update_my_profile);
-        	mLogOut = (TextView) getView().findViewById(R.id.log_out);
-        }
-    }
     
 }
