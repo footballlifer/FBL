@@ -537,8 +537,7 @@ public class TabViewActivity extends FragmentActivity {
         	
         	private boolean mSelectable = true;
         	
-        	public PhotoTextItem(){
-        	}
+        	public PhotoTextItem(){}
         	
         	public PhotoTextItem(Drawable photo, Drawable condition, 
         	String name, String position, HexView hexView){
@@ -641,7 +640,8 @@ public class TabViewActivity extends FragmentActivity {
         	public PhotoTextView(Context context, PhotoTextItem mItem) {
         		super(context);
         		
-        		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        		LayoutInflater inflater = 
+        				(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         		inflater.inflate(R.layout.item_view, this, true);
         		
         		mPhoto = (ImageView) findViewById(R.id.photo);
