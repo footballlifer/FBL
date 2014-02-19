@@ -160,7 +160,7 @@ public class ProfileUpdateActivity extends Activity {
     }
 
     @SuppressWarnings("unchecked")
-	private void updateMyInfo() {
+	private boolean updateMyInfo() {
     	String name = mNameUpdate.getText().toString();
 		String position = mPositionUpdate.getText().toString();
 		String age = mAgeUpdate.getText().toString();
@@ -171,32 +171,32 @@ public class ProfileUpdateActivity extends Activity {
 		if (name.equals("")) { 
 			Log.d(TAG, "Please fill in name");
 			Toast.makeText(getApplication(), "Please fill in name", Toast.LENGTH_LONG).show();
-			return;
+			return false;
 		}
 		if (position.equals("")) { 
 			Log.d(TAG, "Please fill in position");
 			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
-			return;
+			return false;
 		}
 		if (age.equals("")) { 
 			Log.d(TAG, "Please fill in position");
 			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
-			return;
+			return false;
 		}
 		if (height.equals("")) { 
 			Log.d(TAG, "Please fill in position");
 			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
-			return;
+			return false;
 		}
 		if (weight.equals("")) { 
 			Log.d(TAG, "Please fill in position");
 			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
-			return;
+			return false;
 		}
 		if (foot.equals("")) { 
 			Log.d(TAG, "Please fill in position");
 			Toast.makeText(getApplication(), "Please fill in position", Toast.LENGTH_LONG).show();
-			return;
+			return false;
 		}
 		
 		JSONObject myProfile = new JSONObject();
@@ -211,6 +211,8 @@ public class ProfileUpdateActivity extends Activity {
 		if (result.equals(Config.KEY_OK)) {
 			Toast.makeText(getApplication(), "My Profile updated OK", Toast.LENGTH_SHORT).show();
 		}
+		
+		return true;
     }
     
 	private void uploadImage() {
@@ -249,8 +251,9 @@ public class ProfileUpdateActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {        
         switch (item.getItemId()) {
         case R.id.menu_save:
+        	if ( updateMyInfo() == false ) 
+        		return false;
         	uploadImage();
-        	updateMyInfo();
         	Intent i = new Intent(ProfileUpdateActivity.this, SplashScreenActivity.class);
 			startActivity(i);
 			return true;
