@@ -58,12 +58,20 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		= "CREATE TABLE " + PLAYER_PROFILE_TABLE + " ( " 
 		+ Config.KEY_UID + " INTEGER, "  			
 		+ Config.KEY_NAME + " TEXT, "
-		+ Config.KEY_POSITION + " TEXT )";
+		+ Config.KEY_POSITION + " TEXT " 
+		+ Config.KEY_AGE + " TEXT "
+		+ Config.KEY_HEIGHT + " TEXT "
+		+ Config.KEY_WEIGHT + " TEXT "
+		+ Config.KEY_FOOT + " TEXT " + ")";
 	
 	private static final String[] PLAYER_PROFILE_COLUMNS = {
 		Config.KEY_UID,
 		Config.KEY_NAME,
-		Config.KEY_POSITION,};
+		Config.KEY_POSITION,
+		Config.KEY_AGE,
+		Config.KEY_HEIGHT,
+		Config.KEY_WEIGHT,
+		Config.KEY_FOOT,};
 	
 	public FblSQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -169,6 +177,10 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		values.put(Config.KEY_UID, pp.getUid());
 		values.put(Config.KEY_NAME, pp.getName());
 		values.put(Config.KEY_POSITION, pp.getPosition());
+		values.put(Config.KEY_AGE, pp.getAge());
+		values.put(Config.KEY_HEIGHT, pp.getHeight());
+		values.put(Config.KEY_WEIGHT, pp.getWeight());
+		values.put(Config.KEY_FOOT, pp.getFoot());
 		
 		return values;
 	}
@@ -180,6 +192,10 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		pp.setUid(Integer.parseInt(cursor.getString(0)));
 		pp.setName(cursor.getString(1));
 		pp.setPosition(cursor.getString(2));
+		pp.setAge(cursor.getString(3));
+		pp.setHeight(cursor.getString(4));
+		pp.setWeight(cursor.getString(5));
+		pp.setFoot(cursor.getString(6));
 		
 		return pp;
 	}

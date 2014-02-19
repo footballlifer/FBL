@@ -110,11 +110,19 @@ public class SplashScreenActivity extends Activity {
     		
     		String name = (String)status.get(Config.KEY_NAME);
     		String position = (String)status.get(Config.KEY_POSITION);
+    		String age = (String)status.get(Config.KEY_AGE);
+    		String height = (String)status.get(Config.KEY_HEIGHT);
+    		String weight = (String)status.get(Config.KEY_WEIGHT);
+    		String foot = (String)status.get(Config.KEY_FOOT);
     		
     		PlayerProfile pp = new PlayerProfile();
     		pp.setUid(uid);
     		pp.setName(name);
     		pp.setPosition(position);
+    		pp.setAge(age);
+    		pp.setHeight(height);
+    		pp.setWeight(weight);
+    		pp.setFoot(foot);
     		
     		db.addPlayerProfile(pp);
     	}
