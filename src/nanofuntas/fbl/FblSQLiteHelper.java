@@ -58,10 +58,10 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		= "CREATE TABLE " + PLAYER_PROFILE_TABLE + " ( " 
 		+ Config.KEY_UID + " INTEGER, "  			
 		+ Config.KEY_NAME + " TEXT, "
-		+ Config.KEY_POSITION + " TEXT " 
-		+ Config.KEY_AGE + " TEXT "
-		+ Config.KEY_HEIGHT + " TEXT "
-		+ Config.KEY_WEIGHT + " TEXT "
+		+ Config.KEY_POSITION + " TEXT, " 
+		+ Config.KEY_AGE + " TEXT, "
+		+ Config.KEY_HEIGHT + " TEXT, "
+		+ Config.KEY_WEIGHT + " TEXT, "
 		+ Config.KEY_FOOT + " TEXT " + ")";
 	
 	private static final String[] PLAYER_PROFILE_COLUMNS = {
