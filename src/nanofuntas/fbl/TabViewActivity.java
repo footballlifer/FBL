@@ -428,12 +428,12 @@ public class TabViewActivity extends FragmentActivity {
         	ArrayList<PhotoTextItem> itemList = new ArrayList<PhotoTextItem>();
         	
     		FblSQLiteHelper db = new FblSQLiteHelper(getActivity());
-    		List<PlayerRating> listPR = db.getAllPlayerRating();
-        	List<PlayerProfile> listPP = db.getAllPlayerProfile();
+    		List<PlayerInfo.PlayerRating> listPR = db.getAllPlayerRating();
+        	List<PlayerInfo.PlayerProfile> listPP = db.getAllPlayerProfile();
         	
         	for (long i = 0; i < listPR.size(); i++) {
-        		PlayerRating pr = listPR.get((int)i);
-        		PlayerProfile pp = listPP.get((int)i);
+        		PlayerInfo.PlayerRating pr = listPR.get((int)i);
+        		PlayerInfo.PlayerProfile pp = listPP.get((int)i);
         		setItem(pr, pp, itemList);
         		// this map must match listView position
         		map.put(i, pr.getUid());
@@ -451,8 +451,8 @@ public class TabViewActivity extends FragmentActivity {
          * @param map index to player profile mapping
          * @param indexToMap index of player profile to be added to map
          */
-        private void setItem(PlayerRating pr, PlayerProfile pp, 
-        ArrayList<PhotoTextItem> itemList) {
+        private void setItem(PlayerInfo.PlayerRating pr, 
+        PlayerInfo.PlayerProfile pp, ArrayList<PhotoTextItem> itemList) {
         	if (DEBUG) Log.d(TAG, "setItem()");
         	
         	PhotoTextItem item = new PhotoTextItem();

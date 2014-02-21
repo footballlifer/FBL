@@ -57,7 +57,7 @@ public class PlayerRatingActivity extends Activity {
 		mUid = getIntent().getExtras().getLong(Config.KEY_UID);
 		
 		FblSQLiteHelper db = new FblSQLiteHelper(this);
-    	PlayerProfile pp = db.getPlayerProfile(mUid);    	    	
+		PlayerInfo.PlayerProfile pp = db.getPlayerProfile(mUid);    	    	
 		nameRating.setText(pp.getName());		
 	}
 	

@@ -192,7 +192,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public void addPlayerProfile(PlayerProfile pp) {
+	public void addPlayerProfile(PlayerInfo.PlayerProfile pp) {
 		if (DEBUG) Log.d(TAG, "addPlayerProfile()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromPlayerProfile(pp);
@@ -200,7 +200,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public PlayerProfile getPlayerProfile(long uid) {
+	public PlayerInfo.PlayerProfile getPlayerProfile(long uid) {
 		if (DEBUG) Log.d(TAG, "getPlayerProfile(), uid="+uid);
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(PLAYER_PROFILE_TABLE, 
@@ -212,20 +212,21 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		if (cursor != null)
 			cursor.moveToFirst();
 		
-		PlayerProfile pp = makePlayerProfileFromCursor(cursor);
+		PlayerInfo.PlayerProfile pp = makePlayerProfileFromCursor(cursor);
 		db.close();
 		return pp;
 	}
 	
-	public List<PlayerProfile> getAllPlayerProfile() {
+	public List<PlayerInfo.PlayerProfile> getAllPlayerProfile() {
 		Log.d(TAG, "getAllPlayerProfile()");
-		List<PlayerProfile> listPP = new ArrayList<PlayerProfile>();
+		List<PlayerInfo.PlayerProfile> listPP = 
+				new ArrayList<PlayerInfo.PlayerProfile>();
 		String query = "SELECT * FROM " + PLAYER_PROFILE_TABLE;
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		if (cursor.moveToFirst()) {
 			do {
-				PlayerProfile pp = makePlayerProfileFromCursor(cursor);
+				PlayerInfo.PlayerProfile pp = makePlayerProfileFromCursor(cursor);
 				listPP.add(pp);
 			} while(cursor.moveToNext());
 		}
@@ -233,7 +234,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return listPP;
 	}
 	
-	public int updatePlayerProfile(PlayerProfile pp) {
+	public int updatePlayerProfile(PlayerInfo.PlayerProfile pp) {
 		Log.d(TAG, "updatePlayerProfile()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromPlayerProfile(pp);
@@ -245,7 +246,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return i;
 	}
 	
-	public void deletePlayerProfile(PlayerProfile pp) {
+	public void deletePlayerProfile(PlayerInfo.PlayerProfile pp) {
 		Log.d(TAG, "deletePlayerProfile()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(PLAYER_PROFILE_TABLE, 
@@ -318,7 +319,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	private ContentValues makeValuesFromPlayerProfile(PlayerProfile pp) {
+	private ContentValues makeValuesFromPlayerProfile(PlayerInfo.PlayerProfile pp) {
 		Log.d(TAG, "makeValuesFromPlayerProfile()");
 		ContentValues values = new ContentValues();
 		
@@ -333,9 +334,9 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return values;
 	}
 	
-	private PlayerProfile makePlayerProfileFromCursor(Cursor cursor) {
+	private PlayerInfo.PlayerProfile makePlayerProfileFromCursor(Cursor cursor) {
 		Log.d(TAG, "makePlayerProfileFromCursor()");
-		PlayerProfile pp = new PlayerProfile();
+		PlayerInfo.PlayerProfile pp = new PlayerInfo.PlayerProfile();
 		
 		pp.setUid(Integer.parseInt(cursor.getString(0)));
 		pp.setName(cursor.getString(1));
@@ -348,7 +349,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return pp;
 	}
 	
-	public void addPlayerRating(PlayerRating pr) {
+	public void addPlayerRating(PlayerInfo.PlayerRating pr) {
 		if (DEBUG) Log.d(TAG, "addPlayerRating()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromPlayerRating(pr);
@@ -356,7 +357,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public PlayerRating getPlayerRating(long uid) {
+	public PlayerInfo.PlayerRating getPlayerRating(long uid) {
 		if (DEBUG) Log.d(TAG, "getPlayerRating(), uid="+uid);
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(PLAYER_RATING_TABLE, 
@@ -368,20 +369,21 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		if (cursor != null)
 			cursor.moveToFirst();
 		
-		PlayerRating pr = makePlayerRatingFromCursor(cursor);
+		PlayerInfo.PlayerRating pr = makePlayerRatingFromCursor(cursor);
 		db.close();
 		return pr;
 	}
 	
-	public List<PlayerRating> getAllPlayerRating() {
+	public List<PlayerInfo.PlayerRating> getAllPlayerRating() {
 		if (DEBUG) Log.d(TAG, "getAllPlayerRating()");
-		List<PlayerRating> listPR = new ArrayList<PlayerRating>();
+		List<PlayerInfo.PlayerRating> listPR = 
+				new ArrayList<PlayerInfo.PlayerRating>();
 		String query = "SELECT * FROM " + PLAYER_RATING_TABLE;
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		if (cursor.moveToFirst()) {
 			do {
-				PlayerRating pr = makePlayerRatingFromCursor(cursor);
+				PlayerInfo.PlayerRating pr = makePlayerRatingFromCursor(cursor);
 				listPR.add(pr);
 			} while(cursor.moveToNext());
 		}
@@ -389,7 +391,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return listPR;
 	}
 	
-	public int updatePlayerRating(PlayerRating pr) {
+	public int updatePlayerRating(PlayerInfo.PlayerRating pr) {
 		if (DEBUG) Log.d(TAG, "updatePlayerRating()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromPlayerRating(pr);
@@ -401,7 +403,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return i;
 	}
 	
-	public void deletePlayerRating(PlayerRating pr) {
+	public void deletePlayerRating(PlayerInfo.PlayerRating pr) {
 		if (DEBUG) Log.d(TAG, "deletePlayerRating()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(PLAYER_RATING_TABLE, 
@@ -410,7 +412,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	private ContentValues makeValuesFromPlayerRating(PlayerRating pr) {
+	private ContentValues makeValuesFromPlayerRating(PlayerInfo.PlayerRating pr) {
 		if (DEBUG) Log.d(TAG, "makeValuesFromPlayerRating()");
 		ContentValues values = new ContentValues();
 		
@@ -432,9 +434,9 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return values;
 	}
 	
-	private PlayerRating makePlayerRatingFromCursor(Cursor cursor) {
+	private PlayerInfo.PlayerRating makePlayerRatingFromCursor(Cursor cursor) {
 		Log.d(TAG, "makePlayerRatingFromCursor()");
-		PlayerRating pr = new PlayerRating();
+		PlayerInfo.PlayerRating pr = new PlayerInfo.PlayerRating();
 		
 		pr.setUid(Integer.parseInt(cursor.getString(0)));
 		pr.setAttack(Integer.parseInt(cursor.getString(1)));

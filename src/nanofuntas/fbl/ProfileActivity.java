@@ -48,7 +48,7 @@ public class ProfileActivity extends Activity {
 		mUid = getIntent().getExtras().getLong(Config.KEY_UID);		
 		
 		FblSQLiteHelper db = new FblSQLiteHelper(this);
-    	PlayerProfile pp = db.getPlayerProfile(mUid);    	
+		PlayerInfo.PlayerProfile pp = db.getPlayerProfile(mUid);    	
     	mPlayerName.setText(pp.getName());
     	mPosition.setText(pp.getPosition());
     	
@@ -104,7 +104,7 @@ public class ProfileActivity extends Activity {
     	if (DEBUG) Log.d(TAG, "getAndSetPlayerStatus()");
     	
     	FblSQLiteHelper db = new FblSQLiteHelper(this);
-		PlayerRating pr = db.getPlayerRating((int)uid);
+    	PlayerInfo.PlayerRating pr = db.getPlayerRating((int)uid);
     	
 		int atkRating = (int) pr.getAttack();
     	int dfsRating = (int) pr.getDefense();

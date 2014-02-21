@@ -127,7 +127,7 @@ public class SplashScreenActivity extends Activity {
         	long cutRating = (Long)status.get(Config.KEY_CUTTING);
         	long ovrRating = (Long)status.get(Config.KEY_OVERALL);
         	
-        	PlayerRating pr = new PlayerRating();
+        	PlayerInfo.PlayerRating pr = new PlayerInfo.PlayerRating();
         	pr.setUid(uid);
         	pr.setAttack(atkRating);
     		pr.setDefense(dfsRating);
@@ -152,7 +152,7 @@ public class SplashScreenActivity extends Activity {
     		String weight = (String)status.get(Config.KEY_WEIGHT);
     		String foot = (String)status.get(Config.KEY_FOOT);
     		
-    		PlayerProfile pp = new PlayerProfile();
+    		PlayerInfo.PlayerProfile pp = new PlayerInfo.PlayerProfile();
     		pp.setUid(uid);
     		pp.setName(name);
     		pp.setPosition(position);
