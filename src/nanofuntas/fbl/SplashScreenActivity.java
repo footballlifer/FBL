@@ -38,9 +38,12 @@ public class SplashScreenActivity extends Activity {
 		long tid = Utils.getMyTid();
     	final JSONObject jsonMembersStatus = ServerIface.getMembersStatus(tid);
 
-    	new LoadImageThread(jsonMembersStatus).start();    	
-    	savePlayerStatusToDB(jsonMembersStatus, db);
+    	new LoadImagesThread(jsonMembersStatus).start();    	
+       	//savePlayerStatusToDB(jsonMembersStatus, db);
+    	new SavePlayerStatusThread(jsonMembersStatus, db).start();
     	saveTeamStatusToDB(jsonMembersStatus, db);
+    	// the following thread make crash
+    	//new SaveTeamStatusThread(jsonMembersStatus, db).start();
     	
     	Intent i = new Intent(SplashScreenActivity.this, TabViewActivity.class);
 		startActivity(i);
@@ -63,27 +66,43 @@ public class SplashScreenActivity extends Activity {
 		}
 	}
 	
-	private class LoadImageThread extends Thread {
+	private class LoadImagesThread extends Thread {
 		private JSONObject jsonMembersStatus;
-		LoadImageThread(JSONObject jsonMembersStatus) {
+		LoadImagesThread(JSONObject jsonMembersStatus) {
 			this.jsonMembersStatus = jsonMembersStatus;
 		}
 		
 		@Override
 		public void run() {
-			if (DEBUG) Log.d(TAG, "start loadImage thread");
-			final long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
-	    	for (long i = 1; i <= count; i++) {
-				JSONObject status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
-				long uid = (Long)status.get(Config.KEY_UID);
-				byte[] byteArray = ServerIface.downloadImage(uid);
-				Bitmap bitmap = null;
-				if (byteArray != null) {
-					bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-				}
-				if (bitmap != null)
-					saveProfileBitmap(bitmap, uid);
-			}
+			loadImagesToLocal(jsonMembersStatus);
+		}
+	}
+	
+	private class SavePlayerStatusThread extends Thread {
+		private JSONObject jsonMembersStatus;
+		private FblSQLiteHelper sqldb;
+		SavePlayerStatusThread(JSONObject status, FblSQLiteHelper db) {
+			this.jsonMembersStatus = status;
+			this.sqldb = db;
+		}
+		
+		@Override
+		public void run() {
+			savePlayerStatusToDB(jsonMembersStatus, sqldb);
+		}
+	}
+	
+	private class SaveTeamStatusThread extends Thread {
+		private JSONObject jsonMembersStatus;
+		private FblSQLiteHelper sqldb;
+		SaveTeamStatusThread(JSONObject status, FblSQLiteHelper db) {
+			this.jsonMembersStatus = status;
+			this.sqldb = db;
+		}
+		
+		@Override
+		public void run() {
+			saveTeamStatusToDB(jsonMembersStatus, sqldb);
 		}
 	}
 	
