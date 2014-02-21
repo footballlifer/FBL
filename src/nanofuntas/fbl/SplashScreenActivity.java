@@ -47,6 +47,22 @@ public class SplashScreenActivity extends Activity {
 		finish();
 	}
 	
+	private void loadImagesToLocal(JSONObject jsonMembersStatus) {
+		if (DEBUG) Log.d(TAG, "start loadImage thread");
+		final long count = (Long) jsonMembersStatus.get(Config.KEY_MEMBERS_COUNT);    	
+    	for (long i = 1; i <= count; i++) {
+			JSONObject status = (JSONObject) jsonMembersStatus.get(Long.toString(i));
+			long uid = (Long)status.get(Config.KEY_UID);
+			byte[] byteArray = ServerIface.downloadImage(uid);
+			Bitmap bitmap = null;
+			if (byteArray != null) {
+				bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+			}
+			if (bitmap != null)
+				saveProfileBitmap(bitmap, uid);
+		}
+	}
+	
 	private class LoadImageThread extends Thread {
 		private JSONObject jsonMembersStatus;
 		LoadImageThread(JSONObject jsonMembersStatus) {
@@ -176,7 +192,7 @@ public class SplashScreenActivity extends Activity {
     	long tmMtl = (Long)teamStatus.get(Config.KEY_TEAM_MTL);
     	long tmOvr = (Long)teamStatus.get(Config.KEY_TEAM_OVERALL);    	    	
     	
-    	TeamLevel tl = new TeamLevel();
+    	TeamInfo.TeamLevel tl = new TeamInfo.TeamLevel();
     	tl.setTid(tid);
     	tl.setATK(tmAtk);
     	tl.setDFS(tmDfs);
@@ -201,7 +217,7 @@ public class SplashScreenActivity extends Activity {
     	long cutRating = (Long)teamStatus.get(Config.KEY_CUTTING);
     	long ovrRating = (Long)teamStatus.get(Config.KEY_OVERALL);  	
     	
-    	TeamRating tr = new TeamRating();
+    	TeamInfo.TeamRating tr = new TeamInfo.TeamRating();
     	tr.setTid(tid);
     	tr.setAttack(atkRating);
     	tr.setDefense(dfsRating);
@@ -219,7 +235,7 @@ public class SplashScreenActivity extends Activity {
     	db.addTeamRating(tr);
     	
     	String teamName = (String)teamStatus.get(Config.KEY_TEAM_NAME);
-    	TeamProfile tp = new TeamProfile(tid, teamName);
+    	TeamInfo.TeamProfile tp = new TeamInfo.TeamProfile(tid, teamName);
     	db.addTeamProfile(tp);
 	}
 

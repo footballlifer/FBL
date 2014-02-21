@@ -220,13 +220,10 @@ public class TabViewActivity extends FragmentActivity {
         		return;
         	}
         	
-        	JSONObject status = ServerIface.getTeamStatus(tid);
-        	Log.d(TAG, "team status:" + status);
-        	
         	FblSQLiteHelper db = new FblSQLiteHelper(getActivity());
-        	TeamProfile tp = db.getTeamProfile(tid);
-        	TeamRating tr = db.getTeamRating(tid);
-        	TeamLevel tl = db.getTeamLevel(tid);
+        	TeamInfo.TeamProfile tp = db.getTeamProfile(tid);
+        	TeamInfo.TeamRating tr = db.getTeamRating(tid);
+        	TeamInfo.TeamLevel tl = db.getTeamLevel(tid);
         	
         	mTeamName.setText( tp.getTeamName() );
         	

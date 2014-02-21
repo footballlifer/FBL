@@ -254,7 +254,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public void addTeamProfile(TeamProfile tp) {
+	public void addTeamProfile(TeamInfo.TeamProfile tp) {
 		if (DEBUG) Log.d(TAG, "addTeamProfile()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromTeamProfile(tp);
@@ -262,7 +262,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	private ContentValues makeValuesFromTeamProfile(TeamProfile tp) {
+	private ContentValues makeValuesFromTeamProfile(TeamInfo.TeamProfile tp) {
 		Log.d(TAG, "makeValuesFromTeamProfile()");
 		ContentValues values = new ContentValues();
 		values.put(Config.KEY_TID, tp.getTid());
@@ -271,7 +271,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return values;
 	}
 
-	public TeamProfile getTeamProfile(long tid) {
+	public TeamInfo.TeamProfile getTeamProfile(long tid) {
 		if (DEBUG) Log.d(TAG, "getTeamProfile(), tid="+tid);
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(TEAM_PROFILE_TABLE, 
@@ -283,21 +283,21 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		if (cursor != null)
 			cursor.moveToFirst();
 		
-		TeamProfile tp = makeTeamProfileFromCursor(cursor);
+		TeamInfo.TeamProfile tp = makeTeamProfileFromCursor(cursor);
 		db.close();
 		return tp;
 	}
 	
-	private TeamProfile makeTeamProfileFromCursor(Cursor cursor) {
+	private TeamInfo.TeamProfile makeTeamProfileFromCursor(Cursor cursor) {
 		Log.d(TAG, "makeTeamProfileFromCursor()");
-		TeamProfile tp = new TeamProfile();
+		TeamInfo.TeamProfile tp = new TeamInfo.TeamProfile();
 		
 		tp.setTid(cursor.getInt(0));
 		tp.setTeamName(cursor.getString(1));
 		return tp;
 	}
 
-	public int updateTeamProfile(TeamProfile tp) {
+	public int updateTeamProfile(TeamInfo.TeamProfile tp) {
 		Log.d(TAG, "updateTeamProfile()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromTeamProfile(tp);
@@ -309,7 +309,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return i;
 	}
 	
-	public void deleteTeamProfile(TeamProfile tp) {
+	public void deleteTeamProfile(TeamInfo.TeamProfile tp) {
 		Log.d(TAG, "deleteTeamProfile()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TEAM_PROFILE_TABLE, 
@@ -454,7 +454,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return pr;
 	}
 	
-	public void addTeamRating(TeamRating tr) {
+	public void addTeamRating(TeamInfo.TeamRating tr) {
 		if (DEBUG) Log.d(TAG, "addTeamRating()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromTeamRating(tr);
@@ -462,7 +462,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public TeamRating getTeamRating(long tid) {
+	public TeamInfo.TeamRating getTeamRating(long tid) {
 		if (DEBUG) Log.d(TAG, "getTeamRating(), tid="+tid);
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(TEAM_RATING_TABLE, 
@@ -474,12 +474,12 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		if (cursor != null)
 			cursor.moveToFirst();
 		
-		TeamRating tr = makeTeamRatingFromCursor(cursor);
+		TeamInfo.TeamRating tr = makeTeamRatingFromCursor(cursor);
 		db.close();
 		return tr;
 	}
 	
-	public int updateTeamRating(TeamRating tr) {
+	public int updateTeamRating(TeamInfo.TeamRating tr) {
 		if (DEBUG) Log.d(TAG, "updateTeamRating()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromTeamRating(tr);
@@ -491,7 +491,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return i;
 	}
 	
-	public void deleteTeamRating(TeamRating tr) {
+	public void deleteTeamRating(TeamInfo.TeamRating tr) {
 		if (DEBUG) Log.d(TAG, "deleteTeamRating()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TEAM_RATING_TABLE, 
@@ -500,7 +500,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	private ContentValues makeValuesFromTeamRating(TeamRating tr) {
+	private ContentValues makeValuesFromTeamRating(TeamInfo.TeamRating tr) {
 		if (DEBUG) Log.d(TAG, "makeValuesFromTeamRating()");
 		ContentValues values = new ContentValues();
 		
@@ -522,9 +522,9 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return values;
 	}
 	
-	private TeamRating makeTeamRatingFromCursor(Cursor cursor) {
+	private TeamInfo.TeamRating makeTeamRatingFromCursor(Cursor cursor) {
 		Log.d(TAG, "makeTeamRatingFromCursor()");
-		TeamRating tr = new TeamRating();
+		TeamInfo.TeamRating tr = new TeamInfo.TeamRating();
 		
 		tr.setTid(Integer.parseInt(cursor.getString(0)));
 		tr.setAttack(Integer.parseInt(cursor.getString(1)));
@@ -544,14 +544,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return tr;
 	}
 	
-	
-	
-	
-	
-	
-	
-	//TODOs
-	public void addTeamLevel(TeamLevel tl) {
+	public void addTeamLevel(TeamInfo.TeamLevel tl) {
 		if (DEBUG) Log.d(TAG, "addTeamLevel()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromTeamLevel(tl);
@@ -559,7 +552,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public TeamLevel getTeamLevel(long tid) {
+	public TeamInfo.TeamLevel getTeamLevel(long tid) {
 		if (DEBUG) Log.d(TAG, "getTeamLevel(), tid="+tid);
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(TEAM_LEVEL_TABLE, 
@@ -571,12 +564,12 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		if (cursor != null)
 			cursor.moveToFirst();
 		
-		TeamLevel tl = makeTeamLevelFromCursor(cursor);
+		TeamInfo.TeamLevel tl = makeTeamLevelFromCursor(cursor);
 		db.close();
 		return tl;
 	}
 	
-	public int updateTeamLevel(TeamLevel tl) {
+	public int updateTeamLevel(TeamInfo.TeamLevel tl) {
 		if (DEBUG) Log.d(TAG, "updateTeamLevel()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = makeValuesFromTeamLevel(tl);
@@ -588,7 +581,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return i;
 	}
 	
-	public void deleteTeamLevel(TeamLevel tl) {
+	public void deleteTeamLevel(TeamInfo.TeamLevel tl) {
 		if (DEBUG) Log.d(TAG, "deleteTeamLevel()");
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TEAM_LEVEL_TABLE, 
@@ -597,7 +590,7 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	private ContentValues makeValuesFromTeamLevel(TeamLevel tl) {
+	private ContentValues makeValuesFromTeamLevel(TeamInfo.TeamLevel tl) {
 		if (DEBUG) Log.d(TAG, "makeValuesFromTeamLevel()");
 		ContentValues values = new ContentValues();
 		
@@ -613,9 +606,9 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		return values;
 	}
 	
-	private TeamLevel makeTeamLevelFromCursor(Cursor cursor) {
+	private TeamInfo.TeamLevel makeTeamLevelFromCursor(Cursor cursor) {
 		Log.d(TAG, "makeTeamLevelFromCursor()");
-		TeamLevel tl = new TeamLevel();
+		TeamInfo.TeamLevel tl = new TeamInfo.TeamLevel();
 		
 		tl.setTid(Integer.parseInt(cursor.getString(0)));
 		tl.setATK(Integer.parseInt(cursor.getString(1)));
