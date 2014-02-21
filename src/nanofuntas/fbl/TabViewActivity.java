@@ -223,16 +223,21 @@ public class TabViewActivity extends FragmentActivity {
         	JSONObject status = ServerIface.getTeamStatus(tid);
         	Log.d(TAG, "team status:" + status);
         	
-        	mTeamName.setText( (String)status.get(Config.KEY_TEAM_NAME) );
+        	FblSQLiteHelper db = new FblSQLiteHelper(getActivity());
+        	TeamProfile tp = db.getTeamProfile(tid);
+        	TeamRating tr = db.getTeamRating(tid);
+        	TeamLevel tl = db.getTeamLevel(tid);
         	
-        	long tmAtkR = (Long)status.get(Config.KEY_TEAM_ATK);
-        	long tmDfsR = (Long)status.get(Config.KEY_TEAM_DFS);
-        	long tmTecR = (Long)status.get(Config.KEY_TEAM_TEC);
-        	long tmPhyR = (Long)status.get(Config.KEY_TEAM_PHY);
-        	long tmTwkR = (Long)status.get(Config.KEY_TEAM_TWK);
-        	long tmMtlR = (Long)status.get(Config.KEY_TEAM_MTL);
-        	long tmOvrR = (Long)status.get(Config.KEY_TEAM_OVERALL);    	    	
-        	    	
+        	mTeamName.setText( tp.getTeamName() );
+        	
+        	long tmAtkR = tl.getATK();
+        	long tmDfsR = tl.getDFS();
+        	long tmTecR = tl.getTEC();
+        	long tmPhyR = tl.getPHY();
+        	long tmTwkR = tl.getTWK();
+        	long tmMtlR = tl.getMTL();
+        	long tmOvrR = tl.getOVERALL();
+        	
         	Utils.setTextAndColor(mTeamATKRating, (int)tmAtkR);
         	Utils.setTextAndColor(mTeamDFSRating, (int)tmDfsR);
         	Utils.setTextAndColor(mTeamTECRating, (int)tmTecR);
@@ -241,19 +246,19 @@ public class TabViewActivity extends FragmentActivity {
         	Utils.setTextAndColor(mTeamMTLRating, (int)tmMtlR);    	
         	Utils.setTextAndColor(mTeamOVERating, (int)tmOvrR);
         	
-        	long atkRating = (Long)status.get(Config.KEY_ATTACK);
-        	long dfsRating = (Long)status.get(Config.KEY_DEFENSE);
-        	long twkRating = (Long)status.get(Config.KEY_TEAMWORK);
-        	long mtlRating = (Long)status.get(Config.KEY_MENTAL);
-        	long powRating = (Long)status.get(Config.KEY_POWER);
-        	long spdRating = (Long)status.get(Config.KEY_SPEED);
-        	long staRating = (Long)status.get(Config.KEY_STAMINA);
-        	long blcRating = (Long)status.get(Config.KEY_BALL_CONTROL);
-        	long pasRating = (Long)status.get(Config.KEY_PASS);
-        	long shtRating = (Long)status.get(Config.KEY_SHOT);
-        	long hdrRating = (Long)status.get(Config.KEY_HEADER);
-        	long cutRating = (Long)status.get(Config.KEY_CUTTING);
-        	long ovrRating = (Long)status.get(Config.KEY_OVERALL);  	
+        	long atkRating = tr.getAttack();
+        	long dfsRating = tr.getDefense();
+        	long twkRating = tr.getTeamwork();
+        	long mtlRating = tr.getMental();
+        	long powRating = tr.getPower();
+        	long spdRating = tr.getSpeed();
+        	long staRating = tr.getStamina();
+        	long blcRating = tr.getBallControl();
+        	long pasRating = tr.getPass();
+        	long shtRating = tr.getShot();
+        	long hdrRating = tr.getHeader();
+        	long cutRating = tr.getCutting();
+        	long ovrRating = tr.getOverall();
         	
         	Utils.setTextAndColor(mTeamAttackRating, (int)atkRating);
         	Utils.setTextAndColor(mTeamDefenseRating, (int)dfsRating);

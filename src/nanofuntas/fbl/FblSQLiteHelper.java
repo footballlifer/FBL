@@ -71,7 +71,79 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		Config.KEY_AGE,
 		Config.KEY_HEIGHT,
 		Config.KEY_WEIGHT,
-		Config.KEY_FOOT,};
+		Config.KEY_FOOT,
+	};
+	
+	private static final String TEAM_RATING_TABLE = "team_rating";
+	private static final String CREATE_TEAM_RATING_TABLE 
+		= "CREATE TABLE " + TEAM_RATING_TABLE + " ( " 
+		//+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "  
+		+ Config.KEY_TID + " INTEGER, "  			
+		+ Config.KEY_ATTACK + " INTEGER, "
+		+ Config.KEY_DEFENSE + " INTEGER, "
+		+ Config.KEY_TEAMWORK + " INTEGER, "
+		+ Config.KEY_MENTAL + " INTEGER, "
+		+ Config.KEY_POWER + " INTEGER, "
+		+ Config.KEY_SPEED + " INTEGER, "
+		+ Config.KEY_STAMINA + " INTEGER, "
+		+ Config.KEY_BALL_CONTROL + " INTEGER, "
+		+ Config.KEY_PASS + " INTEGER, "
+		+ Config.KEY_SHOT + " INTEGER, "
+		+ Config.KEY_HEADER + " INTEGER, "
+		+ Config.KEY_CUTTING + " INTEGER, "
+		+ Config.KEY_OVERALL + " INTEGER )";
+	
+	private static final String[] TEAM_RATING_COLUMNS = {
+		Config.KEY_TID,
+		Config.KEY_ATTACK,
+		Config.KEY_DEFENSE,
+		Config.KEY_TEAMWORK,
+		Config.KEY_MENTAL,
+		Config.KEY_POWER,
+		Config.KEY_SPEED,
+		Config.KEY_STAMINA,
+		Config.KEY_BALL_CONTROL,
+		Config.KEY_PASS,
+		Config.KEY_SHOT,
+		Config.KEY_HEADER,
+		Config.KEY_CUTTING,
+		Config.KEY_OVERALL,
+	};
+	
+	private static final String TEAM_PROFILE_TABLE = "team_profile";
+	private static final String CREATE_TEAM_PROFILE_TABLE 
+		= "CREATE TABLE " + TEAM_PROFILE_TABLE + " ( " 
+		+ Config.KEY_TID + " INTEGER, "  			
+		+ Config.KEY_TEAM_NAME + " TEXT " + ")";
+	
+	private static final String[] TEAM_PROFILE_COLUMNS = {
+		Config.KEY_TID,
+		Config.KEY_TEAM_NAME,
+	};
+	
+	private static final String TEAM_LEVEL_TABLE = "team_level";
+	private static final String CREATE_TEAM_LEVEL_TABLE 
+		= "CREATE TABLE " + TEAM_LEVEL_TABLE + " ( " 
+		//+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "  
+		+ Config.KEY_TID + " INTEGER, "  			
+		+ Config.KEY_TEAM_ATK + " INTEGER, "
+		+ Config.KEY_TEAM_DFS + " INTEGER, "
+		+ Config.KEY_TEAM_TEC + " INTEGER, "
+		+ Config.KEY_TEAM_PHY + " INTEGER, "
+		+ Config.KEY_TEAM_TWK + " INTEGER, "
+		+ Config.KEY_TEAM_MTL + " INTEGER, "
+		+ Config.KEY_TEAM_OVERALL + " INTEGER )";
+	
+	private static final String[] TEAM_LEVEL_COLUMNS = {
+		Config.KEY_TID,
+		Config.KEY_TEAM_ATK,
+		Config.KEY_TEAM_DFS,
+		Config.KEY_TEAM_TEC,
+		Config.KEY_TEAM_PHY,
+		Config.KEY_TEAM_TWK,
+		Config.KEY_TEAM_MTL,
+		Config.KEY_TEAM_OVERALL,
+	};
 	
 	public FblSQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -82,6 +154,9 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		if (DEBUG) Log.d(TAG, "onCreate()");
 		db.execSQL(CREATE_PLAYER_RATING_TABLE);
 		db.execSQL(CREATE_PLAYER_PROFILE_TABLE);
+		db.execSQL(CREATE_TEAM_RATING_TABLE);
+		db.execSQL(CREATE_TEAM_PROFILE_TABLE);
+		db.execSQL(CREATE_TEAM_LEVEL_TABLE);
 	}
 	
 	@Override
@@ -89,6 +164,9 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		if (DEBUG) Log.d(TAG, "onUpgrade()");
 		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_RATING_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_PROFILE_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + TEAM_RATING_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + TEAM_PROFILE_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + TEAM_LEVEL_TABLE);
 		this.onCreate(db);
 	}
 	
@@ -97,6 +175,9 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL(CREATE_PLAYER_RATING_TABLE);
 		db.execSQL(CREATE_PLAYER_PROFILE_TABLE);
+		db.execSQL(CREATE_TEAM_RATING_TABLE);
+		db.execSQL(CREATE_TEAM_PROFILE_TABLE);
+		db.execSQL(CREATE_TEAM_LEVEL_TABLE);
 		db.close();
 	}
 	
@@ -105,6 +186,9 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_RATING_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + PLAYER_PROFILE_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + TEAM_RATING_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + TEAM_PROFILE_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + TEAM_LEVEL_TABLE);
 		db.close();
 	}
 	
@@ -167,6 +251,70 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		db.delete(PLAYER_PROFILE_TABLE, 
 				Config.KEY_UID + " = ?", 
 				new String[] {String.valueOf(pp.getUid())});
+		db.close();
+	}
+	
+	public void addTeamProfile(TeamProfile tp) {
+		if (DEBUG) Log.d(TAG, "addTeamProfile()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromTeamProfile(tp);
+		db.insert(TEAM_PROFILE_TABLE, null, values);
+		db.close();
+	}
+	
+	private ContentValues makeValuesFromTeamProfile(TeamProfile tp) {
+		Log.d(TAG, "makeValuesFromTeamProfile()");
+		ContentValues values = new ContentValues();
+		values.put(Config.KEY_TID, tp.getTid());
+		values.put(Config.KEY_TEAM_NAME, tp.getTeamName());
+		
+		return values;
+	}
+
+	public TeamProfile getTeamProfile(long tid) {
+		if (DEBUG) Log.d(TAG, "getTeamProfile(), tid="+tid);
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query(TEAM_PROFILE_TABLE, 
+				TEAM_PROFILE_COLUMNS,
+				" " + Config.KEY_TID + " = ?", 
+				new String[] {String.valueOf(tid)},
+				null, null, null, null);
+		
+		if (cursor != null)
+			cursor.moveToFirst();
+		
+		TeamProfile tp = makeTeamProfileFromCursor(cursor);
+		db.close();
+		return tp;
+	}
+	
+	private TeamProfile makeTeamProfileFromCursor(Cursor cursor) {
+		Log.d(TAG, "makeTeamProfileFromCursor()");
+		TeamProfile tp = new TeamProfile();
+		
+		tp.setTid(cursor.getInt(0));
+		tp.setTeamName(cursor.getString(1));
+		return tp;
+	}
+
+	public int updateTeamProfile(TeamProfile tp) {
+		Log.d(TAG, "updateTeamProfile()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromTeamProfile(tp);
+		
+		int i = db.update(TEAM_PROFILE_TABLE, values,
+				Config.KEY_TID + " =?", 
+				new String[] {String.valueOf(tp.getTid())});
+		db.close();
+		return i;
+	}
+	
+	public void deleteTeamProfile(TeamProfile tp) {
+		Log.d(TAG, "deleteTeamProfile()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TEAM_PROFILE_TABLE, 
+				Config.KEY_TID + " = ?", 
+				new String[] {String.valueOf(tp.getTid())});
 		db.close();
 	}
 	
@@ -305,4 +453,180 @@ public class FblSQLiteHelper extends SQLiteOpenHelper {
 		
 		return pr;
 	}
+	
+	public void addTeamRating(TeamRating tr) {
+		if (DEBUG) Log.d(TAG, "addTeamRating()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromTeamRating(tr);
+		db.insert(TEAM_RATING_TABLE, null, values);
+		db.close();
+	}
+	
+	public TeamRating getTeamRating(long tid) {
+		if (DEBUG) Log.d(TAG, "getTeamRating(), tid="+tid);
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query(TEAM_RATING_TABLE, 
+				TEAM_RATING_COLUMNS,
+				" " + Config.KEY_TID + " = ?", 
+				new String[] {String.valueOf(tid)},
+				null, null, null, null);
+		
+		if (cursor != null)
+			cursor.moveToFirst();
+		
+		TeamRating tr = makeTeamRatingFromCursor(cursor);
+		db.close();
+		return tr;
+	}
+	
+	public int updateTeamRating(TeamRating tr) {
+		if (DEBUG) Log.d(TAG, "updateTeamRating()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromTeamRating(tr);
+		
+		int i = db.update(TEAM_RATING_TABLE, values,
+				Config.KEY_TID + " =?", 
+				new String[] {String.valueOf(tr.getTid())});
+		db.close();
+		return i;
+	}
+	
+	public void deleteTeamRating(TeamRating tr) {
+		if (DEBUG) Log.d(TAG, "deleteTeamRating()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TEAM_RATING_TABLE, 
+				Config.KEY_TID + " = ?", 
+				new String[] {String.valueOf(tr.getTid())});
+		db.close();
+	}
+	
+	private ContentValues makeValuesFromTeamRating(TeamRating tr) {
+		if (DEBUG) Log.d(TAG, "makeValuesFromTeamRating()");
+		ContentValues values = new ContentValues();
+		
+		values.put(Config.KEY_TID, tr.getTid());
+		values.put(Config.KEY_ATTACK, tr.getAttack());
+		values.put(Config.KEY_DEFENSE, tr.getDefense());
+		values.put(Config.KEY_TEAMWORK, tr.getTeamwork());
+		values.put(Config.KEY_MENTAL, tr.getMental());
+		values.put(Config.KEY_POWER, tr.getPower());
+		values.put(Config.KEY_SPEED, tr.getSpeed());
+		values.put(Config.KEY_STAMINA, tr.getStamina());
+		values.put(Config.KEY_BALL_CONTROL, tr.getBallControl());
+		values.put(Config.KEY_PASS, tr.getPass());
+		values.put(Config.KEY_SHOT, tr.getShot());
+		values.put(Config.KEY_HEADER, tr.getHeader());
+		values.put(Config.KEY_CUTTING, tr.getCutting());
+		values.put(Config.KEY_OVERALL, tr.getOverall());
+		
+		return values;
+	}
+	
+	private TeamRating makeTeamRatingFromCursor(Cursor cursor) {
+		Log.d(TAG, "makeTeamRatingFromCursor()");
+		TeamRating tr = new TeamRating();
+		
+		tr.setTid(Integer.parseInt(cursor.getString(0)));
+		tr.setAttack(Integer.parseInt(cursor.getString(1)));
+		tr.setDefense(Integer.parseInt(cursor.getString(2)));
+		tr.setTeamwork(Integer.parseInt(cursor.getString(3)));
+		tr.setMental(Integer.parseInt(cursor.getString(4)));
+		tr.setPower(Integer.parseInt(cursor.getString(5)));
+		tr.setSpeed(Integer.parseInt(cursor.getString(6)));
+		tr.setStamina(Integer.parseInt(cursor.getString(7)));
+		tr.setBallControl(Integer.parseInt(cursor.getString(8)));
+		tr.setPass(Integer.parseInt(cursor.getString(9)));
+		tr.setShot(Integer.parseInt(cursor.getString(10)));
+		tr.setHeader(Integer.parseInt(cursor.getString(11)));
+		tr.setCutting(Integer.parseInt(cursor.getString(12)));
+		tr.setOverall(Integer.parseInt(cursor.getString(13)));
+		
+		return tr;
+	}
+	
+	
+	
+	
+	
+	
+	
+	//TODOs
+	public void addTeamLevel(TeamLevel tl) {
+		if (DEBUG) Log.d(TAG, "addTeamLevel()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromTeamLevel(tl);
+		db.insert(TEAM_LEVEL_TABLE, null, values);
+		db.close();
+	}
+	
+	public TeamLevel getTeamLevel(long tid) {
+		if (DEBUG) Log.d(TAG, "getTeamLevel(), tid="+tid);
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query(TEAM_LEVEL_TABLE, 
+				TEAM_LEVEL_COLUMNS,
+				" " + Config.KEY_TID + " = ?", 
+				new String[] {String.valueOf(tid)},
+				null, null, null, null);
+		
+		if (cursor != null)
+			cursor.moveToFirst();
+		
+		TeamLevel tl = makeTeamLevelFromCursor(cursor);
+		db.close();
+		return tl;
+	}
+	
+	public int updateTeamLevel(TeamLevel tl) {
+		if (DEBUG) Log.d(TAG, "updateTeamLevel()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = makeValuesFromTeamLevel(tl);
+		
+		int i = db.update(TEAM_LEVEL_TABLE, values,
+				Config.KEY_TID + " =?", 
+				new String[] {String.valueOf(tl.getTid())});
+		db.close();
+		return i;
+	}
+	
+	public void deleteTeamLevel(TeamLevel tl) {
+		if (DEBUG) Log.d(TAG, "deleteTeamLevel()");
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TEAM_LEVEL_TABLE, 
+				Config.KEY_TID + " = ?", 
+				new String[] {String.valueOf(tl.getTid())});
+		db.close();
+	}
+	
+	private ContentValues makeValuesFromTeamLevel(TeamLevel tl) {
+		if (DEBUG) Log.d(TAG, "makeValuesFromTeamLevel()");
+		ContentValues values = new ContentValues();
+		
+		values.put(Config.KEY_TID, tl.getTid());
+		values.put(Config.KEY_TEAM_ATK, tl.getATK());
+		values.put(Config.KEY_TEAM_DFS, tl.getDFS());
+		values.put(Config.KEY_TEAM_TEC, tl.getTEC());
+		values.put(Config.KEY_TEAM_PHY, tl.getPHY());
+		values.put(Config.KEY_TEAM_TWK, tl.getTWK());
+		values.put(Config.KEY_TEAM_MTL, tl.getMTL());
+		values.put(Config.KEY_TEAM_OVERALL, tl.getOVERALL());
+
+		return values;
+	}
+	
+	private TeamLevel makeTeamLevelFromCursor(Cursor cursor) {
+		Log.d(TAG, "makeTeamLevelFromCursor()");
+		TeamLevel tl = new TeamLevel();
+		
+		tl.setTid(Integer.parseInt(cursor.getString(0)));
+		tl.setATK(Integer.parseInt(cursor.getString(1)));
+		tl.setDFS(Integer.parseInt(cursor.getString(2)));
+		tl.setTEC(Integer.parseInt(cursor.getString(3)));
+		tl.setPHY(Integer.parseInt(cursor.getString(4)));
+		tl.setTWK(Integer.parseInt(cursor.getString(5)));
+		tl.setMTL(Integer.parseInt(cursor.getString(6)));
+		tl.setOVERALL(Integer.parseInt(cursor.getString(7)));
+		
+		return tl;
+	}
+	
 }

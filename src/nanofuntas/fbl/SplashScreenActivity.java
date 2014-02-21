@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
@@ -39,7 +40,8 @@ public class SplashScreenActivity extends Activity {
 
     	new LoadImageThread(jsonMembersStatus).start();    	
     	savePlayerStatusToDB(jsonMembersStatus, db);
-		
+    	saveTeamStatusToDB(jsonMembersStatus, db);
+    	
     	Intent i = new Intent(SplashScreenActivity.this, TabViewActivity.class);
 		startActivity(i);
 		finish();
@@ -154,6 +156,73 @@ public class SplashScreenActivity extends Activity {
 		}
 	}
 	
+	private void saveTeamStatusToDB(JSONObject jsonTeamStatus, FblSQLiteHelper db) {
+		if (DEBUG) Log.d(TAG, "getAndSetTeamStatus()");
+    	
+    	long tid = Utils.getMyTid();
+    	if (tid <=0 ) {
+    		if (DEBUG) Log.d(TAG, "tid <= 0, return");
+    		return;
+    	}
+    	
+    	JSONObject teamStatus = ServerIface.getTeamStatus(tid);
+    	Log.d(TAG, "team status:" + teamStatus);
+    	
+    	long tmAtk = (Long)teamStatus.get(Config.KEY_TEAM_ATK);
+    	long tmDfs = (Long)teamStatus.get(Config.KEY_TEAM_DFS);
+    	long tmTec = (Long)teamStatus.get(Config.KEY_TEAM_TEC);
+    	long tmPhy = (Long)teamStatus.get(Config.KEY_TEAM_PHY);
+    	long tmTwk = (Long)teamStatus.get(Config.KEY_TEAM_TWK);
+    	long tmMtl = (Long)teamStatus.get(Config.KEY_TEAM_MTL);
+    	long tmOvr = (Long)teamStatus.get(Config.KEY_TEAM_OVERALL);    	    	
+    	
+    	TeamLevel tl = new TeamLevel();
+    	tl.setTid(tid);
+    	tl.setATK(tmAtk);
+    	tl.setDFS(tmDfs);
+    	tl.setTEC(tmTec);
+    	tl.setPHY(tmPhy);
+    	tl.setTWK(tmTwk);
+    	tl.setMTL(tmMtl);
+    	tl.setOVERALL(tmOvr);
+    	db.addTeamLevel(tl);
+    	
+    	long atkRating = (Long)teamStatus.get(Config.KEY_ATTACK);
+    	long dfsRating = (Long)teamStatus.get(Config.KEY_DEFENSE);
+    	long twkRating = (Long)teamStatus.get(Config.KEY_TEAMWORK);
+    	long mtlRating = (Long)teamStatus.get(Config.KEY_MENTAL);
+    	long powRating = (Long)teamStatus.get(Config.KEY_POWER);
+    	long spdRating = (Long)teamStatus.get(Config.KEY_SPEED);
+    	long staRating = (Long)teamStatus.get(Config.KEY_STAMINA);
+    	long blcRating = (Long)teamStatus.get(Config.KEY_BALL_CONTROL);
+    	long pasRating = (Long)teamStatus.get(Config.KEY_PASS);
+    	long shtRating = (Long)teamStatus.get(Config.KEY_SHOT);
+    	long hdrRating = (Long)teamStatus.get(Config.KEY_HEADER);
+    	long cutRating = (Long)teamStatus.get(Config.KEY_CUTTING);
+    	long ovrRating = (Long)teamStatus.get(Config.KEY_OVERALL);  	
+    	
+    	TeamRating tr = new TeamRating();
+    	tr.setTid(tid);
+    	tr.setAttack(atkRating);
+    	tr.setDefense(dfsRating);
+    	tr.setTeamwork(twkRating);
+    	tr.setMental(mtlRating);
+    	tr.setPower(powRating);
+    	tr.setSpeed(spdRating);
+    	tr.setStamina(staRating);
+    	tr.setBallControl(blcRating);
+    	tr.setPass(pasRating);
+    	tr.setShot(shtRating);
+    	tr.setHeader(hdrRating);
+    	tr.setCutting(cutRating);
+    	tr.setOverall(ovrRating);
+    	db.addTeamRating(tr);
+    	
+    	String teamName = (String)teamStatus.get(Config.KEY_TEAM_NAME);
+    	TeamProfile tp = new TeamProfile(tid, teamName);
+    	db.addTeamProfile(tp);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
