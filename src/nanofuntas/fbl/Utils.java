@@ -110,4 +110,23 @@ public class Utils {
 
     }
 	
+	public static void setLevelFromRating(TextView tv, int rating) {
+		if (50 <= rating && rating <= 59) {
+    		tv.setTextColor(Color.WHITE);
+        	tv.setText("E");
+    	} else if (60 <= rating && rating <= 69) {
+    		tv.setTextColor(Color.WHITE);
+        	tv.setText("D");
+    	} else if (70 <= rating && rating <= 79) {
+    		tv.setTextColor(Color.WHITE);
+        	tv.setText("C");
+    	} else if (80 <= rating && rating <= 89) {
+    		tv.setTextColor(Color.YELLOW);
+        	tv.setText("B");
+    	} else if (90 <= rating && rating <= 100) {
+    		tv.setTextColor(Color.RED);
+        	tv.setText("A");
+    	}
+	}
+	
 }

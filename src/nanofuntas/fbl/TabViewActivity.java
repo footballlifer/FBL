@@ -235,13 +235,13 @@ public class TabViewActivity extends FragmentActivity {
         	long tmMtlR = tl.getMTL();
         	long tmOvrR = tl.getOVERALL();
         	
-        	Utils.setTextAndColor(mTeamATKRating, (int)tmAtkR);
-        	Utils.setTextAndColor(mTeamDFSRating, (int)tmDfsR);
-        	Utils.setTextAndColor(mTeamTECRating, (int)tmTecR);
-        	Utils.setTextAndColor(mTeamPHYRating, (int)tmPhyR);
-        	Utils.setTextAndColor(mTeamTWKRating, (int)tmTwkR);
-        	Utils.setTextAndColor(mTeamMTLRating, (int)tmMtlR);    	
-        	Utils.setTextAndColor(mTeamOVERating, (int)tmOvrR);
+        	Utils.setLevelFromRating(mTeamATKRating, (int)tmAtkR);
+        	Utils.setLevelFromRating(mTeamDFSRating, (int)tmDfsR);
+        	Utils.setLevelFromRating(mTeamTECRating, (int)tmTecR);
+        	Utils.setLevelFromRating(mTeamPHYRating, (int)tmPhyR);
+        	Utils.setLevelFromRating(mTeamTWKRating, (int)tmTwkR);
+        	Utils.setLevelFromRating(mTeamMTLRating, (int)tmMtlR);    	
+        	Utils.setLevelFromRating(mTeamOVERating, (int)tmOvrR);
         	
         	long atkRating = tr.getAttack();
         	long dfsRating = tr.getDefense();
