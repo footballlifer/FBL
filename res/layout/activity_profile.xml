@@ -324,7 +324,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="WU YONGSHOU"
+            android:text="WU"
             android:textAppearance="?android:attr/textAppearanceMedium" 
             android:textColor="@android:color/white"/>
 
@@ -332,21 +332,43 @@
             android:id="@+id/position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/player_name"
-            android:text="Position"
+            android:text="FW"
             android:textAppearance="?android:attr/textAppearanceMedium" 
             android:textColor="@android:color/white"/>
-
+        
         <TextView
-            android:id="@+id/position_value"
+            android:id="@+id/height_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/position"
-            android:text="FW"
+            android:text="180cm/75kg"
             android:textAppearance="?android:attr/textAppearanceMedium" 
             android:textColor="@android:color/white"/>
+        
+        <TextView
+            android:id="@+id/foot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/height_weight"
+            android:text="Right"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
+        
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/foot"
+            android:text="26"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:textColor="@android:color/white"/>
+        
+        
     </RelativeLayout>
     
 </RelativeLayout>

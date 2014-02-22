@@ -20,6 +20,10 @@ public class ProfileActivity extends Activity {
 	
     private TextView mPlayerName;
     private TextView mPosition;
+    private TextView mHeightWeight;
+    private TextView mFoot;
+    private TextView mAge;
+    
     private ImageView mImageView;
     
     private TextView mAttackRating;
@@ -72,7 +76,11 @@ public class ProfileActivity extends Activity {
     	if (DEBUG) Log.d(TAG, "initView()");
     	
     	mPlayerName = (TextView) findViewById(R.id.player_name);
-    	mPosition = (TextView) findViewById(R.id.position_value);
+    	mPosition = (TextView) findViewById(R.id.position);
+    	mHeightWeight = (TextView) findViewById(R.id.height_weight);
+    	mFoot = (TextView) findViewById(R.id.foot);
+    	mAge = (TextView) findViewById(R.id.age);
+    	
     	mImageView = (ImageView) findViewById(R.id.imageView1);
     	
     	mAttackRating = (TextView) findViewById(R.id.attack_rating);
@@ -104,6 +112,13 @@ public class ProfileActivity extends Activity {
     	if (DEBUG) Log.d(TAG, "getAndSetPlayerStatus()");
     	
     	FblSQLiteHelper db = new FblSQLiteHelper(this);
+    	PlayerInfo.PlayerProfile pp = db.getPlayerProfile((int)uid);
+    	mPlayerName.setText(pp.getName());
+    	mPosition.setText(pp.getPosition());
+    	mHeightWeight.setText(pp.getHeight() + "cm/"+pp.getWeight()+"Kg");
+    	mFoot.setText(pp.getFoot());
+    	mAge.setText(pp.getAge());
+    	
     	PlayerInfo.PlayerRating pr = db.getPlayerRating((int)uid);
     	
 		int atkRating = (int) pr.getAttack();
