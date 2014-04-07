@@ -1,19 +1,22 @@
 package nanofuntas.fbl.settings;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
 
 import nanofuntas.fbl.Config;
-import nanofuntas.fbl.LogNRegActivity;
 import nanofuntas.fbl.R;
 import nanofuntas.fbl.ServerIface;
 import nanofuntas.fbl.SplashScreenActivity;
-import nanofuntas.fbl.TabViewActivity;
 import nanofuntas.fbl.Utils;
 
 import org.json.simple.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,12 +26,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 public class ProfileUpdateActivity extends Activity {
@@ -37,6 +45,11 @@ public class ProfileUpdateActivity extends Activity {
 	
 	private ImageView mProfilePhoto;
 	private AlertDialog mPhotoDialog;
+	private AlertDialog mPositonDialog;
+	private AlertDialog mAgeDialog;
+	private AlertDialog mHeightDialog;
+	private AlertDialog mWeightDialog;
+	private AlertDialog mFootDialog;
 	private Bitmap mBitmapPic;
 	
 	private EditText mNameUpdate;
@@ -59,7 +72,8 @@ public class ProfileUpdateActivity extends Activity {
 	    
     	UID = Utils.getMyUid();
     	initViews();
-		downloadImage(UID);
+		//TODO: do not download from server, this takes a long time
+    	downloadImage(UID);
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    builder.setItems(R.array.photo_array,  new DialogInterface.OnClickListener() {
@@ -82,8 +96,153 @@ public class ProfileUpdateActivity extends Activity {
 				mPhotoDialog.show();
 			}
 		});
-	}
+	    
+	    final CharSequence[] positionItems = {"CF", "AMF", "LW", 
+	    		"RW", "DMF", "CB", "LWB", "RWB", "GK"};
 
+	    AlertDialog.Builder positionBuilder = new AlertDialog.Builder(this);
+	    positionBuilder.setTitle("Make your selection");
+	    positionBuilder.setItems(positionItems, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int item) {
+	        	mPositionUpdate.setText(positionItems[item]);
+	        }
+	    });
+	    mPositonDialog = positionBuilder.create();
+	    
+	    mPositionUpdate.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				mPositonDialog.show();
+				return false;
+			}
+	    });
+	    
+	    LayoutInflater inflater = getLayoutInflater();
+	    View ageView = inflater.inflate(R.layout.dialog_number_picker, null);
+	    final NumberPicker npAge = (NumberPicker) ageView.findViewById(R.id.numberPicker1);
+	    npAge.setMinValue(1950);
+	    npAge.setMaxValue(2013);
+	    AlertDialog.Builder ageBuilder = new AlertDialog.Builder(this)
+	    	.setTitle("Make your selection")
+	    	.setView(ageView)
+	    	.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	    		@Override
+	    		public void onClick(DialogInterface dialog, int which) {
+	    			mPositonDialog.dismiss();
+	    		}
+	    	})
+	    	.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+	    		@Override
+	    		public void onClick(DialogInterface dialog, int which) {
+	    			mAgeUpdate.setText(npAge.getValue()+"");
+	    		}
+	    	});
+	    mAgeDialog = ageBuilder.create();
+	    mAgeUpdate.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				mAgeDialog.show();
+				return false;
+			}
+	    });
+	    
+	    View heightView = inflater.inflate(R.layout.dialog_number_picker, null);
+	    final NumberPicker npHeight = (NumberPicker) heightView.findViewById(R.id.numberPicker1);
+	    npHeight.setMinValue(150);
+	    npHeight.setMaxValue(200);
+	    AlertDialog.Builder heightBuilder = new AlertDialog.Builder(this)
+	    	.setTitle("Make your selection")
+	    	.setView(heightView)
+	    	.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	    		@Override
+	    		public void onClick(DialogInterface dialog, int which) {
+	    			mHeightDialog.dismiss();
+	    		}
+	    	})
+	    	.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+	    		@Override
+	    		public void onClick(DialogInterface dialog, int which) {
+	    			mHeightUpdate.setText(npHeight.getValue()+"");
+	    		}
+	    	});
+	    mHeightDialog = heightBuilder.create();
+	    mHeightUpdate.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				mHeightDialog.show();
+				return false;
+			}
+	    });
+	    
+	    View weightView = inflater.inflate(R.layout.dialog_number_picker, null);
+	    final NumberPicker npWeight = (NumberPicker) weightView.findViewById(R.id.numberPicker1);
+	    npWeight.setMinValue(40);
+	    npWeight.setMaxValue(150);
+	    AlertDialog.Builder weightBuilder = new AlertDialog.Builder(this)
+	    	.setTitle("Make your selection")
+	    	.setView(weightView)
+	    	.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	    		@Override
+	    		public void onClick(DialogInterface dialog, int which) {
+	    			mWeightDialog.dismiss();
+	    		}
+	    	})
+	    	.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+	    		@Override
+	    		public void onClick(DialogInterface dialog, int which) {
+	    			mWeightUpdate.setText(npWeight.getValue()+"");
+	    		}
+	    	});
+	    mWeightDialog = weightBuilder.create();
+	    mWeightUpdate.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				mWeightDialog.show();
+				return false;
+			}
+	    });
+	    
+	    final CharSequence[] footItems = {"Right", "Left", "Both"};
+
+	    AlertDialog.Builder footBuilder = new AlertDialog.Builder(this);
+	    footBuilder.setTitle("Make your selection");
+	    footBuilder.setItems(footItems, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int item) {
+	        	mFootUpdate.setText(footItems[item]);
+	        }
+	    });
+	    mFootDialog = footBuilder.create();
+	    
+	    mFootUpdate.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				mFootDialog.show();
+				return false;
+			}
+	    });
+	    
+	}
+	
+	public static class DatePickerFragment extends DialogFragment
+    implements OnDateSetListener {
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			// Use the current date as the default date in the picker
+			final Calendar c = Calendar.getInstance();
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH);
+			int day = c.get(Calendar.DAY_OF_MONTH);
+
+			// Create a new instance of DatePickerDialog and return it
+			return new DatePickerDialog(getActivity(), this, year, month, day);
+		}
+
+		public void onDateSet(DatePicker view, int year, int month, int day) {
+			// Do something with the date chosen by the user
+		}
+	}
+	
 	private void initViews() {
 		mProfilePhoto = (ImageView) findViewById(R.id.profile_photo);
 		mNameUpdate = (EditText) findViewById(R.id.name_update);

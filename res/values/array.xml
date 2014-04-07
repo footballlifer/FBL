@@ -4,4 +4,17 @@
         <item>Take photo</item>
         <item>Select photo from gallery</item>
     </string-array>
+    
+    <string-array name="position_array">
+        <item>CF</item>
+        <item>AMF</item>
+        <item>LW</item>
+        <item>RW</item>
+        <item>DMF</item>
+        <item>CB</item>
+        <item>LWB</item>
+        <item>RWB</item>
+        <item>GK</item>
+    </string-array>
+    
 </resources>
